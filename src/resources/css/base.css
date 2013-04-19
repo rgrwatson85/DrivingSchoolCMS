@@ -1,0 +1,156 @@
+.root {
+    -fx-font-family: "Helvetica, Tahoma, Geneva, sans-serif";
+    -fx-font-size: 14px;
+    -fx-base: #D0D0D0;
+    -fx-background: #F4F4F4;
+    -fx-focus-color: #f2dada;
+    -fx-control-inner-background: #DBDBDB;
+    -fx-inner-border: linear-gradient(to bottom, derive(-fx-color,100.0%) 0%, derive(-fx-color,27.612903225806456%) 100%);
+    -fx-body-color: linear-gradient( to bottom, derive(-fx-color, 45.0%) 0%, derive(-fx-color, 34.0%) 50%, derive(-fx-color, 59.237288135593246%) 50.5%, derive(-fx-color, -10.0%) 100%);
+}
+.button, .toggle-button, .choice-box {
+    -fx-background-radius: 4, 4, 3, 2;
+    -fx-padding: 0px 7px 0px 7px;
+}
+.menu-button {
+    -fx-background-radius: 4, 4, 3, 2;
+}
+.menu-button .label {
+    -fx-padding: 0px 15px 0px 7px;
+}
+.menu-button .arrow-button {
+    -fx-padding: 0px 3px 0px 0px;
+}
+.choice-box {
+    -fx-padding: 0 3px 0 0;
+}
+.choice-box .label {
+    -fx-padding: 0px 1px 0px 3px;
+}
+.choice-box .open-button {
+    -fx-padding: 1 0 0 5px;
+}
+.combo-box-base:editable .text-field, .combo-box-base .arrow-button, .combo-box .list-cell {
+    -fx-padding: 0px 3px 0px 3px;
+}
+.check-box .box {
+    -fx-padding: 0.25em;
+}
+.radio-button .radio {
+    -fx-padding: 0.333333em;
+}
+.label, .check-box, .radio-button {
+    -fx-text-fill: -fx-text-background-color;
+}
+.button, .toggle-button, .check-box .box, .radio-button .radio, .choice-box, .menu-button, .tab, .combo-box-base {
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+}
+.button:focused, .toggle-button:focused, .check-box:focused .box, .radio-button:focused .radio, .choice-box:focused, .menu-button:focused, .combo-box-base:focused {
+    -fx-background-insets: -1.4, 0, 1, 2;
+}
+.combo-box-base .arrow-button {
+    -fx-background-insets: 0, 1, 2;
+}
+.choice-box .label { /* Workaround for RT-20015 */
+    -fx-text-fill: -fx-text-base-color;
+}
+.menu-button .label { /* Workaround for RT-20015 */
+    -fx-text-fill: -fx-text-base-color;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
+/*NAV ICONS*/
+.btnWaitlist{-fx-background-image: url("../images/fullsize/Chat.png");-fx-background-size: stretch;-fx-background-color: transparent;}
+.btnCustomer{-fx-background-image: url("../images/fullsize/users.png");-fx-background-size: stretch;-fx-background-color: transparent;}
+.btnCourse{-fx-background-image: url("../images/fullsize/course.png");-fx-background-size: stretch;-fx-background-color: transparent;}
+.btnEmployee{-fx-background-image: url("../images/fullsize/employee.png");-fx-background-size: stretch;-fx-background-color: transparent;}
+.btnVehicle{-fx-background-image: url("../images/fullsize/vehicle.png");-fx-background-size: stretch;-fx-background-color: transparent;}
+.btnAddCustomer_sc{-fx-background-image: url("../images/shortcuts/add_user.png");-fx-background-color: transparent;}
+.btnContactCustomer_sc{-fx-background-image: url("../images/shortcuts/phone_book.png");-fx-background-color: transparent;}
+.btnSchedule_sc{-fx-background-image: url("../images/shortcuts/calendar.png");-fx-background-color: transparent;}
+.btnTime_sc{-fx-background-image: url("../images/fullsize/paper_icon.png");-fx-background-color: transparent;}
+.btnBalanceDue_sc{-fx-background-image: url("../images/shortcuts/dollar_currency_sign.png");-fx-background-color: transparent;}
+.btnLogOut_sc{-fx-background-image: url("../images/shortcuts/lock.png");-fx-background-color: transparent;}
+.btnSettings{-fx-background-image: url("../images/fullsize/process.png");-fx-background-size: stretch;-fx-background-color: transparent;}
+.toggleButtonContainer .toggle-button{
+    -fx-background-color: linear-gradient(darkgray, black);
+    -fx-text-fill: white;
+    -fx-background-radius: 3;
+}
+.toggleButtonContainer .toggle-button:selected{
+    -fx-background-color: gray;
+    -fx-text-fill: white;
+    -fx-background-radius: 3;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 5;
+}
+
+/*CONTENT PANE ICONS*/
+.btnAddCustomer{-fx-background-image: url("../images/fullsize/add_user.png");-fx-background-size: stretch;}
+.btnSchedule{-fx-background-image: url("../images/fullsize/calendar.png");-fx-background-size: stretch;}
+.btnTime{-fx-background-image: url("../images/fullsize/Clock.png");-fx-background-size: stretch;}
+.btnBalanceDue{-fx-background-image: url("../images/fullsize/dollar_currency_sign.png");-fx-background-size: stretch;}
+.btnSearch{-fx-background-image: url("../images/fullsize/search.png");-fx-background-size: stretch;}
+.btnSearchCustomer{-fx-background-image: url("../images/fullsize/search_user.png");-fx-background-size: stretch;}
+.btnDeleteCustomer{-fx-background-image: url("../images/fullsize/delete_user.png");-fx-background-size: stretch;}
+.btnAddToCourse{-fx-background-image: url("../images/fullsize/add_to_cart.png");-fx-background-size: stretch;}
+.btnAddNewCourse{-fx-background-image: url("../images/fullsize/add_to_database.png");-fx-background-size: stretch;}
+.btnDeleteCourse{-fx-background-image: url("../images/fullsize/search_database.png");-fx-background-size: stretch;}
+.btnCourseEnrollment{-fx-background-image: url("../images/fullsize/tutorial.png");-fx-background-size: stretch;}
+.btnAttendanceRecords{-fx-background-image: url("../images/fullsize/user_accept.png");-fx-background-size: stretch;}
+.btnHelp{-fx-background-image: url("../images/fullsize/help.png");-fx-background-size: stretch;}
+.btnFee{-fx-background-image: url("../images/fullsize/stop.png");-fx-background-size: stretch;}
+.btnMakePayment{-fx-background-image: url("../images/fullsize/add.png");-fx-background-size: stretch;}
+.btnEditCustomer{-fx-background-image: url("../images/fullsize/edit_profile.png");-fx-background-size: stretch;}
+.btnEmergencyContact{ -fx-background-image: url("../images/fullsize/emergency.png");-fx-background-size: stretch;}
+.btnAcceptChanges{-fx-background-image: url("../images/fullsize/accept_page.png");-fx-background-size: stretch;}
+.btnCancelChanges{-fx-background-image: url("../images/fullsize/delete_page.png");-fx-background-size: stretch;}
+.btnSteeringWheel{-fx-background-image: url("../images/fullsize/steering-wheel.png");-fx-background-size: stretch;}
+.btnPrintContract{-fx-background-image: url("../images/fullsize/print.png");-fx-background-size: stretch;}
+.btnFuelTransaction{-fx-background-image: url("../images/fullsize/gascan.png");}
+.btnMaintenance{-fx-background-image: url("../images/fullsize/wrench.png");}
+
+/*BACKGROUND TEXTURES*/
+.background1{
+    -fx-background-image: url("../images/backgrounds/otis_redding.png");
+    -fx-background-repeat: repeat;
+}
+.background2{
+    -fx-background-image: url("../images/backgrounds/cars_background.png");
+    -fx-background-repeat: repeat;
+}
+.background3{
+    -fx-background-image: url("../images/backgrounds/linen.png");
+    -fx-background-repeat: repeat;
+}
+.background4{
+    -fx-background-image: url("../images/backgrounds/grey.png");
+    -fx-background-repeat: repeat;
+}
+
+/*SPECIAL ITEMS*/
+.txtFilter{-fx-font-size: 13;}
+.labelToolTip{-fx-font-size: 11; -fx-font-weight: bold;}
+.button{-fx-font-size: 12}
+
+
+/*TABLE VIEW CUSTOMIZATION*/
+.table-view .column-header{
+    -fx-font-size: 15;
+    -fx-font-weight: normal;
+}
+.table-view .table-row-cell {
+    -fx-font-size: 12;
+    -fx-size: 12px;
+}
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #0060EF;
+}
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}

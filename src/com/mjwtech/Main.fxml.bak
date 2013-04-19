@@ -56,6 +56,5 @@
   </children>
   <stylesheets>
     <URL value="@../../resources/css/base.css" />
-    <URL value="@../../resources/css/undecorator.css" />
   </stylesheets>
 </AnchorPane>

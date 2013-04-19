@@ -6,7 +6,9 @@ package com.mjwtech;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -14,7 +16,13 @@ import javafx.fxml.Initializable;
  * @author mrgnwatson
  */
 public class MainController implements Initializable {
-
+    
+    /*
+     * control declaration
+     */
+    @FXML public static AnchorPane root;
+    
+    
     /**
      * Initializes the controller class.
      */

@@ -1,0 +1,98 @@
+/* 
+    Document   : Undecorator
+    Created on : Jan 15, 2013, 8:42:25 AM
+    Author     : In-SideFX
+    Description:
+        Demo purpose
+*/
+
+/*
+    The Stage background.
+    Currently a Rectangle node
+*/
+
+.undecorator-background {
+    -fx-fill:transparent;
+   -fx-fill: radial-gradient(focus-angle 45deg, focus-distance 20%, center 25% 25%, radius 50%, reflect, #eeeeee88, #55555588 30%, dimgray);
+   -fx-arc-width:25;
+   -fx-arc-height:25;
+}
+
+/*
+*	Menu button
+*/
+.decoration-button-menu{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image: url("../images/undecorator/menu.png");
+    -fx-background-size: stretch;
+    -fx-background-color: transparent;
+}
+
+.decoration-button-menu:hover{
+    -fx-background-color: null;
+}
+/*
+*	Minmize button
+*/
+.decoration-button-minimize{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("../images/undecorator/minimize.png");
+}
+
+.decoration-button-minimize:hover{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+}
+
+/*
+*	Maximize button
+*/
+.decoration-button-maximize{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("../images/undecorator/maximize.png");
+    -fx-opacity: 0;
+}
+.decoration-button-maximize:hover{
+    -fx-background-color: null;
+    -fx-opacity: 0;
+}
+.decoration-button-restore{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("../images/undecorator/restore.png");
+    -fx-opacity: 0;
+}
+.decoration-button-restore:hover{
+    -fx-background-color: null;
+    -fx-opacity: 0;
+}
+/*
+*	Close button
+*/
+.decoration-button-close{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("../images/undecorator/close.png");
+}
+.decoration-button-close:hover{
+    -fx-background-color: null;
+}
+
+/*
+*	Resize button
+*/
+.decoration-button-resize{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("../images/undecorator/resizeSE.png");
+}
