@@ -1,0 +1,20 @@
+/build/
+/dist/
+
+# NetBeans Specific #
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+rebel.xml
+
+# Binary Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
