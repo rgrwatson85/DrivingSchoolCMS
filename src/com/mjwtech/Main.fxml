@@ -15,23 +15,21 @@
 
 <AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="root" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.MainController">
   <children>
-    <TilePane fx:id="contentPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefColumns="1" prefHeight="651.0" prefRows="1" prefWidth="1244.0" styleClass="background2, contentPane" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="64.0">
+    <TilePane fx:id="contentPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefColumns="1" prefHeight="651.0" prefRows="1" prefWidth="1244.0" styleClass="contentPane, background3" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="64.0">
       <effect>
         <InnerShadow />
       </effect>
     </TilePane>
-    <HBox alignment="CENTER_LEFT" layoutX="556.0" layoutY="9.0" prefHeight="48.0" prefWidth="473.0" spacing="22.0">
+    <HBox alignment="CENTER_LEFT" layoutX="546.0" layoutY="9.0" minWidth="397.0" prefHeight="48.0" prefWidth="397.0" spacing="22.0">
       <children>
         <Button id="addCustomer" fx:id="btnAddCustomer" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAddCustomer_sc" />
         <Button id="btnSearchStudent" fx:id="btnContactCustomer" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnContactCustomer_sc" />
         <Button id="Schedule" fx:id="btnSchedule" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnSchedule_sc" />
         <Button id="btnTime" fx:id="btnReport" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnTime_sc" />
         <Button fx:id="btnBalanceDue" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnBalanceDue_sc" />
-        <Button id="button1" fx:id="btnSettings" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnSettings" />
-        <Button fx:id="btnLogOut" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnLogOut_sc" />
       </children>
     </HBox>
-    <Label fx:id="lblUserName" alignment="CENTER_LEFT" contentDisplay="CENTER" layoutY="15.0" prefHeight="37.0" prefWidth="180.0" text="" textAlignment="LEFT" textFill="WHITE" AnchorPane.rightAnchor="4.0" />
+    <Label fx:id="lblUserName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutY="15.0" prefHeight="37.0" prefWidth="291.0" style="" text="" textAlignment="LEFT" textFill="WHITE" AnchorPane.rightAnchor="4.0" />
     <Label fx:id="lblToolTip" alignment="CENTER" layoutX="14.0" layoutY="50.0" prefWidth="627.0" text="" visible="false" />
     <HBox fx:id="toggleButtonContainer" alignment="CENTER" layoutX="8.0" layoutY="9.0" prefHeight="48.0" prefWidth="506.0" spacing="15.0" styleClass="undecorator-background, toggleButtonContainer">
       <children>
@@ -53,9 +51,11 @@
         <ColorAdjust brightness="-0.4126984126984127" contrast="0.41269841269841256" hue="0.04761904761904767" saturation="-0.2222222222222222" />
       </effect>
     </Button>
+    <Button fx:id="btnLogOut" layoutX="899.0" layoutY="8.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnLogOut_sc" />
   </children>
   <stylesheets>
     <URL value="@../../resources/css/base.css" />
     <URL value="@../../resources/css/undecorator.css" />
+    <URL value="@Main.css" />
   </stylesheets>
 </AnchorPane>

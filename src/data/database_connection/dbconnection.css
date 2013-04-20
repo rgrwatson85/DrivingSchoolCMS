@@ -1,0 +1,20 @@
+/* 
+    Document   : dbconnection.css
+    Created on : Apr 19, 2013, 5:16:43 PM
+    Author     : mrgnwatson
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.modal-dialog {
+  -fx-alignment: center;
+  -fx-font-size: 14;
+  -fx-border-width: 5;
+  -fx-background-insets: 12;
+  -fx-border-insets: 10;
+  -fx-border-radius: 15;
+  -fx-background-radius: 15;
+}
+.label{
+    -fx-text-fill:black;
+}

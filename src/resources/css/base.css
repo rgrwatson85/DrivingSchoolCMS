@@ -40,7 +40,7 @@
     -fx-padding: 0.333333em;
 }
 .label, .check-box, .radio-button {
-    -fx-text-fill: -fx-text-background-color;
+    -fx-text-fill:white; /*fx-text-background-color;*/
 }
 .button, .toggle-button, .check-box .box, .radio-button .radio, .choice-box, .menu-button, .tab, .combo-box-base {
     -fx-background-insets: 0 0 -1 0, 0, 1, 2;

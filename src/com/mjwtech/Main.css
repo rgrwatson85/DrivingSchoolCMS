@@ -1,0 +1,13 @@
+/* 
+    Document   : Main
+    Created on : Apr 19, 2013, 5:00:01 PM
+    Author     : mrgnwatson
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+
+#lblUserName{
+    -fx-text-fill:red;
+}

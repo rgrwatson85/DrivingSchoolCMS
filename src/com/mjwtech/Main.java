@@ -4,8 +4,10 @@
  */
 package com.mjwtech;
 
+import data.database_connection.dbconnection;
 import insidefx.undecorator.Undecorator;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -13,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -41,6 +44,13 @@ public class Main extends Application {
         stage.setMinHeight(733);
         stage.setMaxWidth(1600);
         stage.setMaxHeight(1200);
+        stage.setOnShown(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                dbconnection.getInstance();
+            }
+        });
         stage.show();
     }
+
 }

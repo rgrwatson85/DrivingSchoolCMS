@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="root" maxHeight="600.0" maxWidth="429.0" minHeight="181.0" minWidth="288.0" prefHeight="306.0" prefWidth="288.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.CustomerController">
+  <children>
+    <AnchorPane id="AnchorPane" fx:id="wrapper" prefHeight="306.0" prefWidth="288.0">
+      <children>
+        <VBox id="VBox" alignment="CENTER" spacing="15.0">
+          <children>
+            <Button fx:id="btnAddCustomer" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAddCustomer">
+              <effect>
+                <DropShadow fx:id="x3" />
+              </effect>
+              <font>
+                <Font size="15.0" />
+              </font>
+            </Button>
+            <Button fx:id="btnSearchCustomer" effect="$x3" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnSearchCustomer" />
+            <Button fx:id="btnOutstandingBalances" effect="$x3" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnBalanceDue" />
+            <Button id="btnOutstandingBalances" fx:id="btnMailingList" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnPrintContract">
+              <effect>
+                <DropShadow />
+              </effect>
+            </Button>
+            <Button id="btnOutstandingBalances" fx:id="btnCustomerPermit" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnSearch">
+              <effect>
+                <DropShadow />
+              </effect>
+            </Button>
+          </children>
+        </VBox>
+        <VBox id="VBox" alignment="CENTER" layoutX="55.0" layoutY="14.0" minHeight="165.0" prefHeight="209.0" prefWidth="250.0" spacing="35.0">
+          <children>
+            <Label prefHeight="29.0" prefWidth="250.0" text="ADD A NEW CUSTOMER">
+              <font>
+                <Font name="Verdana" size="17.0" fx:id="x1" />
+              </font>
+            </Label>
+            <Label font="$x1" prefHeight="26.0" prefWidth="339.0" text="VIEW CUSTOMER RECORD" />
+            <Label font="$x1" prefHeight="31.0" prefWidth="339.0" text="ACCOUNTS RECEIVABLE" />
+            <Label font="$x1" prefHeight="31.0" prefWidth="339.0" text="MAILING LIST" />
+          </children>
+        </VBox>
+        <Label font="$x1" layoutX="55.0" layoutY="262.0" prefHeight="28.0" prefWidth="250.0" text="VIEW CUSTOMER PERMIT" />
+      </children>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@../../../resources/css/base.css" />
+  </stylesheets>
+</AnchorPane>
