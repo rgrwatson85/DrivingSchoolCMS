@@ -5,12 +5,15 @@
 package com.mjwtech.customer;
 
 import com.mjwtech.MainController;
+import data.dropdown.dropdowndata;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import name.antonsmirnov.javafx.dialog.Dialog;
 
 
 /**
@@ -50,6 +53,14 @@ public class CustomerController implements Initializable {
         
         //makes the correct toggle button selected
         MainController.btnCustomer.setSelected(true);
-
+        
+        //load default dropdown data
+        try {
+            dropdowndata.createDropDownData();
+            dropdowndata.createStateDropDownData("USA");
+            dropdowndata.createVehicleDropDownData("Acura");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Dialog.showError("ERROR", "Could not load dropdown data\n\nMainController:123");
+        }
     }    
 }

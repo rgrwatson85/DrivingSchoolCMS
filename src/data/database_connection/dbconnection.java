@@ -34,13 +34,6 @@ import javafx.stage.WindowEvent;
  * @author mrgnwatson
  */
 public class dbconnection {
-
-    public static Connection conn;
-    public static String Username;
-    public static String Password;
-    public static String urlString;
-    public static String IP = "";
-    public static String port = "";
     public static dbconnection instance = null;
     final Stage stage;
     

@@ -5,12 +5,6 @@
 package data.database_connection;
 
 import com.mjwtech.MainController;
-import static data.database_connection.dbconnection.IP;
-import static data.database_connection.dbconnection.Password;
-import static data.database_connection.dbconnection.Username;
-import static data.database_connection.dbconnection.conn;
-import static data.database_connection.dbconnection.port;
-import static data.database_connection.dbconnection.urlString;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -18,7 +12,9 @@ import java.net.Socket;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,6 +48,7 @@ import org.xml.sax.SAXException;
  * @author mrgnwatson
  */
 public class SettingsController implements Initializable {
+
     @FXML
     public static AnchorPane root;
     @FXML
@@ -67,14 +64,16 @@ public class SettingsController implements Initializable {
     @FXML
     public TextField txtUser;
     @FXML
-    public TextField txtEmail;
-    @FXML
-    public TextField txtEmailPass;
-    public static boolean connection;
-    public static String IP;
-    public static String port;
-    public static String Username;
-    public static String Password;
+    private TextField txtDatabase;
+    private static boolean connection;
+    private static Connection conn;
+    public static Statement stmt;
+    private static String urlString;
+    private static String IP;
+    private static String port;
+    private static String database;
+    private static String Username;
+    private static String Password;
     private static boolean loginstatus;
 
     /**
@@ -102,24 +101,10 @@ public class SettingsController implements Initializable {
 
     private void login() {
         IP = txtServerIP.getText();
-        if ("".equals(IP)) {
-            IP = "noip";
-        }
-
         port = txtPort.getText();
-        if ("".equals(port)) {
-            port = "noport";
-        }
-
+        database = txtDatabase.getText();
         Username = txtUser.getText();
-        if ("".equals(Username)) {
-            Username = "Guest";
-        }
-
         Password = txtPass.getText();
-        if ("".equals(Password)) {
-            Password = "cis1!2@3#4$";
-        }
         loginstatus = true;
         testConnection();
     }
@@ -133,16 +118,13 @@ public class SettingsController implements Initializable {
     }
 
     private static void testConnection() {
-        dbconnection.IP = IP;
-        dbconnection.port = port;
-        dbconnection.Username = Username;
-        dbconnection.Password = Password;
         connection = false;
         lblStatus.setText("");
         try {
-            openConnection("TxDrivingSchool");
+            openConnection();
             closeConnection();
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
+            Dialog.showError("ERROR", e.getMessage() + "\n\nSettingsController:125");
         }
         if (connection) {
             saveLogin();
@@ -179,10 +161,18 @@ public class SettingsController implements Initializable {
             nValue = (Node) nlList.item(0);
             txtPort.setText(nValue.getNodeValue());
 
+            //get database name
+            Node databaseNode = nList.item(0);
+            eElement = (Element) databaseNode;
+            nlList = eElement.getElementsByTagName("database").item(0).getChildNodes();
+            nValue = (Node) nlList.item(0);
+            txtDatabase.setText(nValue.getNodeValue());
+
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             Dialog.showError("Error", "Could load load dbconn.xml");
         }
     }
+
     public static void saveLogin() {
         try {
             File file = new File("src/data/database_connection/dbconn.xml");
@@ -209,6 +199,13 @@ public class SettingsController implements Initializable {
             nValue = (Node) nlList.item(0);
             nValue.setTextContent(port);
 
+            //update database
+            Node databaseNode = nList.item(0);
+            eElement = (Element) databaseNode;
+            nlList = eElement.getElementsByTagName("database").item(0).getChildNodes();
+            nValue = (Node) nlList.item(0);
+            nValue.setTextContent(database);
+
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -219,44 +216,32 @@ public class SettingsController implements Initializable {
             Dialog.showError("Error", ex.getMessage());
         }
     }
-    public static void openConnection(String dbName){
+
+    public static void openConnection() throws ClassNotFoundException, SQLException {
         Socket s = null;
         try {
             new Socket().connect(new InetSocketAddress(IP, Integer.parseInt(port)), 1000);
-            try {
-                if("".equals(Username)||"".equals(Password)){
-                    Username="Guest";
-                    Password="cis1!2@3#4$";
-                }
-                urlString="jdbc:jtds:sqlserver://";
-                urlString+=IP;
-                urlString+=":";
-                urlString+=port;
-                urlString+=";databaseName="+dbName;
-
-                Class.forName("net.sourceforge.jtds.jdbc.Driver");
-                conn = (Connection) DriverManager.getConnection(urlString,Username,Password);
-                if(loginstatus){
-                    MainController.lblUserName.setText("Logged In As: "+Username.toUpperCase());
-                }else{
-                    MainController.lblUserName.setText("Logged Out");
-                }
-                SettingsController.connection = true;
-            }
-            catch (SQLException | ClassNotFoundException ex) {
-                System.out.println(ex);
-                SettingsController.connection = false;
-            }
-        } 
-        catch (IOException ex) {
-            Dialog.showError("Error","No connection to server.\nCheck Server IP in advanced tab.");
-        } 
-    }
-    public static void closeConnection(){
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(dbconnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Dialog.showError("Error", "No connection to server.\nCheck Server IP in advanced tab.");
         }
+        urlString = "jdbc:jtds:sqlserver://";
+        urlString += IP;
+        urlString += ":";
+        urlString += port;
+        urlString += ";databaseName=" + database;
+
+        Class.forName("net.sourceforge.jtds.jdbc.Driver");
+        conn = (Connection) DriverManager.getConnection(urlString, Username, Password);
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        if (loginstatus) {
+            MainController.lblUserName.setText("Logged In As: " + Username.toUpperCase());
+        } else {
+            MainController.lblUserName.setText("Logged Out");
+        }
+        SettingsController.connection = true;
+    }
+
+    public static void closeConnection() throws SQLException {
+        conn.close();
     }
 }

@@ -5,17 +5,10 @@
 package com.mjwtech.customer;
 
 import java.text.DecimalFormat;
-import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 /**
  *
@@ -24,306 +17,240 @@ import javafx.stage.Stage;
 public class Customer {
 
     public static Customer oCust = new Customer();
+   
     //ID property
-    private IntegerProperty ID;
-
-    public void setID(int value) {
-        IDProperty().setValue(value);
-    }
-
-    public int getID() {
-        return IDProperty().get();
-    }
-
+    private IntegerProperty CustomerID;
+    public void setID(int value) { IDProperty().setValue(value);}
+    public int getID() { return IDProperty().get();}
     public IntegerProperty IDProperty() {
-        if (ID == null) {
-            ID = new SimpleIntegerProperty(this, "ID");
+        if (CustomerID == null) {
+            CustomerID = new SimpleIntegerProperty(this, "CustomerID");
         }
-        return ID;
+        return CustomerID;
     }
+   
     //Salutation property
-    private StringProperty salutation;
-
-    public void setSalutation(String value) {
-        salutationProperty().set(value);
-    }
-
-    public String getSalutation() {
-        return salutationProperty().get();
-    }
-
-    public StringProperty salutationProperty() {
-        if (salutation == null) {
-            salutation = new SimpleStringProperty(this, "salutation");
+    private StringProperty SalutationName;
+    public void setSalutationName(String value) {SalutationNameProperty().set(value);}
+    public String getSalutationName() { return SalutationNameProperty().get();}
+    public StringProperty SalutationNameProperty() {
+        if (SalutationName == null) {
+            SalutationName = new SimpleStringProperty(this, "SalutationName");
         }
-        return salutation;
+        return SalutationName;
     }
+   
     //First name property
-    private StringProperty firstName;
-
-    public void setFirstName(String value) {
-        firstNameProperty().set(value);
-    }
-
-    public String getFirstName() {
-        return firstNameProperty().get();
-    }
-
-    public StringProperty firstNameProperty() {
-        if (firstName == null) {
-            firstName = new SimpleStringProperty(this, "FirstName");
+    private StringProperty FirstName;
+    public void setFirstName(String value) {FirstNameProperty().set(value);}
+    public String getFirstName() {return FirstNameProperty().get();}
+    public StringProperty FirstNameProperty() {
+        if (FirstName == null) {
+            FirstName = new SimpleStringProperty(this, "FirstName");
         }
-        return firstName;
+        return FirstName;
     }
+    
     //Last name property
-    private StringProperty lastName;
-
-    public void setLastName(String value) {
-        lastNameProperty().set(value);
-    }
-
-    public String getLastName() {
-        return lastNameProperty().get();
-    }
-
-    public StringProperty lastNameProperty() {
-        if (lastName == null) {
-            lastName = new SimpleStringProperty(this, "LastName");
+    private StringProperty LastName;
+    public void setLastName(String value) {LastNameProperty().set(value);}
+    public String getLastName() {return LastNameProperty().get();}
+    public StringProperty LastNameProperty() {
+        if (LastName == null) {
+            LastName = new SimpleStringProperty(this, "LastName");
         }
-        return lastName;
+        return LastName;
     }
+    
     //suffix property
-    private StringProperty suffix;
-
-    public void setSuffix(String value) {
-        suffixProperty().set(value);
-    }
-
-    public String getSuffix() {
-        return suffixProperty().get();
-    }
-
-    public StringProperty suffixProperty() {
-        if (suffix == null) {
-            suffix = new SimpleStringProperty(this, "suffix");
+    private StringProperty Suffix;
+    public void setSuffix(String value) {SuffixProperty().set(value);}
+    public String getSuffix() {return SuffixProperty().get();}
+    public StringProperty SuffixProperty() {
+        if (Suffix == null) {
+            Suffix = new SimpleStringProperty(this, "Suffix");
         }
-        return suffix;
+        return Suffix;
     }
+    
     //Address1 property
-    private StringProperty address1;
-
-    public void setAddress1(String value) {
-        address1Property().set(value);
-    }
-
-    public String getAddress1() {
-        return address1Property().get();
-    }
-
-    public StringProperty address1Property() {
-        if (address1 == null) {
-            address1 = new SimpleStringProperty(this, "address1");
+    private StringProperty Address1;
+    public void setAddress1(String value) {Address1Property().set(value);}
+    public String getAddress1() {return Address1Property().get();}
+    public StringProperty Address1Property() {
+        if (Address1 == null) {Address1 = new SimpleStringProperty(this, "Address1");
         }
-        return address1;
+        return Address1;
     }
+    
     //Address2 property
-    private StringProperty address2;
-
-    public void setAddress2(String value) {
-        address2Property().set(value);
-    }
-
-    public String getAddress2() {
-        return address2Property().get();
-    }
-
-    public StringProperty address2Property() {
-        if (address2 == null) {
-            address2 = new SimpleStringProperty(this, "address2");
+    private StringProperty Address2;
+    public void setAddress2(String value) {Address2Property().set(value);}
+    public String getAddress2() {return Address2Property().get();}
+    public StringProperty Address2Property() {
+        if (Address2 == null) {
+            Address2 = new SimpleStringProperty(this, "Address2");
         }
-        return address2;
+        return Address2;
     }
+   
     //City property
-    private StringProperty city;
-
+    private StringProperty City;
     public void setCity(String value) {
-        cityProperty().set(value);
+        CityProperty().set(value);
     }
-
     public String getCity() {
-        return cityProperty().get();
+        return CityProperty().get();
     }
-
-    public StringProperty cityProperty() {
-        if (city == null) {
-            city = new SimpleStringProperty(this, "city");
+    public StringProperty CityProperty() {
+        if (City == null) {
+            City = new SimpleStringProperty(this, "City");
         }
-        return city;
+        return City;
     }
+    
     //State property
-    private StringProperty state;
-
+    private StringProperty State;
     public void setState(String value) {
-        stateProperty().set(value);
+        StateProperty().set(value);
     }
-
     public String getState() {
-        return stateProperty().get();
+        return StateProperty().get();
     }
-
-    public StringProperty stateProperty() {
-        if (state == null) {
-            state = new SimpleStringProperty(this, "state");
+    public StringProperty StateProperty() {
+        if (State == null) {
+            State = new SimpleStringProperty(this, "State");
         }
-        return state;
+        return State;
     }
+    
     //Country property
-    private StringProperty country;
-
+    private StringProperty Country;
     public void setCountry(String value) {
-        countryProperty().set(value);
+        CountryProperty().set(value);
     }
-
     public String getCountry() {
-        return countryProperty().get();
+        return CountryProperty().get();
     }
-
-    public StringProperty countryProperty() {
-        if (country == null) {
-            country = new SimpleStringProperty(this, "country");
+    public StringProperty CountryProperty() {
+        if (Country == null) {
+            Country = new SimpleStringProperty(this, "Country");
         }
-        return country;
+        return Country;
     }
+    
     //Zip code property
-    private StringProperty zip;
-
+    private StringProperty Zip;
     public void setZip(String value) {
-        zipProperty().set(value);
+        ZipProperty().set(value);
     }
-
     public String getZip() {
-        return zipProperty().get();
+        return ZipProperty().get();
     }
-
-    public StringProperty zipProperty() {
-        if (zip == null) {
-            zip = new SimpleStringProperty(this, "zip");
+    public StringProperty ZipProperty() {
+        if (Zip == null) {
+            Zip = new SimpleStringProperty(this, "Zip");
         }
-        return zip;
+        return Zip;
     }
+    
     //homePhone property
-    private StringProperty homePhone;
-
-    public void sethomePhone(String value, String value2, String value3) {
-        homePhoneProperty().set("(" + value + ") " + value2 + "-" + value3);
+    private StringProperty HomePhone;
+    public void setHomePhone(String value, String value2, String value3) {
+        HomePhoneProperty().set("(" + value + ") " + value2 + "-" + value3);
     }
-
-    public void sethomePhone(String value) {
-        homePhoneProperty().set(value);
+    public void setHomePhone(String value) {
+        HomePhoneProperty().set(value);
     }
-
     public String getHomePhone() {
-        return homePhoneProperty().get();
+        return HomePhoneProperty().get();
     }
-
-    public StringProperty homePhoneProperty() {
-        if (homePhone == null) {
-            homePhone = new SimpleStringProperty(this, "homePhone");
+    public StringProperty HomePhoneProperty() {
+        if (HomePhone == null) {
+            HomePhone = new SimpleStringProperty(this, "HomePhone");
         }
-        return homePhone;
+        return HomePhone;
     }
+   
     //cellPhone property
-    private StringProperty cellPhone;
-
-    public void setcellPhone(String value, String value2, String value3) {
-        cellPhoneProperty().set("(" + value + ") " + value2 + "-" + value3);
+    private StringProperty CellPhone;
+    public void setCellPhone(String value, String value2, String value3) {
+        CellPhoneProperty().set("(" + value + ") " + value2 + "-" + value3);
     }
-
-    public void setcellPhone(String value) {
-        cellPhoneProperty().set(value);
+    public void setCellPhone(String value) {
+        CellPhoneProperty().set(value);
     }
-
     public String getCellPhone() {
-        return cellPhoneProperty().get();
+        return CellPhoneProperty().get();
     }
-
-    public StringProperty cellPhoneProperty() {
-        if (cellPhone == null) {
-            cellPhone = new SimpleStringProperty(this, "cellPhone");
+    public StringProperty CellPhoneProperty() {
+        if (CellPhone == null) {
+            CellPhone = new SimpleStringProperty(this, "CellPhone");
         }
-        return cellPhone;
+        return CellPhone;
     }
+    
     //Email property
-    private StringProperty email;
-
+    private StringProperty Email;
     public void setEmail(String value) {
-        emailProperty().set(value);
+        EmailProperty().set(value);
     }
-
     public String getEmail() {
-        return emailProperty().get();
+        return EmailProperty().get();
     }
-
-    public StringProperty emailProperty() {
-        if (email == null) {
-            email = new SimpleStringProperty(this, "email");
+    public StringProperty EmailProperty() {
+        if (Email == null) {
+            Email = new SimpleStringProperty(this, "Email");
         }
-        return email;
+        return Email;
     }
+    
     //dob property
-    private StringProperty dob;
-
+    private StringProperty DOB;
     public void setDOB(String value, String value2, String value3) {
-        dobProperty().set(value + "/" + value2 + "/" + value3);
+        DOBProperty().set(value + "/" + value2 + "/" + value3);
     }
-
     public void setDOB(String value) {
-        dobProperty().set(value);
+        DOBProperty().set(value);
     }
-
     public String getDOB() {
-        return dobProperty().get();
+        return DOBProperty().get();
     }
-
-    public StringProperty dobProperty() {
-        if (dob == null) {
-            dob = new SimpleStringProperty(this, "dob");
+    public StringProperty DOBProperty() {
+        if (DOB == null) {
+            DOB = new SimpleStringProperty(this, "DOB");
         }
-        return dob;
+        return DOB;
     }
+    
     //highschool property
-    private StringProperty highschool;
-
+    private StringProperty Highschool;
     public void setHighschool(String value) {
-        highschoolProperty().set(value);
+        HighschoolProperty().set(value);
     }
-
     public String getHighschool() {
-        return highschoolProperty().get();
+        return HighschoolProperty().get();
     }
-
-    public StringProperty highschoolProperty() {
-        if (highschool == null) {
-            highschool = new SimpleStringProperty(this, "highschool");
+    public StringProperty HighschoolProperty() {
+        if (Highschool == null) {
+            Highschool = new SimpleStringProperty(this, "Highschool");
         }
-        return highschool;
+        return Highschool;
     }
+    
     //balanceDue property
     DecimalFormat formatter = new DecimalFormat("$#,##0.00");
-    private StringProperty balanceDue;
-
-    public void setbalanceDue(Double value) {
-        balanceDueProperty().set(formatter.format(value));
+    private StringProperty BalanceDue;
+    public void setBalanceDue(Double value) {
+        BalanceDueProperty().set(formatter.format(value));
     }
-
-    public String getbalanceDue() {
-        return balanceDueProperty().get();
+    public String getBalanceDue() {
+        return BalanceDueProperty().get();
     }
-
-    public StringProperty balanceDueProperty() {
-        if (balanceDue == null) {
-            balanceDue = new SimpleStringProperty(this, "balanceDue");
+    public StringProperty BalanceDueProperty() {
+        if (BalanceDue == null) {
+            BalanceDue = new SimpleStringProperty(this, "BalanceDue");
         }
-        return balanceDue;
+        return BalanceDue;
     }
 }

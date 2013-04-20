@@ -2,6 +2,6 @@
     <user>
         <ip>172.16.89.132</ip>
         <port>1433</port>
-        <email>carbon.it.solutions@gmail.com</email>
+        <database>TxDrivingSchool</database>
     </user>
 </dbconnection>

@@ -25,6 +25,10 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import name.antonsmirnov.javafx.dialog.Dialog;
 import com.mjwtech.customer.Customer;
+import data.dropdown.dropdowndata;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * FXML Controller class
@@ -33,9 +37,8 @@ import com.mjwtech.customer.Customer;
  */
 public class MainController implements Initializable {
 
-    /*
-     * control declaration
-     */
+    public static String DB_NAME;
+    
     @FXML
     public static AnchorPane root;
     //area the encompasses the everything below the company logo and user name label
@@ -107,12 +110,12 @@ public class MainController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //set toggle buttons to load the correct pages into the content area
         try {
             applyButtonEventHandlers();
         } catch (Exception e) {
-            Dialog.showError("ERROR", "Error applying event handlers\n\n"+e.getMessage());
+            System.err.println(e.getMessage());
         }
-        
 
         //logs the user out and opens up the login screen
         btnLogOut.setOnAction(new EventHandler<ActionEvent>() {

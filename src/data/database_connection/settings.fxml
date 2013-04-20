@@ -35,10 +35,12 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="524.0">
               <children>
-                <TextField id="textField1" fx:id="txtServerIP" layoutX="91.0" layoutY="14.0" prefWidth="143.0" text="" />
-                <TextField id="textField1" fx:id="txtPort" layoutX="91.0" layoutY="42.0" prefWidth="50.0" text="1433" />
-                <Label id="label4" font="$x1" layoutX="52.0" layoutY="46.0" text="Port" />
-                <Label id="label1" font="$x1" layoutX="14.0" layoutY="14.0" text="Server IP" />
+                <TextField id="textField1" fx:id="txtServerIP" layoutX="140.0" layoutY="14.0" prefWidth="143.0" text="" />
+                <TextField id="textField1" fx:id="txtPort" layoutX="140.0" layoutY="42.0" prefWidth="50.0" text="" />
+                <Label id="label4" font="$x1" layoutX="101.0" layoutY="46.0" text="Port" />
+                <Label id="label1" font="$x1" layoutX="63.0" layoutY="14.0" text="Server IP" />
+                <TextField id="textField1" fx:id="txtDatabase" layoutX="140.0" layoutY="74.0" prefWidth="143.0" text="" />
+                <Label id="label4" font="$x1" layoutX="17.0" layoutY="78.0" text="Database Name" />
               </children>
             </AnchorPane>
           </content>
