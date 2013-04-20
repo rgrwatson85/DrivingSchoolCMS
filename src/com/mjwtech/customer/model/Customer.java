@@ -17,6 +17,7 @@ import javafx.beans.property.StringProperty;
 public class Customer {
 
     public static Customer oCust = new Customer();
+    public static String customerFXMLString = "/com/mjwtech/customer/view/";
    
     //ID property
     private IntegerProperty CustomerID;

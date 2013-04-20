@@ -14,6 +14,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import name.antonsmirnov.javafx.dialog.Dialog;
+import com.mjwtech.customer.model.Customer;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 
 /**
@@ -54,13 +57,25 @@ public class CustomerController implements Initializable {
         //makes the correct toggle button selected
         MainController.btnCustomer.setSelected(true);
         
-        //load default dropdown data
+        /*
+         * This will create all the drop downs needed to interact with a customer
+         */
         try {
             dropdowndata.createDropDownData();
             dropdowndata.createStateDropDownData("USA");
-            dropdowndata.createVehicleDropDownData("Acura");
         } catch (ClassNotFoundException | SQLException ex) {
             Dialog.showError("ERROR", "Could not load dropdown data\n\nMainController:123");
         }
+        
+        /*
+         * This will load the add new customer into the content pane
+         */
+        btnAddCustomer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                MainController.transitionContent(Customer.customerFXMLString+"AddNewCustomer.fxml");
+            }
+        });
+        
     }    
 }

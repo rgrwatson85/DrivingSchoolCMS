@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="root" maxHeight="600.0" maxWidth="429.0" minHeight="181.0" minWidth="288.0" prefHeight="306.0" prefWidth="288.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.CustomerController">
+<AnchorPane id="AnchorPane" fx:id="root" maxHeight="600.0" maxWidth="429.0" minHeight="181.0" minWidth="288.0" prefHeight="306.0" prefWidth="288.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.CustomerController">
   <children>
     <AnchorPane id="AnchorPane" fx:id="wrapper" prefHeight="306.0" prefWidth="288.0">
       <children>
@@ -55,4 +55,7 @@
       </children>
     </AnchorPane>
   </children>
+  <stylesheets>
+    <URL value="@../../../resources/css/base.css" />
+  </stylesheets>
 </AnchorPane>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import jfxtras.labs.scene.control.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="748.0" styleClass="root" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.AddNewCustomerController">
+  <children>
+    <TextField id="textField1" fx:id="txtFirstName" layoutX="187.0" layoutY="118.0" prefWidth="154.0" />
+    <TextField id="textField1" fx:id="txtLastName" layoutX="82.0" layoutY="176.0" prefWidth="154.0" />
+    <TextField id="textField1" fx:id="txtAddress1" layoutX="82.0" layoutY="234.0" prefWidth="259.0" />
+    <TextField id="textField1" fx:id="txtAddress2" layoutX="82.0" layoutY="292.0" prefWidth="259.0" />
+    <TextField id="textField1" fx:id="txtCity" layoutX="82.0" layoutY="411.0" prefWidth="125.0" />
+    <ComboBox id="comboBox1" fx:id="cmbState" layoutX="229.0" layoutY="350.0" prefHeight="23.0" prefWidth="112.0" promptText="State" />
+    <TextField id="textField1" fx:id="txtZip" layoutX="229.0" layoutY="411.0" prefWidth="82.0" />
+    <Label id="label1" layoutX="81.0" text="NEW CUSTOMER INFORMATION" textAlignment="CENTER" />
+    <Label id="label2" layoutX="406.0" layoutY="99.0" text="Home Phone" />
+    <Label id="label2" layoutX="406.0" layoutY="157.0" text="Cell Phone" />
+    <Label id="label2" layoutX="405.0" layoutY="215.0" text="Email" />
+    <Label id="label2" layoutX="406.0" layoutY="273.0" text="Date Of Birth" />
+    <Label id="label2" layoutX="187.0" layoutY="99.0" text="First Name" />
+    <Label id="label2" layoutX="82.0" layoutY="157.0" text="Last Name" />
+    <Label id="label2" layoutX="82.0" layoutY="215.0" text="Address" />
+    <Label id="label2" layoutX="82.0" layoutY="273.0" text="Address 2" />
+    <Label id="label2" layoutX="82.0" layoutY="392.0" text="City" />
+    <Label id="label2" layoutX="229.0" layoutY="331.0" text="State" />
+    <Label id="label2" layoutX="229.0" layoutY="392.0" text="Zip" />
+    <TextField id="textField1" fx:id="txtHomePhone1" layoutX="406.0" layoutY="118.0" prefWidth="41.0" />
+    <TextField id="textField1" fx:id="txtHomePhone2" layoutX="456.0" layoutY="118.0" prefWidth="41.0" />
+    <TextField id="textField1" fx:id="txtHomePhone3" layoutX="507.0" layoutY="118.0" prefWidth="54.0" />
+    <TextField id="textField1" fx:id="txtCellPhone1" layoutX="407.0" layoutY="176.0" prefWidth="41.0" />
+    <TextField id="textField1" fx:id="txtCellPhone2" layoutX="457.0" layoutY="176.0" prefWidth="41.0" />
+    <TextField id="textField1" fx:id="txtCellPhone3" layoutX="508.0" layoutY="176.0" prefWidth="54.0" />
+    <TextField id="textField1" fx:id="txtEmail" layoutX="405.0" layoutY="234.0" prefWidth="259.0" />
+    <Button fx:id="btnSubmit" layoutX="405.0" layoutY="409.0" minHeight="26.999900000002526" mnemonicParsing="false" prefHeight="26.999900000002526" prefWidth="259.0" styleClass="submit-button" text="Add Customer To System" />
+    <CalendarTextField id="textField2" fx:id="calendar" layoutX="406.0" layoutY="292.0" prefWidth="126.0" />
+    <ComboBox id="comboBox1" fx:id="cmbCountry" layoutX="81.0" layoutY="350.0" prefHeight="23.0" prefWidth="112.0" promptText="Country" />
+    <Label id="label2" layoutX="81.0" layoutY="331.0" text="Country" />
+    <Label id="label2" layoutX="262.0" layoutY="157.0" text="Suffix" />
+    <ComboBox fx:id="cmbSuffix" layoutX="263.0" layoutY="175.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Label id="label2" layoutX="82.0" layoutY="99.0" text="Salutation" />
+    <ComboBox id="cmbSuffix" fx:id="cmbSalutation" layoutX="83.0" layoutY="117.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <ComboBox fx:id="cmbHighSchool" layoutX="406.0" layoutY="349.0" prefWidth="265.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Label id="label2" layoutX="407.0" layoutY="331.0" text="Highschool" />
+  </children>
+  <stylesheets>
+    <URL value="@../../../../resources/css/base.css" />
+  </stylesheets>
+</AnchorPane>

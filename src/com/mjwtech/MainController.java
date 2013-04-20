@@ -126,9 +126,9 @@ public class MainController implements Initializable {
         });
     }
 
-    public static void transitionContent(Class c, String s) {
+    public static void transitionContent(String s) {
         try {
-            content = FXMLLoader.load(c.getResource(s));
+            content = FXMLLoader.load(Main.class.getResource(s));
             contentPane.getChildren().clear();
             contentPane.getChildren().add(content);
         } catch (Exception ex) {
@@ -141,15 +141,12 @@ public class MainController implements Initializable {
      */
     private void applyButtonEventHandlers() throws ClassNotFoundException {
         for (final Node n : toggleButtonContainer.getChildren()) {
-            final String classname = n.getId().replace("btn", "");
-            final String packagename = "com.mjwtech."+classname.toLowerCase()+".";
-            final Class c = Class.forName(packagename.concat(classname));
             if (n instanceof ToggleButton) {
+                final String classname = n.getId().replace("btn", "");
                 n.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent t) {
-                            transitionContent(c, classname+".fxml");
-                            System.gc();
+                            transitionContent("/com/mjwtech/"+classname.toLowerCase()+"/view/"+classname+".fxml");
                     }
                 });
             }
