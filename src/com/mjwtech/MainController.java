@@ -149,6 +149,7 @@ public class MainController implements Initializable {
                     @Override
                     public void handle(MouseEvent t) {
                             transitionContent(c, classname+".fxml");
+                            System.gc();
                     }
                 });
             }

@@ -138,7 +138,6 @@ public class dropdowndata {
                     + "WHERE b.CountryID = Country.CountryID "
                     + "AND Country.CountryName='" + countryFilter + "' "
                     + "GROUP BY b.StateID, b.StateName, b.CountryID, CountryName";
-            System.out.println(sql);
             ResultSet rs = SettingsController.stmt.executeQuery(sql);
             int size = 0;
             int countryCount = 0;
@@ -583,7 +582,6 @@ public class dropdowndata {
                     + "WHERE b.VehicleMakeID = VehicleMake.VehicleMakeID "
                     + "AND VehicleMake.VehicleMakeName='" + vehicleMake + "' "
                     + "GROUP BY b.VehicleMakeID, b.VehicleModelName, b.VehicleMakeID, b.VehicleModelID, VehicleMakeName";
-            System.out.println(sql);
             ResultSet rs = SettingsController.stmt.executeQuery(sql);
             int size = 0;
             int makeCount = 0;
