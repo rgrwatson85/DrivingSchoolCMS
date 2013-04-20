@@ -24,7 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import name.antonsmirnov.javafx.dialog.Dialog;
-import com.mjwtech.customer.Customer;
+import com.mjwtech.customer.model.Customer;
 import data.dropdown.dropdowndata;
 import java.sql.SQLException;
 import java.util.logging.Level;

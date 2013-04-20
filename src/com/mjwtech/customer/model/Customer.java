@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mjwtech.customer;
+package com.mjwtech.customer.model;
 
 import java.text.DecimalFormat;
 import javafx.beans.property.IntegerProperty;

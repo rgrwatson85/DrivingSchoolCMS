@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mjwtech.employee;
+package com.mjwtech.vehicle.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
  *
  * @author mrgnwatson
  */
-public class EmployeeController implements Initializable {
+public class VehicleController implements Initializable {
 
     /**
      * Initializes the controller class.

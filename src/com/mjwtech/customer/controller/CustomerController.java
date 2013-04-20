@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mjwtech.customer;
+package com.mjwtech.customer.controller;
 
 import com.mjwtech.MainController;
 import data.dropdown.dropdowndata;
