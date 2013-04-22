@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="875.0" styleClass="root" xmlns:fx="http://javafx.com/fxml" fx:controller="texasdrivingschoolfx.emergencycontact.addnewemergencycontact.addnewemergencycontactController">
+  <children>
+    <Button fx:id="btnSubmit" layoutX="279.0" layoutY="453.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="317.0" styleClass="submit-button" text="Add Emergency Contact To System" />
+    <Label id="label1" layoutX="163.0" layoutY="35.0" styleClass="title" text="NEW EMERGENCY CONTACT" textAlignment="CENTER" />
+    <AnchorPane id="AnchorPane" layoutX="356.0" layoutY="142.0" />
+    <TextField id="textField1" fx:id="txtFirstName" layoutX="415.0" layoutY="119.0" prefWidth="154.0" />
+    <TextField id="textField1" fx:id="txtLastName" layoutX="310.0" layoutY="177.0" prefWidth="154.0" />
+    <Label id="label2" layoutX="310.0" layoutY="214.0" text="Home Phone" />
+    <Label id="label2" layoutX="310.0" layoutY="272.0" text="Cell Phone" />
+    <Label id="label2" layoutX="309.0" layoutY="330.0" text="Email" />
+    <Label id="label2" layoutX="415.0" layoutY="100.0" text="First Name" />
+    <Label id="label2" layoutX="310.0" layoutY="158.0" text="Last Name" />
+    <TextField id="textField1" fx:id="txtHomePhone1" layoutX="310.0" layoutY="233.0" prefWidth="41.0" />
+    <TextField id="textField1" fx:id="txtHomePhone2" layoutX="360.0" layoutY="233.0" prefWidth="41.0" />
+    <TextField id="textField1" fx:id="txtHomePhone3" layoutX="411.0" layoutY="233.0" prefWidth="54.0" />
+    <TextField id="textField1" fx:id="txtCellPhone1" layoutX="311.0" layoutY="291.0" prefWidth="41.0" />
+    <TextField id="textField1" fx:id="txtCellPhone2" layoutX="361.0" layoutY="291.0" prefWidth="41.0" />
+    <TextField id="textField1" fx:id="txtCellPhone3" layoutX="412.0" layoutY="291.0" prefWidth="54.0" />
+    <TextField id="textField1" fx:id="txtEmail" layoutX="309.0" layoutY="349.0" prefWidth="259.0" />
+    <Label id="label2" layoutX="490.0" layoutY="158.0" text="Suffix" />
+    <ComboBox fx:id="cmbSuffix" layoutX="491.0" layoutY="176.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Label id="label2" layoutX="310.0" layoutY="100.0" text="Salutation" />
+    <ComboBox id="cmbSuffix" fx:id="cmbSalutation" layoutX="311.0" layoutY="118.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Label id="label2" layoutX="311.0" layoutY="387.0" text="Relationship" />
+    <ComboBox id="cmbSuffix" fx:id="cmbRelationship" layoutX="312.0" layoutY="405.0" prefWidth="125.5">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+  </children>
+  <stylesheets>
+    <URL value="@../../../../resources/css/base.css" />
+  </stylesheets>
+</AnchorPane>

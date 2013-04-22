@@ -77,5 +77,15 @@ public class CustomerController implements Initializable {
             }
         });
         
+        /*
+         * This will load the view customer into the content pane
+         */
+        btnSearchCustomer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                MainController.transitionContent(Customer.customerFXMLString+"ViewCustomer.fxml");
+            }
+        });
+        
     }    
 }

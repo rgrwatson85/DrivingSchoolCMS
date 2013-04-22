@@ -7,6 +7,7 @@ package data.dropdown;
 import data.database_connection.SettingsController;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -106,7 +107,8 @@ public class dropdowndata {
         //get countries
         try {
             String sql = "SELECT CountryName FROM Country";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -138,7 +140,8 @@ public class dropdowndata {
                     + "WHERE b.CountryID = Country.CountryID "
                     + "AND Country.CountryName='" + countryFilter + "' "
                     + "GROUP BY b.StateID, b.StateName, b.CountryID, CountryName";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             int countryCount = 0;
             try {
@@ -177,7 +180,8 @@ public class dropdowndata {
         //get courses
         try {
             String sql = "SELECT CourseName,FloatingDate FROM CourseMaster";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -206,7 +210,8 @@ public class dropdowndata {
         //get employees and instructor subset
         try{
             String sql = "SELECT FirstName, LastName FROM EMPLOYEE ";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -229,7 +234,8 @@ public class dropdowndata {
                     + "FROM EmployeeType "
                     + "WHERE EmployeeTypeName='Instructor'"
                     + ")";
-            rs = SettingsController.stmt.executeQuery(sql);
+            stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery(sql);
             size = 0;
             try {
                 rs.last();
@@ -254,7 +260,8 @@ public class dropdowndata {
     private static void loadSalutation() {
         try {
             String sql = "SELECT SalutationName FROM Salutation";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -279,7 +286,8 @@ public class dropdowndata {
         //get suffix
         try {
             String sql = "SELECT SuffixName FROM LastNameSuffix";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -304,7 +312,8 @@ public class dropdowndata {
         //get suffix
         try {
             String sql = "SELECT Address FROM Location";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -329,7 +338,8 @@ public class dropdowndata {
         //get relationships
         try {
             String sql = "SELECT RelationshipType FROM Relationship";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -353,7 +363,8 @@ public class dropdowndata {
     private static void loadEmployeeType() {
         try {
             String sql = "SELECT EmployeeTypeName FROM EmployeeType";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -377,7 +388,8 @@ public class dropdowndata {
     private static void loadTransactionType() {
         try {
             String sql = "SELECT TransactionTypeName FROM TransactionType";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -401,7 +413,8 @@ public class dropdowndata {
     private static void loadPaymentType() {
         try {
             String sql = "SELECT PaymentMethodName FROM PaymentMethod";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -424,7 +437,8 @@ public class dropdowndata {
     private static void loadPermitRestriction() {
         try {
             String sql = "SELECT (RestrictionTypeID + ' - ' + RestrictionTypeName) AS RestrictionType FROM RestrictionType";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -447,7 +461,8 @@ public class dropdowndata {
     private static void loadHighSchool() {
         try {
             String sql = "SELECT HighschoolName FROM HighSchool";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -471,7 +486,8 @@ public class dropdowndata {
         //maintenance type 
         try {
             String sql = "SELECT VehicleID FROM Vehicle";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -498,7 +514,8 @@ public class dropdowndata {
         //maintenance type 
         try {
             String sql = "SELECT MaintenanceTypeName FROM MaintenanceType";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -524,7 +541,8 @@ public class dropdowndata {
         //get shopnames
         try {
             String sql = "SELECT AuthorizedMechanicShopName FROM AuthorizedMechanicShop";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -551,7 +569,8 @@ public class dropdowndata {
         //maintenance type 
         try {
             String sql = "SELECT VehicleMakeName FROM VehicleMake";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -582,7 +601,8 @@ public class dropdowndata {
                     + "WHERE b.VehicleMakeID = VehicleMake.VehicleMakeID "
                     + "AND VehicleMake.VehicleMakeName='" + vehicleMake + "' "
                     + "GROUP BY b.VehicleMakeID, b.VehicleModelName, b.VehicleMakeID, b.VehicleModelID, VehicleMakeName";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             int makeCount = 0;
             try {
@@ -619,7 +639,8 @@ public class dropdowndata {
         //vehicle type 
         try {
             String sql = "SELECT VehicleTypeName FROM VehicleType";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();
@@ -645,7 +666,8 @@ public class dropdowndata {
         //fuel type 
         try {
             String sql = "SELECT FuelTypeName FROM FuelType";
-            ResultSet rs = SettingsController.stmt.executeQuery(sql);
+            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             try {
                 rs.last();

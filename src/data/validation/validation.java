@@ -33,16 +33,35 @@ public class validation {
     
     //number only validation
     public boolean validateNumberOnly(String text){
-        regex = Pattern.compile("\\d");
+        regex = Pattern.compile("\\d{3,4}");
+        validate(text);
+        return match.matches();
+    }
+    
+    //number and letter address
+    public boolean validateAddress(String text){
+        regex = Pattern.compile("[a-zA-Z0-9]{1,150}");
         text = text.replaceAll(" ", "");
+        text = text.replaceAll("\\.", "");
+        validate(text);
+        return match.matches();
+    }
+    
+    //email address
+    public boolean validateEmail(String text){
+        regex = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         validate(text);
         return match.matches();
     }
     
     //date validation
     public boolean validateDate(String text){
-        regex = Pattern.compile("/(0[1-9]|1[012])[- \\/.](0[1-9]|[12][0-9]|3[01])[- \\/.](19|20)\\d\\d/");
-        text = text.replaceAll(" ", "");
+        regex = Pattern.compile("^(?:(?:(?:0?[13578]|1[02])(\\/|-|\\.)31)\\1|(?:(?:0?[1,3-9]"
+                + "|1[0-2])(\\/|-|\\.)(?:29|30)\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:0?2(\\/|"
+                + "-|\\.)29\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|"
+                + "[2468][048]|[3579][26])00))))$|^(?:(?:0?[1-9])|(?:1[0-2]))(\\/|-|\\.)(?:0?[1-9]|1"
+                + "\\d|2[0-8])\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
         validate(text);
         return match.matches();
     }

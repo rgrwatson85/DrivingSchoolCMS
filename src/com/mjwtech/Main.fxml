@@ -29,7 +29,7 @@
         <Button fx:id="btnBalanceDue" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnBalanceDue_sc" />
       </children>
     </HBox>
-    <Label fx:id="lblUserName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutY="15.0" prefHeight="37.0" prefWidth="291.0" style="" text="" textAlignment="LEFT" textFill="WHITE" AnchorPane.rightAnchor="4.0" />
+    <Label fx:id="lblUserName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutY="18.0" prefHeight="37.0" prefWidth="291.0" style="" text="" textAlignment="LEFT" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
     <Label fx:id="lblToolTip" alignment="CENTER" layoutX="14.0" layoutY="50.0" prefWidth="627.0" text="" visible="false" />
     <HBox fx:id="toggleButtonContainer" alignment="CENTER" layoutX="8.0" layoutY="9.0" prefHeight="48.0" prefWidth="506.0" spacing="15.0" styleClass="undecorator-background, toggleButtonContainer">
       <children>

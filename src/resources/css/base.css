@@ -57,10 +57,16 @@
 .menu-button .label { /* Workaround for RT-20015 */
     -fx-text-fill: -fx-text-base-color;
 }
-
 .button:hover {
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
+
+
+/*
+*DO NO DELETE BELOW THIS LINE
+*/
+
+
 
 /*NAV ICONS*/
 .btnWaitlist{-fx-background-image: url("../images/fullsize/Chat.png");-fx-background-size: stretch;-fx-background-color: transparent;}
@@ -134,14 +140,36 @@
 .txtFilter{-fx-font-size: 13;}
 .labelToolTip{-fx-font-size: 11; -fx-font-weight: bold;}
 .button{-fx-font-size: 12}
+.error{
+    -fx-background-color: #F76E6E;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+.warning{
+    -fx-background-color: #F2F752;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+
+}
+.valid{
+    -fx-background-color: #43C335;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+.title {
+   -fx-font-size: 32px;
+   -fx-font-family: "Arial Black";
+   -fx-text-fill: #909090;
+   -fx-fill: #000000;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.9) , 6, 0.0 , 0 , 2 );
+}
 
 
 /*TABLE VIEW CUSTOMIZATION*/
-.table-view .column-header{
+.table-view .column-header .label{
     -fx-font-size: 15;
+    -fx-text-fill: black;
+    -fx-selection-bar-text:black;
     -fx-font-weight: normal;
 }
-.table-view .table-row-cell {
+.table-view .table-row-cell{
     -fx-font-size: 12;
     -fx-size: 12px;
 }

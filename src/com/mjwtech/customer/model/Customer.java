@@ -5,7 +5,9 @@
 package com.mjwtech.customer.model;
 
 import java.text.DecimalFormat;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -240,17 +242,12 @@ public class Customer {
     }
     
     //balanceDue property
-    DecimalFormat formatter = new DecimalFormat("$#,##0.00");
-    private StringProperty BalanceDue;
-    public void setBalanceDue(Double value) {
-        BalanceDueProperty().set(formatter.format(value));
-    }
-    public String getBalanceDue() {
-        return BalanceDueProperty().get();
-    }
-    public StringProperty BalanceDueProperty() {
+    private DoubleProperty BalanceDue;
+    public void setBalanceDue(Double value) { BalanceDueProperty().set(value);}
+    public Double getBalanceDue() {return BalanceDueProperty().get();}
+    public DoubleProperty BalanceDueProperty() {
         if (BalanceDue == null) {
-            BalanceDue = new SimpleStringProperty(this, "BalanceDue");
+            BalanceDue = new SimpleDoubleProperty(this, "BalanceDue");
         }
         return BalanceDue;
     }

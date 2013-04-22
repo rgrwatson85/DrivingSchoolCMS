@@ -66,8 +66,7 @@ public class SettingsController implements Initializable {
     @FXML
     private TextField txtDatabase;
     private static boolean connection;
-    private static Connection conn;
-    public static Statement stmt;
+    public static Connection conn;
     private static String urlString;
     private static String IP;
     private static String port;
@@ -232,7 +231,6 @@ public class SettingsController implements Initializable {
 
         Class.forName("net.sourceforge.jtds.jdbc.Driver");
         conn = (Connection) DriverManager.getConnection(urlString, Username, Password);
-        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         if (loginstatus) {
             MainController.lblUserName.setText("Logged In As: " + Username.toUpperCase());
         } else {
