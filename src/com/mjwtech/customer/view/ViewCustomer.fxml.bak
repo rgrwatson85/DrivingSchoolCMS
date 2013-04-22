@@ -9,6 +9,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import jfxtras.labs.scene.control.*?>
 
 <AnchorPane id="AnchorPane" minHeight="611.0" prefHeight="611.0" prefWidth="1041.0" styleClass="root, background3" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.ViewCustomerController">
   <children>
@@ -40,7 +41,8 @@
         <TextField fx:id="txtCellPhone2" editable="false" layoutX="520.0" layoutY="82.0" prefWidth="41.0" />
         <TextField fx:id="txtCellPhone3" editable="false" layoutX="571.0" layoutY="82.0" prefWidth="48.0" />
         <TextField fx:id="txtEmail" editable="false" layoutX="469.0" layoutY="140.0" prefWidth="242.0" />
-        <TextField fx:id="txtDOB" editable="false" layoutX="469.0" layoutY="197.0" prefWidth="186.0" />
+        <CalendarTextField fx:id="txtDOB" layoutX="469.0" layoutY="197.0" prefWidth="140.0" />
+        <TextField fx:id="txtDOB_mask" editable="false" layoutX="469.0" layoutY="197.0" prefWidth="107.0" />
         <TextField fx:id="txtBalanceDue" alignment="CENTER_RIGHT" editable="false" layoutX="469.0" layoutY="256.0" prefWidth="107.0" />
         <Button id="button1" fx:id="btnTransactions" layoutX="651.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnHelp" />
         <Button id="button2" fx:id="btnFee" layoutX="619.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnFee" />
@@ -66,7 +68,7 @@
         <TextField fx:id="txtSalutation" editable="false" layoutX="-1.0" layoutY="82.0" prefWidth="56.0" />
         <ComboBox fx:id="cmbSalutation" layoutX="-1.0" layoutY="82.0" prefHeight="23.0" prefWidth="68.0" visible="true" />
         <TextField id="txtLastName" fx:id="txtSuffix" editable="false" layoutX="294.0" layoutY="197.0" prefWidth="95.00009999999747" />
-        <ComboBox fx:id="cmbSuffix" layoutX="293.0" layoutY="196.0" prefHeight="23.0" prefWidth="97.0" visible="true" />
+        <ComboBox fx:id="cmbSuffix" layoutX="293.0" layoutY="196.0" prefHeight="23.0" prefWidth="98.0" visible="true" />
         <Label id="label2" layoutX="295.0" layoutY="180.0" text="Suffix" />
         <TableView fx:id="tableNote" layoutX="469.0" layoutY="380.0" prefHeight="92.0" prefWidth="329.0">
           <columns>

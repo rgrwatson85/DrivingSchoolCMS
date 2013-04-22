@@ -17,6 +17,7 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.application.*;
@@ -44,7 +45,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -53,6 +53,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import jfxtras.labs.scene.control.CalendarTextField;
+import jfxtras.labs.scene.control.CalendarTimeTextField;
 import name.antonsmirnov.javafx.dialog.Dialog;
 
 /**
@@ -62,8 +64,6 @@ import name.antonsmirnov.javafx.dialog.Dialog;
  */
 public class ViewCustomerController implements Initializable {
 
-    //<editor-fold defaultstate="collapsed" desc="FXML Nodes">
-    
     //root anchor pane
     @FXML
     AnchorPane root;
@@ -120,7 +120,9 @@ public class ViewCustomerController implements Initializable {
     private TextField txtCustomerID; 
     
     @FXML
-    private TextField txtDOB; 
+    private CalendarTextField txtDOB; 
+    
+    @FXML TextField txtDOB_mask;
     
     @FXML 
     private TextField txtEmail; 
@@ -157,9 +159,6 @@ public class ViewCustomerController implements Initializable {
     
     @FXML 
     private TextField txtZip; 
-    
-    @FXML
-    private TextArea txtNotes;
     
     @FXML
     private TextField txtSuffix;
@@ -270,8 +269,7 @@ public class ViewCustomerController implements Initializable {
     SimpleDateFormat displayTime = new SimpleDateFormat("h:mm a");
     SimpleDateFormat parseTime = new SimpleDateFormat("HH:mm:ss");
     DecimalFormat formatter = new DecimalFormat("$#,##0.00");
-    
-    //</editor-fold>
+
      /**
      * Initializes the controller class.
      */
@@ -287,7 +285,7 @@ public class ViewCustomerController implements Initializable {
         
         //set drop downs
         loadDropDownData();
-              
+    
         //set focus to txtSearchField name on load
         Platform.runLater(new Runnable() {
             @Override
@@ -300,19 +298,28 @@ public class ViewCustomerController implements Initializable {
         //show when a customer has been loaded into the form
         buttonWrapper.setVisible(false);
         
-        //hide cmbCountry, cmbState, and cmbSuffix initially
+        //hide initially
         //shows when editing
         cmbCountry.setVisible(false);
         cmbState.setVisible(false);
         cmbSalutation.setVisible(false);
         cmbSuffix.setVisible(false);
         cmbHighSchool.setVisible(false);
-        
-        //load customer data if customer object has been created
-        loadForm();
+        txtDOB.setVisible(false);
 
         //Set default combo box search parameter to Customer ID
         cmbParameter.getSelectionModel().select(1);
+        
+        //load customer data if customer object has been created
+        loadForm();
+        
+        //changes the txtDOB mask to show the correct date
+        txtDOB.valueProperty().addListener(new ChangeListener<Calendar>() {
+            @Override
+            public void changed(ObservableValue<? extends Calendar> ov, Calendar t, Calendar t1) {
+                txtDOB_mask.setText(sdf.format(t1.getTime()));
+            }
+        });
         
         //changes state drop drown when country is changed
         cmbCountry.valueProperty().addListener(new ChangeListener<String>() {
@@ -361,7 +368,7 @@ public class ViewCustomerController implements Initializable {
                 //searches for the customer
                 try{
                 searchCustomer();
-                }catch(Exception e){
+                }catch(ClassNotFoundException e){
                     Dialog.showError("ERROR", "Error loading customer record\n\n"+e.getMessage());
                 }
             }
@@ -445,8 +452,8 @@ public class ViewCustomerController implements Initializable {
                 //reload customer info
                 try{
                     searchCustomer();
-                }catch(Exception e){
-                    Dialog.showError("ERROR", "Error searching customer");
+                }catch(ClassNotFoundException e){
+                    Dialog.showError("ERROR", "Error searching customer\n\n"+e.getMessage());
                 }
                 Dialog.showInfo("Notice", "Changes have been cancelled");
             }
@@ -729,7 +736,7 @@ public class ViewCustomerController implements Initializable {
                 createNote();
             }
         });
-        
+
     } 
     
      /*
@@ -959,15 +966,15 @@ public class ViewCustomerController implements Initializable {
                 }
             }
         });
-        txtDOB.textProperty().addListener(new ChangeListener<String>() {
+        txtDOB_mask.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> ov, String t, String t1) {
                 if (fv.validateDate(t1)) {
-                    txtDOB.getStyleClass().remove("error");
-                    txtDOB.getStyleClass().add("valid");
+                    txtDOB_mask.getStyleClass().remove("error");
+                    txtDOB_mask.getStyleClass().add("valid");
                 } else {
-                    txtDOB.getStyleClass().remove("valid");
-                    txtDOB.getStyleClass().add("error");
+                    txtDOB_mask.getStyleClass().remove("valid");
+                    txtDOB_mask.getStyleClass().add("error");
                 }
             }
         });
@@ -983,7 +990,7 @@ public class ViewCustomerController implements Initializable {
             //search for the customer
             try{
                 searchCustomer();
-            }catch(Exception e){
+            }catch(ClassNotFoundException e){
                 Dialog.showError("ERROR", "Error searching for customer");
             }
         }
@@ -1049,7 +1056,7 @@ public class ViewCustomerController implements Initializable {
                 }
                 
                 Customer.oCust.setDOB(sdf.format(parseDate.parse(rs.getString("DOB"))));
-                txtDOB.setText(sdf.format(parseDate.parse(rs.getString("DOB"))));
+                txtDOB_mask.setText(sdf.format(parseDate.parse(rs.getString("DOB"))));
                 
                 //home phone can be null so set text conditionally
                 if(rs.getString("HomePhone")==null){
@@ -1241,7 +1248,7 @@ public class ViewCustomerController implements Initializable {
             txtCellPhone2.editableProperty().set(editable);
             txtCellPhone3.editableProperty().set(editable);
             txtEmail.editableProperty().set(editable);
-            txtDOB.editableProperty().set(editable);
+            txtDOB.visibleProperty().set(editable);
             btnEditCustomer.setVisible(!editable);
             btnEmergencyContact.setVisible(!editable);
             btnEnrollCourse.setVisible(!editable);
@@ -1313,7 +1320,6 @@ public class ViewCustomerController implements Initializable {
                 
             }
             
-            System.out.println(""+hsID);
             //update the customer record
             if(hsID>0){
                 sql = "UPDATE Customer "
@@ -1330,7 +1336,7 @@ public class ViewCustomerController implements Initializable {
                     + "HomePhone='("+txtHomePhone1.getText()+") "+txtHomePhone2.getText()+"-"+txtHomePhone3.getText()+"', "
                     + "CellPhone='("+txtCellPhone1.getText()+") "+txtCellPhone2.getText()+"-"+txtCellPhone3.getText()+"', "
                     + "EmailAddress='"+txtEmail.getText()+"', "
-                    + "DOB='"+txtDOB.getText()+"', "
+                    + "DOB='"+txtDOB_mask.getText()+"', "
                     + "HighSchoolID="+hsID+" "
                     + "WHERE CustomerID="+custID+"; "
                     + ""
@@ -1352,7 +1358,7 @@ public class ViewCustomerController implements Initializable {
                     + "HomePhone='("+txtHomePhone1.getText()+") "+txtHomePhone2.getText()+"-"+txtHomePhone3.getText()+"', "
                     + "CellPhone='("+txtCellPhone1.getText()+") "+txtCellPhone2.getText()+"-"+txtCellPhone3.getText()+"', "
                     + "EmailAddress='"+txtEmail.getText()+"', "
-                    + "DOB='"+txtDOB.getText()+"' "
+                    + "DOB='"+txtDOB_mask.getText()+"' "
                     + "WHERE CustomerID="+custID+"; "
                     + ""
                     + "UPDATE Customer " 
@@ -1361,19 +1367,13 @@ public class ViewCustomerController implements Initializable {
             }
             stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stmt.executeUpdate(sql);
+            searchCustomer();
 
             SettingsController.closeConnection();
             Dialog.showInfo("Success", "Customer information was successfully updated.");
-            searchCustomer();
-
         }
         catch(ClassNotFoundException | SQLException ex){
             Dialog.showError("Error", ex.getMessage());
-            try{
-                searchCustomer();
-            }catch(Exception e){
-                Dialog.showError("ERROR", "Error searching customer");
-            }
         }
     }
     

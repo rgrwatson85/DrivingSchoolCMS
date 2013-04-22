@@ -18,3 +18,4 @@ rebel.xml
 *.jar
 *.war
 *.ear
+/test/

@@ -9,6 +9,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import jfxtras.labs.scene.control.*?>
 
 <AnchorPane id="AnchorPane" minHeight="611.0" prefHeight="611.0" prefWidth="1041.0" styleClass="root, background3" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.ViewCustomerController">
   <children>
@@ -40,7 +41,8 @@
         <TextField fx:id="txtCellPhone2" editable="false" layoutX="520.0" layoutY="82.0" prefWidth="41.0" />
         <TextField fx:id="txtCellPhone3" editable="false" layoutX="571.0" layoutY="82.0" prefWidth="48.0" />
         <TextField fx:id="txtEmail" editable="false" layoutX="469.0" layoutY="140.0" prefWidth="242.0" />
-        <TextField fx:id="txtDOB" editable="false" layoutX="469.0" layoutY="197.0" prefWidth="186.0" />
+        <CalendarTextField fx:id="txtDOB" layoutX="469.0" layoutY="197.0" prefWidth="140.0" />
+        <TextField fx:id="txtDOB_mask" editable="false" layoutX="469.0" layoutY="197.0" prefWidth="122.0" />
         <TextField fx:id="txtBalanceDue" alignment="CENTER_RIGHT" editable="false" layoutX="469.0" layoutY="256.0" prefWidth="107.0" />
         <Button id="button1" fx:id="btnTransactions" layoutX="651.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnHelp" />
         <Button id="button2" fx:id="btnFee" layoutX="619.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnFee" />
