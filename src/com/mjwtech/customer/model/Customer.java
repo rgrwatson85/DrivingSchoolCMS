@@ -4,7 +4,6 @@
  */
 package com.mjwtech.customer.model;
 
-import java.text.DecimalFormat;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -77,13 +76,13 @@ public class Customer {
     }
     
     //Address1 property
-    private StringProperty Address1;
-    public void setAddress1(String value) {Address1Property().set(value);}
-    public String getAddress1() {return Address1Property().get();}
-    public StringProperty Address1Property() {
-        if (Address1 == null) {Address1 = new SimpleStringProperty(this, "Address1");
+    private StringProperty Address;
+    public void setAddress(String value) {AddressProperty().set(value);}
+    public String getAddress() {return AddressProperty().get();}
+    public StringProperty AddressProperty() {
+        if (Address == null) {Address = new SimpleStringProperty(this, "Address");
         }
-        return Address1;
+        return Address;
     }
     
     //Address2 property
@@ -224,21 +223,6 @@ public class Customer {
             DOB = new SimpleStringProperty(this, "DOB");
         }
         return DOB;
-    }
-    
-    //highschool property
-    private StringProperty Highschool;
-    public void setHighschool(String value) {
-        HighschoolProperty().set(value);
-    }
-    public String getHighschool() {
-        return HighschoolProperty().get();
-    }
-    public StringProperty HighschoolProperty() {
-        if (Highschool == null) {
-            Highschool = new SimpleStringProperty(this, "Highschool");
-        }
-        return Highschool;
     }
     
     //balanceDue property

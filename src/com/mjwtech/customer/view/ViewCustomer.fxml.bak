@@ -13,43 +13,39 @@
 
 <AnchorPane id="AnchorPane" minHeight="611.0" prefHeight="611.0" prefWidth="1041.0" styleClass="root, background3" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.ViewCustomerController">
   <children>
-    <TextField fx:id="txtSearchField" focusTraversable="false" layoutX="5.0" layoutY="27.0" prefHeight="23.0" prefWidth="147.0" />
-    <ChoiceBox id="choiceBox1" fx:id="cmbParameter" layoutX="5.0" layoutY="57.0" prefHeight="21.000099999997474" prefWidth="114.0">
-      <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Cell Phone" />
-          <String fx:value="Customer ID" />
-          <String fx:value="Email" />
-        </FXCollections>
-      </items>
-    </ChoiceBox>
-    <Button fx:id="btnSearch" alignment="CENTER" contentDisplay="CENTER" layoutX="129.0" layoutY="57.0" maxHeight="23.0" maxWidth="23.0" minHeight="23.0" minWidth="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnSearch" />
-    <AnchorPane id="AnchorPane" fx:id="root" layoutX="207.0" layoutY="4.0" prefHeight="489.0" prefWidth="809.0">
+    <AnchorPane id="AnchorPane" fx:id="root" layoutX="207.0" layoutY="4.0" prefHeight="607.0" prefWidth="834.0">
       <children>
-        <TextField fx:id="txtState" editable="false" layoutX="135.0" layoutY="380.0" prefWidth="107.0" />
         <TextField fx:id="txtCustomerID" editable="false" focusTraversable="false" layoutX="-1.0" layoutY="23.0" prefWidth="95.0" />
+        <TextField fx:id="txtSalutation" editable="false" focusTraversable="false" layoutX="-1.0" layoutY="82.0" prefWidth="56.0" />
+        <ComboBox fx:id="cmbSalutation" focusTraversable="true" layoutX="-1.0" layoutY="82.0" prefHeight="23.0" prefWidth="68.0" visible="true" />
         <TextField fx:id="txtFirstName" editable="false" layoutX="-1.0" layoutY="140.0" prefWidth="288.0" />
-        <TextField fx:id="txtLastName" editable="true" layoutX="-1.0" layoutY="196.0" prefWidth="288.0" />
+        <TextField fx:id="txtLastName" editable="false" layoutX="-1.0" layoutY="196.0" prefWidth="288.0" />
+        <TextField id="txtLastName" fx:id="txtSuffix" editable="false" focusTraversable="false" layoutX="294.0" layoutY="196.0" prefWidth="95.00009999999747" />
+        <ComboBox fx:id="cmbSuffix" layoutX="294.0" layoutY="195.0" prefHeight="23.0" prefWidth="98.0" visible="true" />
         <TextField fx:id="txtAddress" editable="false" layoutX="-2.0" layoutY="254.0" prefWidth="392.0" />
         <TextField fx:id="txtAddress2" editable="false" layoutX="-1.0" layoutY="318.0" prefWidth="391.0" />
         <TextField fx:id="txtCity" editable="false" layoutX="-2.0" layoutY="381.0" prefWidth="125.0" />
+        <TextField fx:id="txtState" editable="false" layoutX="135.0" layoutY="380.0" prefWidth="107.0" />
+        <ComboBox id="comboBox1" fx:id="cmbState" layoutX="134.0" layoutY="380.0" prefHeight="22.0" prefWidth="112.0" promptText="State" />
         <TextField fx:id="txtZip" editable="false" layoutX="-1.0" layoutY="450.0" prefWidth="82.0" />
+        <CalendarTextField fx:id="txtDOB" layoutX="469.0" layoutY="197.0" prefWidth="140.0" />
+        <TextField id="textField1" fx:id="txtCountry" focusTraversable="false" layoutX="135.0" layoutY="450.0" prefWidth="180.0" text="USA" />
+        <ComboBox id="comboBox1" fx:id="cmbCountry" layoutX="135.0" layoutY="449.0" prefHeight="24.0" prefWidth="180.0" promptText="Country" />
         <TextField fx:id="txtHomePhone1" editable="false" layoutX="470.0" layoutY="24.0" prefWidth="41.0" />
         <TextField fx:id="txtHomePhone2" editable="false" layoutX="520.0" layoutY="24.0" prefWidth="41.0" />
         <TextField fx:id="txtHomePhone3" editable="false" layoutX="571.0" layoutY="24.0" prefWidth="48.0" />
         <TextField fx:id="txtCellPhone1" editable="false" layoutX="470.0" layoutY="82.0" prefWidth="41.0" />
         <TextField fx:id="txtCellPhone2" editable="false" layoutX="520.0" layoutY="82.0" prefWidth="41.0" />
         <TextField fx:id="txtCellPhone3" editable="false" layoutX="571.0" layoutY="82.0" prefWidth="48.0" />
-        <TextField fx:id="txtEmail" editable="false" layoutX="469.0" layoutY="140.0" prefWidth="242.0" />
-        <CalendarTextField fx:id="txtDOB" layoutX="469.0" layoutY="197.0" prefWidth="140.0" />
-        <TextField fx:id="txtDOB_mask" editable="false" layoutX="469.0" layoutY="197.0" prefWidth="107.0" />
-        <TextField fx:id="txtBalanceDue" alignment="CENTER_RIGHT" editable="false" layoutX="469.0" layoutY="256.0" prefWidth="107.0" />
+        <TextField fx:id="txtEmail" editable="false" layoutX="469.0" layoutY="139.0" prefWidth="242.0" />
+        <TextField fx:id="txtDOB_mask" editable="false" layoutX="469.0" layoutY="195.0" prefWidth="122.0" />
+        <TextField fx:id="txtBalanceDue" alignment="CENTER_RIGHT" editable="false" layoutX="469.0" layoutY="255.0" prefWidth="107.0" />
         <Button id="button1" fx:id="btnTransactions" layoutX="651.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnHelp" />
         <Button id="button2" fx:id="btnFee" layoutX="619.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnFee" />
         <Label id="label2" layoutX="470.0" layoutY="8.0" text="Home Phone" />
         <Label id="label2" layoutX="470.0" layoutY="66.0" text="Cell Phone" />
-        <Label id="label2" layoutX="469.0" layoutY="124.0" text="Email" />
-        <Label id="label2" layoutX="470.0" layoutY="182.0" text="Date Of Birth" />
+        <Label id="label2" layoutX="469.0" layoutY="122.0" text="Email" />
+        <Label id="label2" layoutX="470.0" layoutY="178.0" text="Date Of Birth" />
         <Label id="label2" layoutX="-1.0" layoutY="124.0" text="First Name" />
         <Label id="label2" layoutX="-1.0" layoutY="179.0" text="Last Name" />
         <Label id="label2" layoutX="-1.0" layoutY="239.0" text="Address" />
@@ -57,66 +53,55 @@
         <Label id="label2" layoutX="-2.0" layoutY="365.0" text="City" />
         <Label id="label2" layoutX="-1.0" layoutY="434.0" text="Zip" />
         <Label id="label3" layoutY="5.0" prefWidth="125.0" text="ID" />
-        <Label id="label2" layoutX="470.0" layoutY="241.0" text="Balance Due" />
-        <Label id="label2" layoutX="470.0" layoutY="362.0" text="Notes" />
+        <Label id="label2" layoutX="470.0" layoutY="238.0" text="Balance Due" />
+        <Label id="label2" layoutX="468.0" layoutY="299.0" text="Notes" />
         <Label id="label2" layoutX="135.0" layoutY="432.0" text="Country" />
-        <TextField id="textField1" fx:id="txtCountry" layoutX="135.0" layoutY="450.0" prefWidth="180.0" text="USA" />
         <Label id="label2" layoutX="135.0" layoutY="365.0" text="State" />
-        <ComboBox id="comboBox1" fx:id="cmbState" layoutX="135.0" layoutY="382.0" prefHeight="22.0" prefWidth="112.0" promptText="State" />
-        <ComboBox id="comboBox1" fx:id="cmbCountry" layoutX="135.0" layoutY="449.0" prefHeight="24.0" prefWidth="180.0" promptText="Country" />
         <Label id="label2" layoutX="-1.0" layoutY="66.0" text="Salutation" />
-        <TextField fx:id="txtSalutation" editable="false" layoutX="-1.0" layoutY="82.0" prefWidth="56.0" />
-        <ComboBox fx:id="cmbSalutation" layoutX="-1.0" layoutY="82.0" prefHeight="23.0" prefWidth="68.0" visible="true" />
-        <TextField id="txtLastName" fx:id="txtSuffix" editable="false" layoutX="294.0" layoutY="197.0" prefWidth="95.00009999999747" />
-        <ComboBox fx:id="cmbSuffix" layoutX="293.0" layoutY="196.0" prefHeight="23.0" prefWidth="98.0" visible="true" />
-        <Label id="label2" layoutX="295.0" layoutY="180.0" text="Suffix" />
-        <TableView fx:id="tableNote" layoutX="469.0" layoutY="380.0" prefHeight="92.0" prefWidth="329.0">
+        <Label id="label2" layoutX="295.0" layoutY="178.0" text="Suffix" />
+        <TableView fx:id="tableNote" layoutX="468.0" layoutY="316.0" prefHeight="153.0" prefWidth="329.0">
           <columns>
-            <TableColumn maxWidth="5000.0" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" fx:id="colNoteID" />
             <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="82.0" resizable="false" text="Date" fx:id="colNoteDate" />
             <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="244.0" resizable="false" sortable="false" text="Description" fx:id="colNoteDescription" />
           </columns>
         </TableView>
         <Button id="button2" fx:id="btnMakePayment" layoutX="586.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnMakePayment" />
-        <Button id="button2" fx:id="btnAddNote" layoutX="803.0" layoutY="380.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnMakePayment" />
-        <ComboBox fx:id="cmbHighSchool" layoutX="469.0" layoutY="318.0" prefWidth="329.0">
+        <Button id="button2" fx:id="btnAddNote" layoutX="804.0" layoutY="319.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnMakePayment" />
+        <TableView id="tableView11" fx:id="tableClass" layoutX="-1.0" layoutY="482.0" prefHeight="111.0" prefWidth="799.0">
+          <columns>
+            <TableColumn editable="false" id="tableColumn1" prefWidth="165.0" text="Enrolled Course" fx:id="colCourses" />
+            <TableColumn editable="false" id="tableColumn1" prefWidth="100.0" text="Start Date" fx:id="colStartDate" />
+            <TableColumn editable="false" id="tableColumn1" prefWidth="100.0" text="End Date" fx:id="colEndDate" />
+            <TableColumn editable="false" id="tableColumn1" prefWidth="125.0" text="Meeting Days" fx:id="colDays" />
+            <TableColumn editable="false" id="tableColumn1" maxWidth="5000.0" minWidth="10.0" prefWidth="172.0" text="Time" fx:id="colTimeSlot" />
+            <TableColumn editable="false" id="tableColumn1" maxWidth="5000.0" minWidth="10.0" prefWidth="135.0" text="Instructor" fx:id="colInstructor" />
+          </columns>
+        </TableView>
+      </children>
+    </AnchorPane>
+    <AnchorPane id="AnchorPane" fx:id="searchWrapper" layoutX="14.0" layoutY="5.0" minHeight="46.0001220703125" minWidth="147.0" prefHeight="172.0" prefWidth="149.0">
+      <children>
+        <Label id="label3" layoutX="2.0" layoutY="5.0" prefWidth="54.0" text="Search" />
+        <TextField fx:id="txtSearchField" focusTraversable="false" layoutX="2.0" layoutY="22.0" prefHeight="23.0" prefWidth="147.0" />
+        <ChoiceBox id="choiceBox1" fx:id="cmbParameter" layoutX="2.0" layoutY="52.0" prefHeight="21.000099999997474" prefWidth="114.0">
           <items>
             <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
+              <String fx:value="Cell Phone" />
+              <String fx:value="Customer ID" />
+              <String fx:value="Email Address" />
             </FXCollections>
           </items>
-        </ComboBox>
-        <TextField fx:id="txtHighSchool" layoutX="469.0" layoutY="318.0" prefHeight="24.0" prefWidth="329.0" />
-        <Label id="label2" layoutX="470.0" layoutY="300.0" text="Highschool" />
+        </ChoiceBox>
+        <Button fx:id="btnSearch" alignment="CENTER" contentDisplay="CENTER" layoutX="126.0" layoutY="52.0" maxHeight="23.0" maxWidth="23.0" minHeight="23.0" minWidth="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnSearch" />
+        <Button id="btnSubmit" fx:id="btnSaveChanges" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAcceptChanges" />
+        <Button id="button3" fx:id="btnCancelChanges" layoutX="1.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnCancelChanges" />
+        <Button id="btnSubmit" fx:id="btnEditCustomer" alignment="CENTER" layoutX="1.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnEditCustomer" />
+        <Button id="btnSubmit" fx:id="btnRemoveCustomer" alignment="CENTER" layoutX="101.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnDeleteCustomer" />
+        <Button id="btnSubmit" fx:id="btnEnrollCourse" alignment="CENTER" layoutX="101.0" layoutY="84.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAddToCourse" />
+        <Button id="btnSubmit" fx:id="btnEmergencyContact" alignment="CENTER" layoutX="51.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnEmergencyContact" textFill="#292929" />
+        <Label fx:id="lblToolTip" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="1.0" layoutY="138.0" prefHeight="23.0" prefWidth="147.0" styleClass="labelToolTip" textAlignment="CENTER" textFill="#5d5d5d" wrapText="true" />
       </children>
     </AnchorPane>
-    <AnchorPane id="AnchorPane" fx:id="buttonWrapper" layoutX="5.0" layoutY="86.0" minHeight="46.0001220703125" minWidth="147.0" prefHeight="83.0" prefWidth="147.0">
-      <children>
-        <Button id="btnSubmit" fx:id="btnSaveChanges" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="1.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAcceptChanges" />
-        <Button id="button3" fx:id="btnCancelChanges" layoutY="2.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnCancelChanges" />
-        <Button id="btnSubmit" fx:id="btnEditCustomer" alignment="CENTER" layoutY="1.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnEditCustomer" />
-        <Button id="btnSubmit" fx:id="btnRemoveCustomer" alignment="CENTER" layoutX="100.0" layoutY="2.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnDeleteCustomer" />
-        <Button id="btnSubmit" fx:id="btnEnrollCourse" alignment="CENTER" layoutX="100.0" layoutY="1.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAddToCourse" />
-        <Button id="btnSubmit" fx:id="btnEmergencyContact" alignment="CENTER" layoutX="50.0" layoutY="1.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnEmergencyContact" textFill="#292929" />
-      </children>
-    </AnchorPane>
-    <Label fx:id="lblToolTip" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="5.0" layoutY="144.0" prefHeight="23.0" prefWidth="147.0" styleClass="labelToolTip" textAlignment="CENTER" textFill="#5d5d5d" wrapText="true" />
-    <TableView id="tableView11" fx:id="table" layoutX="207.0" layoutY="493.0" prefHeight="111.0" prefWidth="799.0">
-      <columns>
-        <TableColumn editable="false" id="tableColumn2" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" fx:id="colID" />
-        <TableColumn editable="false" id="tableColumn2" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="course id" fx:id="colCourseID" />
-        <TableColumn editable="false" id="tableColumn1" prefWidth="165.0" text="Enrolled Course" fx:id="colCourses" />
-        <TableColumn editable="false" id="tableColumn1" prefWidth="100.0" text="Start Date" fx:id="colStartDate" />
-        <TableColumn editable="false" id="tableColumn1" prefWidth="100.0" text="End Date" fx:id="colEndDate" />
-        <TableColumn editable="false" id="tableColumn1" prefWidth="125.0" text="Meeting Days" fx:id="colDays" />
-        <TableColumn editable="false" id="tableColumn1" maxWidth="5000.0" minWidth="10.0" prefWidth="172.0" text="Time" fx:id="colTimeSlot" />
-        <TableColumn editable="false" id="tableColumn1" maxWidth="5000.0" minWidth="10.0" prefWidth="135.0" text="Instructor" fx:id="colInstructor" />
-      </columns>
-    </TableView>
-    <Label id="label3" layoutX="5.0" layoutY="10.0" prefWidth="125.0" text="Search" />
-    <Button fx:id="btnPrintContract" layoutX="153.0" layoutY="556.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnPrintContract" text="" visible="false" />
   </children>
   <stylesheets>
     <URL value="@../../../../resources/css/base.css" />

@@ -29,6 +29,7 @@ import data.dropdown.dropdowndata;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import resources.eyecandy.Fade;
 
 /**
  * FXML Controller class
@@ -41,6 +42,8 @@ public class MainController implements Initializable {
     
     @FXML
     public static AnchorPane root;
+    @FXML
+    public static AnchorPane effectsPane;
     //area the encompasses the everything below the company logo and user name label
     @FXML
     AnchorPane contentArea;
@@ -124,6 +127,9 @@ public class MainController implements Initializable {
                 SettingsController.logout();
             }
         });
+        
+        //sets the blur for content pane - created in Fade.java
+        contentPane.setEffect(Fade.gb);
     }
 
     public static void transitionContent(String s) {

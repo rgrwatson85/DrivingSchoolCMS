@@ -11,7 +11,7 @@
 <?import javafx.scene.text.*?>
 <?import jfxtras.labs.scene.control.*?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="748.0" styleClass="root" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.AddNewCustomerController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="748.0" styleClass="root, background3" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.AddNewCustomerController">
   <children>
     <TextField id="textField1" fx:id="txtFirstName" layoutX="187.0" layoutY="118.0" prefWidth="154.0" />
     <TextField id="textField1" fx:id="txtLastName" layoutX="82.0" layoutY="176.0" prefWidth="154.0" />
@@ -39,7 +39,7 @@
     <TextField id="textField1" fx:id="txtCellPhone2" layoutX="457.0" layoutY="176.0" prefWidth="41.0" />
     <TextField id="textField1" fx:id="txtCellPhone3" layoutX="508.0" layoutY="176.0" prefWidth="54.0" />
     <TextField id="textField1" fx:id="txtEmail" layoutX="405.0" layoutY="234.0" prefWidth="259.0" />
-    <Button fx:id="btnSubmit" layoutX="405.0" layoutY="409.0" minHeight="26.999900000002526" mnemonicParsing="false" prefHeight="26.999900000002526" prefWidth="259.0" styleClass="submit-button" text="Add Customer To System" />
+    <Button fx:id="btnSubmit" layoutX="404.0" layoutY="409.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="103.0" styleClass="submit-button" text="SUBMIT" />
     <CalendarTextField id="textField2" fx:id="calendar" layoutX="406.0" layoutY="292.0" maxWidth="101.0" prefWidth="101.0" style="&#10;" />
     <ComboBox id="comboBox1" fx:id="cmbCountry" layoutX="81.0" layoutY="350.0" prefHeight="23.0" prefWidth="112.0" promptText="Country" />
     <Label id="label2" layoutX="81.0" layoutY="331.0" text="Country" />
@@ -63,16 +63,6 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <ComboBox fx:id="cmbHighSchool" layoutX="406.0" layoutY="349.0" prefWidth="265.0">
-      <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Item 1" />
-          <String fx:value="Item 2" />
-          <String fx:value="Item 3" />
-        </FXCollections>
-      </items>
-    </ComboBox>
-    <Label id="label2" layoutX="407.0" layoutY="331.0" text="Highschool" />
     <TextField fx:id="calendar_mask" editable="true" focusTraversable="false" layoutX="404.0" layoutY="292.0" prefWidth="103.0" />
   </children>
   <stylesheets>

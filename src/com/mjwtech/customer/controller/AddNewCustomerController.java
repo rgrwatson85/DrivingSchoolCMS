@@ -470,7 +470,7 @@ public class AddNewCustomerController implements Initializable {
         Customer.oCust.setLastName(txtLastName.getText());
         Customer.oCust.setSalutationName(cmbSalutation.getValue().toString());
         Customer.oCust.setSuffix(cmbSuffix.getValue().toString());
-        Customer.oCust.setAddress1(txtAddress1.getText());
+        Customer.oCust.setAddress(txtAddress1.getText());
         Customer.oCust.setAddress2(txtAddress2.getText());
         Customer.oCust.setCity(txtCity.getText());
         Customer.oCust.setState(cmbState.getSelectionModel().getSelectedItem().toString());
@@ -479,7 +479,6 @@ public class AddNewCustomerController implements Initializable {
         Customer.oCust.setCellPhone(txtCellPhone2.getText(), txtCellPhone2.getText(), txtCellPhone3.getText());
         Customer.oCust.setEmail(txtEmail.getText());
         Customer.oCust.setDOB(calendar_mask.getText());
-        Customer.oCust.setHighschool(cmbHighSchool.getSelectionModel().getSelectedItem().toString());
 
         //create variables for query
         String fn = Customer.oCust.getFirstName();
@@ -488,7 +487,7 @@ public class AddNewCustomerController implements Initializable {
         ln = ln.substring(0, 1).toUpperCase() + ln.substring(1).toLowerCase();
         String sf = Customer.oCust.getSuffix();
         String sa = Customer.oCust.getSalutationName();
-        String add1 = Customer.oCust.getAddress1();
+        String add1 = Customer.oCust.getAddress();
         String add2 = Customer.oCust.getAddress2();
         String city = Customer.oCust.getCity();
         city = city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase();
@@ -498,7 +497,6 @@ public class AddNewCustomerController implements Initializable {
         String cp = Customer.oCust.getCellPhone();
         String email = Customer.oCust.getEmail();
         String dob = Customer.oCust.getDOB();
-        String hs = Customer.oCust.getHighschool();
 
         //create database connection and try to insert the new customer into database
         try {
@@ -507,7 +505,7 @@ public class AddNewCustomerController implements Initializable {
             ResultSet rs;
             //TODO: need to add highschool to query
             String sql = "EXEC createNewCustomer '" + fn + "','" + ln + "','" + sf + "','" + hp + "','" + cp + "','" + add1 + "','" + add2 + "',"
-                    + "'" + city + "','" + state + "','" + zip + "','" + email + "','" + dob + "','" + sa + "','" + hs + "'";
+                    + "'" + city + "','" + state + "','" + zip + "','" + email + "','" + dob + "','" + sa + "'";
 
             Statement stmt = SettingsController.conn.createStatement();
             rs = stmt.executeQuery(sql);
