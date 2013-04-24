@@ -33,6 +33,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import jfxtras.labs.scene.control.CalendarTextField;
 import name.antonsmirnov.javafx.dialog.Dialog;
+import resources.eyecandy.Fade;
 
 
 public class ViewCustomerController {
@@ -411,7 +412,6 @@ public class ViewCustomerController {
                         SettingsController.closeConnection();
                         }catch(ClassNotFoundException | SQLException e){
                             System.err.println(e.getMessage());
-                            Dialog.showError("ERROR", "Error loading class data.");
                         }
                         try {
                             SettingsController.openConnection();
@@ -430,7 +430,6 @@ public class ViewCustomerController {
                             SettingsController.closeConnection();
                         } catch (ClassNotFoundException | SQLException e) {
                             System.err.println(e.getMessage());
-                            Dialog.showError("ERROR", "Error loading  customer notes.");
                         }
                         return null;
                     }
