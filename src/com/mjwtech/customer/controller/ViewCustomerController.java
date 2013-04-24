@@ -351,6 +351,14 @@ public class ViewCustomerController {
                 searchCustomer("CustomerID", Customer.oCust.getID());
             }
         });
+        //save changes to the database
+        btnSaveChanges.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                updateCustomer();
+            }
+        });
+                
     }
     
     //search for customer and assign attributes to global customer object
@@ -501,6 +509,18 @@ public class ViewCustomerController {
             Dialog.showError("ERROR", "Error searching for customer\n\n"+e.getMessage());
         }
     } 
+    
+    //update customer and reload the form
+    private void updateCustomer(){
+        try {
+            SettingsController.openConnection();
+            Statement stmt = SettingsController.conn.createStatement();
+            String sql = "";
+            SettingsController.closeConnection();
+        } catch (ClassNotFoundException | SQLException e) {
+            Dialog.showError("ERROR", "Error saving changes to customer record");
+        }
+    }
     
     //set edit mode for form
     private void setEditMode(Boolean editable){

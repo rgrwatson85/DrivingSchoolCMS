@@ -33,7 +33,6 @@ public class dropdowndata {
     public static ObservableList<String> transactionTypeList;
     public static ObservableList<String> paymentTypeList;
     public static ObservableList<String> permitRestrictionList;
-    public static ObservableList<String> highSchoolList;
     public static ObservableList<String> maintenanceTypeList;
     public static ObservableList<String> shopNameTypeList;
     public static ObservableList<String> vehicleNameList;
@@ -57,7 +56,6 @@ public class dropdowndata {
         transactionTypeList = FXCollections.observableArrayList();
         paymentTypeList = FXCollections.observableArrayList();
         permitRestrictionList = FXCollections.observableArrayList();
-        highSchoolList = FXCollections.observableArrayList();
         maintenanceTypeList = FXCollections.observableArrayList();
         shopNameTypeList = FXCollections.observableArrayList();
         vehicleNameList = FXCollections.observableArrayList();
@@ -77,7 +75,6 @@ public class dropdowndata {
         loadTransactionType();
         loadPaymentType();
         loadPermitRestriction();
-        loadHighSchool();
         loadMaintenanceType();
         loadShopNameTypeList();
         loadVehicleNameList();
@@ -452,30 +449,6 @@ public class dropdowndata {
             while (rs.next()) {
                 permitRestriction[i] = rs.getString("RestrictionType");
                 permitRestrictionList.add(permitRestriction[i]);
-                i++;
-            }
-        } catch (Exception e) {
-        }
-    }
-
-    private static void loadHighSchool() {
-        try {
-            String sql = "SELECT HighschoolName FROM HighSchool";
-            Statement stmt = SettingsController.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = stmt.executeQuery(sql);
-            int size = 0;
-            try {
-                rs.last();
-                size = rs.getRow();
-                rs.beforeFirst();
-            } catch (Exception ex) {
-            }
-            String[] highSchool;
-            highSchool = new String[size];
-            int i = 0;
-            while (rs.next()) {
-                highSchool[i] = rs.getString("HighSchoolName");
-                highSchoolList.add(highSchool[i]);
                 i++;
             }
         } catch (Exception e) {

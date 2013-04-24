@@ -66,9 +66,6 @@ public class AddNewCustomerController implements Initializable {
     //stores list of salutations
     @FXML
     private ComboBox<String> cmbSalutation;
-    //stores list of highschools
-    @FXML
-    private ComboBox<String> cmbHighSchool;
     //address line one
     @FXML
     private TextField txtAddress1;
@@ -144,16 +141,6 @@ public class AddNewCustomerController implements Initializable {
             }
         });
 
-        //opens the add new highschool dialog
-        cmbHighSchool.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
-                if ("ADD NEW HIGHSCHOOL...".equals(t1)) {
-                    Dialog.showError("ERROR", "This functionality has not yet been implemented");
-                }
-            }
-        });
-
         //load data into the drop downs
         try {
             loadDropDownData();
@@ -206,11 +193,6 @@ public class AddNewCustomerController implements Initializable {
         cmbSuffix.getSelectionModel().select("None");
         cmbSalutation.setItems(dropdowndata.salutationList);
         cmbSalutation.getSelectionModel().select("Mr.");
-        Collections.sort(dropdowndata.highSchoolList);
-        dropdowndata.highSchoolList.add(0, "NONE");
-        dropdowndata.highSchoolList.add(1, "ADD NEW HIGHSCHOOL...");
-        cmbHighSchool.setItems(dropdowndata.highSchoolList);
-        cmbHighSchool.getSelectionModel().selectFirst();
     }
 
     /*
@@ -503,7 +485,6 @@ public class AddNewCustomerController implements Initializable {
             //connect to the database
             SettingsController.openConnection();
             ResultSet rs;
-            //TODO: need to add highschool to query
             String sql = "EXEC createNewCustomer '" + fn + "','" + ln + "','" + sf + "','" + hp + "','" + cp + "','" + add1 + "','" + add2 + "',"
                     + "'" + city + "','" + state + "','" + zip + "','" + email + "','" + dob + "','" + sa + "'";
 
