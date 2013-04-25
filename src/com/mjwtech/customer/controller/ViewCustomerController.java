@@ -1,9 +1,11 @@
 package com.mjwtech.customer.controller;
 
+import com.mjwtech.MainController;
 import com.mjwtech.customer.model.Customer;
 import com.mjwtech.customer.model.CustomerNote;
 import com.mjwtech.customer.model.Enrollment;
 import data.database_connection.SettingsController;
+import data.dropdown.dropdowndata;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -204,6 +206,7 @@ public class ViewCustomerController {
     DecimalFormat formatter = new DecimalFormat("$#,##0.00");
     ObservableList<Enrollment> EnrollmentData;
     ObservableList<CustomerNote> NoteData;
+    final Fade f = new Fade();
 
     @FXML
     void initialize() {
@@ -300,6 +303,8 @@ public class ViewCustomerController {
     private void setDefaults(){
         txtDOB.setDateFormat(sdf);
         cmbParameter.getSelectionModel().select(1);
+        cmbSalutation.setItems(dropdowndata.salutationList);
+        cmbSuffix.setItems(dropdowndata.suffixList);
         setEditMode(false);
         colNoteDate.setCellValueFactory(new PropertyValueFactory<CustomerNote,String>("Date"));
         colNoteDescription.setCellValueFactory(new PropertyValueFactory<CustomerNote,String>("ShortNote")); 
@@ -309,6 +314,9 @@ public class ViewCustomerController {
         colDays.setCellValueFactory(new PropertyValueFactory<Enrollment,String>("RecurrenceString"));
         colTime.setCellValueFactory(new PropertyValueFactory<Enrollment,String>("Time"));
         colInstructor.setCellValueFactory(new PropertyValueFactory<Enrollment,String>("InstructorName"));
+        MainController.ProgressGroup.setOpacity(0);
+        MainController.lblProgressStatus.setText("PROCESSING");
+        Fade.gb.setRadius(0);
     }
     
     // Creates all of the event handlers for the class
@@ -325,7 +333,13 @@ public class ViewCustomerController {
                 } catch (Exception e) {
                     searchCustomer(parameter, valueString);
                 }
-                
+            }
+        });
+        //search button
+        btnSearch.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                txtSearchField.getOnAction().handle(t);
             }
         });
         //txtDOB changes the value of its TextField mask
@@ -357,15 +371,22 @@ public class ViewCustomerController {
             public void handle(ActionEvent t) {
                 updateCustomer();
             }
+        });    
+        //delete customer
+        btnRemoveCustomer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                deleteCustomer();
+            }
         });
-                
     }
     
     //search for customer and assign attributes to global customer object
     private void searchCustomer(String parameter, Object value){
+        setEditMode(false);
         String valueType = value.getClass().getSimpleName();
         if("String".equals(valueType)){
-            value = "'"+value+"'";
+            value = "'"+value;
         }
         parameter = parameter.trim().replaceAll(" ", "");
         try {
@@ -481,10 +502,8 @@ public class ViewCustomerController {
                             txtEmail.setText(Customer.oCust.getEmail());
                             txtDOB_mask.setText(Customer.oCust.getDOB());
                             txtBalanceDue.setText(formatter.format(Customer.oCust.getBalanceDue()));
-                            if(Customer.oCust.getID()>0){
-                                txtCustomerID.setText(""+Customer.oCust.getID());
-                                txtSearchField.setText(""+Customer.oCust.getID());
-                            }
+                            txtCustomerID.setText(""+Customer.oCust.getID());
+                            txtSearchField.setText(""+Customer.oCust.getID());
                             tableClass.setItems(EnrollmentData);
                             tableNote.setItems(NoteData);
 
@@ -512,14 +531,138 @@ public class ViewCustomerController {
     
     //update customer and reload the form
     private void updateCustomer(){
-        try {
-            SettingsController.openConnection();
-            Statement stmt = SettingsController.conn.createStatement();
-            String sql = "";
-            SettingsController.closeConnection();
-        } catch (ClassNotFoundException | SQLException e) {
-            Dialog.showError("ERROR", "Error saving changes to customer record");
-        }
+        final Task updateCustomer = new Task() {
+            @Override
+            protected Object call() throws Exception {
+                Thread.sleep(2000);
+                //create SQL parameters
+                String CustomerID = ""+Customer.oCust.getID(),
+                SAL = txtSalutation.getText(),
+                FN = txtFirstName.getText(),
+                LN = txtLastName.getText(),
+                SUF = txtSuffix.getText(),
+                ADD = txtAddress.getText(),
+                ADD2 = txtAddress2.getText(),
+                CTY = txtCity.getText(),
+                ST = txtState.getText(),
+                ZIP = txtZip.getText(),
+                HP = "("+txtHomePhone1.getText()+")"+" "+txtHomePhone2.getText()+"-"+txtHomePhone3.getText(),
+                CP = "("+txtCellPhone1.getText()+")"+" "+txtCellPhone2.getText()+"-"+txtCellPhone3.getText(),
+                EM = txtEmail.getText(),
+                DOB = txtDOB_mask.getText();
+                SettingsController.openConnection();
+                Statement stmt = SettingsController.conn.createStatement();
+                String sql = "EXEC updateCustomer "+CustomerID+",'"+SAL+"','"+FN+"','"+LN+"','"+SUF+"','"+ADD+"','"+ADD2+"','"+CTY+"','"+ST+"','"+ZIP+"','"+HP+"','"+CP+"','"+EM+"','"+DOB+"'";
+                stmt.executeUpdate(sql);
+                SettingsController.closeConnection();
+                return null;
+            }
+   };
+        updateCustomer.setOnScheduled(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                f.FadeOut();
+            }
+        });
+        updateCustomer.setOnFailed(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                MainController.lblProgressStatus.setText("ERROR");
+                try{
+                    Task wait = new Task() {
+                        @Override
+                        protected Object call() throws Exception {
+                            Thread.sleep(2000);
+                            this.setOnSucceeded(new EventHandler() {
+                                @Override
+                                public void handle(Event t) {
+                                    f.FadeIn();
+                                }
+                            });
+                            this.setOnFailed(new EventHandler() {
+                            @Override
+                            public void handle(Event t) {
+                                f.FadeIn();
+                            }
+                        });
+                            return null;
+                        }
+                    };
+                    new Thread(wait).start();
+                }catch(Exception e){
+                    System.err.println(e.getMessage());
+                }
+            }
+        });
+        updateCustomer.setOnSucceeded(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                MainController.lblProgressStatus.setText("SUCCESS");
+                try{
+                    Task wait = new Task() {
+                        @Override
+                        protected Object call() throws Exception {
+                            Thread.sleep(2000);
+                            this.setOnSucceeded(new EventHandler() {
+                                @Override
+                                public void handle(Event t) {
+                                    f.FadeIn();
+                                    txtSearchField.getOnAction().handle(null);
+                                }
+                            });
+                            this.setOnFailed(new EventHandler() {
+                            @Override
+                            public void handle(Event t) {
+                                f.FadeIn();
+                            }
+                        });
+                            return null;
+                        }
+                    };
+                    new Thread(wait).start();
+                }catch(Exception e){
+                    System.err.println(e.getMessage());}
+            }
+        });
+        new Thread(updateCustomer).start();
+    }
+    
+    //delete customer
+    private void deleteCustomer(){
+        Task deleteCustomer = new Task() {
+            @Override
+            protected Object call() throws Exception {
+                try {
+                    SettingsController.openConnection();
+                    Statement stmt = SettingsController.conn.createStatement();
+                    String sql = "DELETE FROM Customer WHERE CustomerID="+Customer.oCust.getID();
+                    stmt.executeUpdate(sql);
+                    sql = "SELECT TOP 1 CustomerID FROM Customer WHERE CustomerID < "+Customer.oCust.getID()+"ORDER BY CustomerID DESC";
+                    ResultSet rs = stmt.executeQuery(sql);
+                    rs.next();
+                    txtSearchField.setText(rs.getInt("CustomerID")+"");
+                    SettingsController.closeConnection();
+                } catch (ClassNotFoundException | SQLException e) {
+                    System.err.println(e.getMessage());
+                    throw new Exception();
+                }
+                return null;
+            }
+        };
+        deleteCustomer.setOnFailed(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                Dialog.showError("ERROR", "Error removing customer from system");
+            }
+        });
+        deleteCustomer.setOnSucceeded(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                Dialog.showInfo("SUCCESS", "Customer removed from system");
+                txtSearchField.getOnAction().handle(null);
+            }
+        });
+        new Thread(deleteCustomer).start();
     }
     
     //set edit mode for form

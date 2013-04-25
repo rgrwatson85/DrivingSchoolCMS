@@ -17,7 +17,7 @@
   <children>
     <TilePane fx:id="contentPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefColumns="1" prefHeight="651.0" prefRows="1" prefWidth="1244.0" styleClass="contentPane, background3" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="64.0">
       <effect>
-        <InnerShadow />
+        <InnerShadow height="115.13986013986013" radius="57.06993006993007" width="115.13986013986013" />
       </effect>
     </TilePane>
     <HBox alignment="CENTER_LEFT" layoutX="546.0" layoutY="9.0" minWidth="397.0" prefHeight="48.0" prefWidth="397.0" spacing="22.0">
@@ -52,12 +52,16 @@
       </effect>
     </Button>
     <Button fx:id="btnLogOut" layoutX="899.0" layoutY="8.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnLogOut_sc" />
-    <AnchorPane fx:id="effectsPane" blendMode="OVERLAY" layoutX="8.0" layoutY="64.0" mouseTransparent="true" prefHeight="651.0" prefWidth="1244.0" visible="true">
+    <Group id="Group" fx:id="ProgressGroup" layoutX="518.0" layoutY="232.0" opacity="1.0">
       <children>
-        <Label alignment="CENTER" layoutX="529.0" layoutY="308.0" prefHeight="35.0" prefWidth="187.0" style="-fx-text-fill:red;&#10;-fx-font-size:30;&#10;-fx-font-family:Perpetua&#10;" text="PROCESSING" textAlignment="CENTER" visible="true" />
-        <ProgressIndicator layoutX="458.0" layoutY="195.0" prefHeight="262.0" prefWidth="328.0" progress="-1.0" />
+        <ProgressIndicator id="ProgressIndicator" layoutX="0.0" layoutY="0.0" prefHeight="131.0" prefWidth="163.0" progress="-1.0" style="-fx-progress-color:lightblue">
+          <effect>
+            <GaussianBlur radius="41.07432432432433" />
+          </effect>
+        </ProgressIndicator>
+        <Label fx:id="lblProgressStatus" alignment="CENTER" layoutX="-10.0" layoutY="156.0" prefHeight="35.0" prefWidth="187.0" style="-fx-text-fill:white;&#10;-fx-font-size:24;&#10;-fx-font-family:Verdana&#10;" text="PROCESSING" textAlignment="CENTER" visible="true" />
       </children>
-    </AnchorPane>
+    </Group>
   </children>
   <stylesheets>
     <URL value="@../../resources/css/base.css" />

@@ -11,7 +11,7 @@
 <?import javafx.scene.text.*?>
 <?import jfxtras.labs.scene.control.*?>
 
-<AnchorPane id="AnchorPane" minHeight="611.0" prefHeight="611.0" prefWidth="1041.0" styleClass="root, background3" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.ViewCustomerController">
+<AnchorPane id="AnchorPane" minHeight="611.0" prefHeight="611.0" prefWidth="1041.0" styleClass="root" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.ViewCustomerController">
   <children>
     <AnchorPane id="AnchorPane" fx:id="root" layoutX="207.0" layoutY="4.0" prefHeight="607.0" prefWidth="834.0">
       <children>

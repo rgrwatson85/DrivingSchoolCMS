@@ -29,6 +29,8 @@ import data.dropdown.dropdowndata;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.Group;
+import javafx.scene.control.ProgressIndicator;
 import resources.eyecandy.Fade;
 
 /**
@@ -43,7 +45,11 @@ public class MainController implements Initializable {
     @FXML
     public static AnchorPane root;
     @FXML
-    public static AnchorPane effectsPane;
+    public static Label lblProgressStatus;
+    @FXML
+    public static Group ProgressGroup;
+    @FXML
+    public static ProgressIndicator progress;
     //area the encompasses the everything below the company logo and user name label
     @FXML
     AnchorPane contentArea;

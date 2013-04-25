@@ -29,6 +29,7 @@
         <ComboBox id="comboBox1" fx:id="cmbState" layoutX="134.0" layoutY="380.0" prefHeight="22.0" prefWidth="112.0" promptText="State" />
         <TextField fx:id="txtZip" editable="false" layoutX="-1.0" layoutY="450.0" prefWidth="82.0" />
         <CalendarTextField fx:id="txtDOB" layoutX="469.0" layoutY="197.0" prefWidth="140.0" />
+        <TextField fx:id="txtDOB_mask" editable="false" layoutX="469.0" layoutY="197.0" prefWidth="122.0" />
         <TextField id="textField1" fx:id="txtCountry" focusTraversable="false" layoutX="135.0" layoutY="450.0" prefWidth="180.0" text="USA" />
         <ComboBox id="comboBox1" fx:id="cmbCountry" layoutX="135.0" layoutY="449.0" prefHeight="24.0" prefWidth="180.0" promptText="Country" />
         <TextField fx:id="txtHomePhone1" editable="false" layoutX="470.0" layoutY="24.0" prefWidth="41.0" />
@@ -38,7 +39,6 @@
         <TextField fx:id="txtCellPhone2" editable="false" layoutX="520.0" layoutY="82.0" prefWidth="41.0" />
         <TextField fx:id="txtCellPhone3" editable="false" layoutX="571.0" layoutY="82.0" prefWidth="48.0" />
         <TextField fx:id="txtEmail" editable="false" layoutX="469.0" layoutY="139.0" prefWidth="242.0" />
-        <TextField fx:id="txtDOB_mask" editable="false" layoutX="469.0" layoutY="195.0" prefWidth="122.0" />
         <TextField fx:id="txtBalanceDue" alignment="CENTER_RIGHT" editable="false" layoutX="469.0" layoutY="255.0" prefWidth="107.0" />
         <Button id="button1" fx:id="btnTransactions" layoutX="651.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnHelp" />
         <Button id="button2" fx:id="btnFee" layoutX="619.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnFee" />
@@ -73,7 +73,7 @@
             <TableColumn editable="false" id="tableColumn1" prefWidth="100.0" text="Start Date" fx:id="colStartDate" />
             <TableColumn editable="false" id="tableColumn1" prefWidth="100.0" text="End Date" fx:id="colEndDate" />
             <TableColumn editable="false" id="tableColumn1" prefWidth="125.0" text="Meeting Days" fx:id="colDays" />
-            <TableColumn editable="false" id="tableColumn1" maxWidth="5000.0" minWidth="10.0" prefWidth="172.0" text="Time" fx:id="colTimeSlot" />
+            <TableColumn editable="false" id="tableColumn1" maxWidth="5000.0" minWidth="10.0" prefWidth="172.0" text="Time" fx:id="colTime" />
             <TableColumn editable="false" id="tableColumn1" maxWidth="5000.0" minWidth="10.0" prefWidth="135.0" text="Instructor" fx:id="colInstructor" />
           </columns>
         </TableView>
@@ -93,12 +93,12 @@
           </items>
         </ChoiceBox>
         <Button fx:id="btnSearch" alignment="CENTER" contentDisplay="CENTER" layoutX="126.0" layoutY="52.0" maxHeight="23.0" maxWidth="23.0" minHeight="23.0" minWidth="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnSearch" />
-        <Button id="btnSubmit" fx:id="btnSaveChanges" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAcceptChanges" />
-        <Button id="button3" fx:id="btnCancelChanges" layoutX="1.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnCancelChanges" />
-        <Button id="btnSubmit" fx:id="btnEditCustomer" alignment="CENTER" layoutX="1.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnEditCustomer" />
-        <Button id="btnSubmit" fx:id="btnRemoveCustomer" alignment="CENTER" layoutX="101.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnDeleteCustomer" />
-        <Button id="btnSubmit" fx:id="btnEnrollCourse" alignment="CENTER" layoutX="101.0" layoutY="84.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAddToCourse" />
-        <Button id="btnSubmit" fx:id="btnEmergencyContact" alignment="CENTER" layoutX="51.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnEmergencyContact" textFill="#292929" />
+        <Button fx:id="btnSaveChanges" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAcceptChanges" />
+        <Button fx:id="btnCancelChanges" layoutX="1.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnCancelChanges" />
+        <Button fx:id="btnEditCustomer" alignment="CENTER" layoutX="1.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnEditCustomer" />
+        <Button fx:id="btnRemoveCustomer" alignment="CENTER" layoutX="101.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnDeleteCustomer" />
+        <Button fx:id="btnEnrollCourse" alignment="CENTER" layoutX="101.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAddToCourse" />
+        <Button fx:id="btnEmergencyContact" alignment="CENTER" layoutX="51.0" layoutY="85.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnEmergencyContact" textFill="#292929" />
         <Label fx:id="lblToolTip" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="1.0" layoutY="138.0" prefHeight="23.0" prefWidth="147.0" styleClass="labelToolTip" textAlignment="CENTER" textFill="#5d5d5d" wrapText="true" />
       </children>
     </AnchorPane>
