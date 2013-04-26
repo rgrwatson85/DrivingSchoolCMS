@@ -4,7 +4,7 @@
  */
 package com.mjwtech.customer.controller;
 
-import com.mjwtech.MainController;
+import com.mjwtech.main.controller.MainController;
 import data.dropdown.dropdowndata;
 import java.net.URL;
 import java.sql.SQLException;

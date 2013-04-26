@@ -4,7 +4,7 @@
  */
 package com.mjwtech.customer.controller;
 
-import com.mjwtech.MainController;
+import com.mjwtech.main.controller.MainController;
 import com.mjwtech.customer.model.Customer;
 import data.database_connection.SettingsController;
 import data.validation.validation;

@@ -1,6 +1,6 @@
 package com.mjwtech.customer.controller;
 
-import com.mjwtech.MainController;
+import com.mjwtech.main.controller.MainController;
 import com.mjwtech.customer.model.Customer;
 import com.mjwtech.customer.model.CustomerNote;
 import com.mjwtech.customer.model.Enrollment;

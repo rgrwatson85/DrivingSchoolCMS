@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mjwtech;
+package com.mjwtech.main.controller;
 
+import com.mjwtech.main.model.Main;
 import data.database_connection.SettingsController;
 import java.net.URL;
 import java.util.ResourceBundle;

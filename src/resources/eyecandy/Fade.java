@@ -4,7 +4,7 @@
  */
 package resources.eyecandy;
 
-import com.mjwtech.MainController;
+import com.mjwtech.main.controller.MainController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;

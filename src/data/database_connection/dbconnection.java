@@ -5,28 +5,17 @@
 package data.database_connection;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import name.antonsmirnov.javafx.dialog.Dialog;
-import com.mjwtech.MainController;
-import insidefx.undecorator.Undecorator;
-import java.awt.Rectangle;
+import com.mjwtech.main.controller.MainController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.paint.Color;
-import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 
 /**
@@ -62,7 +51,7 @@ public class dbconnection {
         stage.show();
         MainController.root.setEffect(new GaussianBlur(10));
     }
-
+    
     public static dbconnection getInstance() {
         if (instance != null) {
             return instance;

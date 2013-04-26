@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mjwtech;
+package com.mjwtech.main.model;
 
 import data.database_connection.dbconnection;
 import insidefx.undecorator.Undecorator;
@@ -24,7 +24,7 @@ import javafx.stage.WindowEvent;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(this.getClass().getResource("Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/mjwtech/main/view/Main.fxml"));
        
         Undecorator undecorator = new Undecorator(stage, root);
         Node node = root.lookup("#root");

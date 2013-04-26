@@ -4,7 +4,7 @@
  */
 package data.database_connection;
 
-import com.mjwtech.MainController;
+import com.mjwtech.main.controller.MainController;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
