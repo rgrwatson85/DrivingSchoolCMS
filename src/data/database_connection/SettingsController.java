@@ -220,23 +220,24 @@ public class SettingsController implements Initializable {
         Socket s = null;
         try {
             new Socket().connect(new InetSocketAddress(IP, Integer.parseInt(port)), 1000);
+            urlString = "jdbc:jtds:sqlserver://";
+            urlString += IP;
+            urlString += ":";
+            urlString += port;
+            urlString += ";databaseName=" + database;
+
+            Class.forName("net.sourceforge.jtds.jdbc.Driver");
+            conn = (Connection) DriverManager.getConnection(urlString, Username, Password);
+            if (loginstatus) {
+                MainController.lblUserName.setText("Logged In As: " + Username.toUpperCase());
+            } else {
+                MainController.lblUserName.setText("Logged Out");
+            }
+            SettingsController.connection = true;      
         } catch (IOException ex) {
+            SettingsController.connection = false;
             Dialog.showError("Error", "No connection to server.\nCheck Server IP in advanced tab.");
         }
-        urlString = "jdbc:jtds:sqlserver://";
-        urlString += IP;
-        urlString += ":";
-        urlString += port;
-        urlString += ";databaseName=" + database;
-
-        Class.forName("net.sourceforge.jtds.jdbc.Driver");
-        conn = (Connection) DriverManager.getConnection(urlString, Username, Password);
-        if (loginstatus) {
-            MainController.lblUserName.setText("Logged In As: " + Username.toUpperCase());
-        } else {
-            MainController.lblUserName.setText("Logged Out");
-        }
-        SettingsController.connection = true;
     }
 
     public static void closeConnection() throws SQLException {
