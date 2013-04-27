@@ -629,7 +629,7 @@ public class ViewCustomerController {
     
     //delete customer
     private void deleteCustomer(){
-        Task deleteCustomer = new Task() {
+        final Task deleteCustomer = new Task() {
             @Override
             protected Object call() throws Exception {
                 try {
@@ -649,20 +649,91 @@ public class ViewCustomerController {
                 return null;
             }
         };
+        deleteCustomer.setOnScheduled(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                f.FadeOut();
+            }
+        });
         deleteCustomer.setOnFailed(new EventHandler() {
             @Override
             public void handle(Event t) {
-                Dialog.showError("ERROR", "Error removing customer from system");
+                MainController.lblProgressStatus.setText("ERROR");
+                try{
+                    Task wait = new Task() {
+                        @Override
+                        protected Object call() throws Exception {
+                            Thread.sleep(2000);
+                            this.setOnSucceeded(new EventHandler() {
+                                @Override
+                                public void handle(Event t) {
+                                    f.FadeIn();
+                                }
+                            });
+                            this.setOnFailed(new EventHandler() {
+                            @Override
+                            public void handle(Event t) {
+                                f.FadeIn();
+                            }
+                        });
+                            return null;
+                        }
+                    };
+                    new Thread(wait).start();
+                }catch(Exception e){
+                    System.err.println(e.getMessage());
+                }
             }
         });
         deleteCustomer.setOnSucceeded(new EventHandler() {
             @Override
             public void handle(Event t) {
-                Dialog.showInfo("SUCCESS", "Customer removed from system");
-                txtSearchField.getOnAction().handle(null);
+                MainController.lblProgressStatus.setText("SUCCESS");
+                try{
+                    Task wait = new Task() {
+                        @Override
+                        protected Object call() throws Exception {
+                            Thread.sleep(2000);
+                            this.setOnSucceeded(new EventHandler() {
+                                @Override
+                                public void handle(Event t) {
+                                    f.FadeIn();
+                                    txtSearchField.getOnAction().handle(null);
+                                }
+                            });
+                            this.setOnFailed(new EventHandler() {
+                            @Override
+                            public void handle(Event t) {
+                                f.FadeIn();
+                            }
+                        });
+                            return null;
+                        }
+                    };
+                    new Thread(wait).start();
+                }catch(Exception e){
+                    System.err.println(e.getMessage());}
             }
         });
-        new Thread(deleteCustomer).start();
+        Dialog.buildConfirmation("", "").create()
+            .setTitle("WARNING")
+            .setMessage("THIS WILL DELETE EVERY RECORD FOR THIS CUSTOMER INDLUDING:\n\n"
+            + "CLASS ATTENDANCE\nDRIVE HISTORY\nGRADES\nPAYMENTS OWED\nPAYMENTS RECEIVED\n\n"
+            + "THIS CANNOT BE UNDONE! ARE YOU SURE YOU WANT TO DO THIS?")
+            .addNoButton(new EventHandler() {
+                @Override
+                public void handle(Event t) {
+                    Dialog.showInfo("SUCCESS", "Customer delete was cancelled");
+                }
+            })
+            .addYesButton(new EventHandler() {
+                @Override
+                public void handle(Event t) {
+                     new Thread(deleteCustomer).start();
+                }
+            })
+            .build()
+            .show();
     }
     
     //set edit mode for form
