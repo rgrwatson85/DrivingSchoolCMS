@@ -126,6 +126,9 @@ public class ViewCustomerController {
 
     @FXML
     private AnchorPane searchWrapper;
+    
+    @FXML
+    private AnchorPane buttonWrapper;
 
     @FXML
     private TableView<Enrollment> tableClass;
@@ -267,6 +270,7 @@ public class ViewCustomerController {
         Task task = new Task() {
             @Override
             protected Object call() throws Exception {
+                buttonWrapper.setVisible(false);
                 createEventHandlers();
                 return null;
             }
@@ -292,6 +296,14 @@ public class ViewCustomerController {
                        if(Customer.oCust.getID()>0){
                            searchCustomer("CustomerID", Customer.oCust.getID());
                        }
+                       else{
+                           Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    txtSearchField.requestFocus();
+                                }
+                            });
+                       }
                    }
                });
             }
@@ -305,6 +317,8 @@ public class ViewCustomerController {
         cmbParameter.getSelectionModel().select(1);
         cmbSalutation.setItems(dropdowndata.salutationList);
         cmbSuffix.setItems(dropdowndata.suffixList);
+        cmbState.setItems(dropdowndata.stateList);
+        cmbCountry.setItems(dropdowndata.countryList);
         setEditMode(false);
         colNoteDate.setCellValueFactory(new PropertyValueFactory<CustomerNote,String>("Date"));
         colNoteDescription.setCellValueFactory(new PropertyValueFactory<CustomerNote,String>("ShortNote")); 
@@ -379,20 +393,35 @@ public class ViewCustomerController {
                 deleteCustomer();
             }
         });
+        //change state drop down
+        cmbCountry.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue ov, Object t, Object t1) {
+                try{
+                dropdowndata.createStateDropDownData(t1.toString());
+                    cmbState.setItems(dropdowndata.stateList);
+                    cmbState.getSelectionModel().selectFirst();
+                }catch(ClassNotFoundException | SQLException e){
+                    Dialog.showError("ERROR", "Error changing state list");
+                }
+            }
+        });
     }
     
     //search for customer and assign attributes to global customer object
     private void searchCustomer(String parameter, Object value){
         setEditMode(false);
+        buttonWrapper.setVisible(true);
         String valueType = value.getClass().getSimpleName();
         if("String".equals(valueType)){
-            value = "'"+value;
+            value = "['"+value+"']";
         }
         parameter = parameter.trim().replaceAll(" ", "");
         try {
             SettingsController.openConnection();
             Statement stmt = SettingsController.conn.createStatement();
             String sql = "EXEC viewCustomer "+parameter+","+value.toString();
+            System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
             int size = 0;
             while(rs.next()){
@@ -414,6 +443,7 @@ public class ViewCustomerController {
                 Customer.oCust.setEmail(rs.getString("EmailAddress"));
                 Customer.oCust.setDOB(sdf.format(rs.getDate("DOB")));
                 Customer.oCust.setBalanceDue(rs.getDouble("BalanceDue"));
+                System.out.println(Customer.oCust.getSuffix());
             }
             SettingsController.closeConnection();
             if (size==1) {
@@ -494,7 +524,7 @@ public class ViewCustomerController {
                                 txtHomePhone1.setText(Customer.oCust.getHomePhone().substring(1,4));
                                 txtHomePhone2.setText(Customer.oCust.getHomePhone().substring(6,9));
                                 txtHomePhone3.setText(Customer.oCust.getHomePhone().substring(10,14));
-                                }catch(Exception e){
+                            }catch(Exception e){
                                 txtHomePhone1.setText("");
                                 txtHomePhone2.setText("");
                                 txtHomePhone3.setText("");
@@ -537,19 +567,29 @@ public class ViewCustomerController {
                 Thread.sleep(2000);
                 //create SQL parameters
                 String CustomerID = ""+Customer.oCust.getID(),
-                SAL = txtSalutation.getText(),
                 FN = txtFirstName.getText(),
                 LN = txtLastName.getText(),
-                SUF = txtSuffix.getText(),
                 ADD = txtAddress.getText(),
                 ADD2 = txtAddress2.getText(),
                 CTY = txtCity.getText(),
-                ST = txtState.getText(),
+                ST = cmbState.getValue().toString(),
                 ZIP = txtZip.getText(),
                 HP = "("+txtHomePhone1.getText()+")"+" "+txtHomePhone2.getText()+"-"+txtHomePhone3.getText(),
                 CP = "("+txtCellPhone1.getText()+")"+" "+txtCellPhone2.getText()+"-"+txtCellPhone3.getText(),
                 EM = txtEmail.getText(),
                 DOB = txtDOB_mask.getText();
+                String SAL,SUF;
+                try{
+                    SAL = cmbSalutation.getValue().toString();}
+                catch(Exception e){
+                    SAL = "null";
+                }
+                try {
+                    SUF = cmbSuffix.getValue().toString();
+                    if("NONE".equals(SUF)) throw new Exception();
+                } catch (Exception e) {
+                    SUF = "null";
+                }
                 SettingsController.openConnection();
                 Statement stmt = SettingsController.conn.createStatement();
                 String sql = "EXEC updateCustomer "+CustomerID+",'"+SAL+"','"+FN+"','"+LN+"','"+SUF+"','"+ADD+"','"+ADD2+"','"+CTY+"','"+ST+"','"+ZIP+"','"+HP+"','"+CP+"','"+EM+"','"+DOB+"'";
@@ -742,10 +782,12 @@ public class ViewCustomerController {
         txtSalutation.editableProperty().set(editable);
         txtSuffix.editableProperty().set(editable);
         cmbSalutation.setVisible(editable);
+        cmbSalutation.getSelectionModel().select(Customer.oCust.getSalutationName());
         txtFirstName.editableProperty().set(editable);
         txtLastName.editableProperty().set(editable);
         txtSuffix.editableProperty().set(editable);
         cmbSuffix.setVisible(editable);
+        cmbSuffix.getSelectionModel().select(Customer.oCust.getSuffix());
         txtAddress.editableProperty().set(editable);
         txtAddress2.editableProperty().set(editable);
         txtCity.editableProperty().set(editable);
@@ -753,8 +795,10 @@ public class ViewCustomerController {
         txtCountry.editableProperty().set(editable);
         txtZip.editableProperty().set(editable);
         cmbState.setVisible(editable);
+        cmbState.getSelectionModel().select(txtState.getText());
         txtState.setVisible(!editable);
         cmbCountry.setVisible(editable);
+        cmbCountry.getSelectionModel().select(txtCountry.getText());
         txtCountry.setVisible(!editable);
         txtHomePhone1.editableProperty().set(editable);
         txtHomePhone2.editableProperty().set(editable);
