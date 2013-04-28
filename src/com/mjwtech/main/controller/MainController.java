@@ -25,12 +25,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import name.antonsmirnov.javafx.dialog.Dialog;
-import com.mjwtech.customer.model.Customer;
-import data.dropdown.dropdowndata;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.Group;
 import javafx.scene.control.ProgressIndicator;
 import resources.eyecandy.Fade;
 
@@ -53,7 +47,7 @@ public class MainController implements Initializable {
     public static ProgressIndicator progress;
     //area the encompasses the everything below the company logo and user name label
     @FXML
-    AnchorPane contentArea;
+    public static AnchorPane contentPane;
     //encomapsses the company logo and the user name label
     @FXML
     AnchorPane titleArea;
@@ -99,8 +93,8 @@ public class MainController implements Initializable {
     @FXML
     public VBox buttonVBox;
     //the main display area. set as static so that it can be referenced throughout the entire application
-    @FXML
-    public static TilePane contentPane;
+//    @FXML
+//    public static TilePane contentPane;
     //label that shows the value of the shortcut buttons
     @FXML
     public Label lblToolTip;

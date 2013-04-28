@@ -34,6 +34,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import jfxtras.labs.scene.control.CalendarTextField;
 import name.antonsmirnov.javafx.dialog.Dialog;
@@ -124,7 +125,9 @@ public class ViewCustomerController {
     private Label lblToolTip;
 
     @FXML
-    private AnchorPane root;
+    private AnchorPane form;
+    
+    @FXML AnchorPane root;
 
     @FXML
     private AnchorPane searchWrapper;
@@ -241,7 +244,7 @@ public class ViewCustomerController {
         assert colStartDate != null : "fx:id=\"colStartDate\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
         assert colTime != null : "fx:id=\"colTime\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
         assert lblToolTip != null : "fx:id=\"lblToolTip\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
-        assert root != null : "fx:id=\"root\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
+        assert form != null : "fx:id=\"form\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
         assert searchWrapper != null : "fx:id=\"searchWrapper\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
         assert tableClass != null : "fx:id=\"tableClass\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
         assert tableNote != null : "fx:id=\"tableNote\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
@@ -267,7 +270,7 @@ public class ViewCustomerController {
         assert txtSuffix != null : "fx:id=\"txtSuffix\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
         assert txtZip != null : "fx:id=\"txtZip\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
         // </editor-fold>
-        
+
         Task task = new Task() {
             @Override
             protected Object call() throws Exception {
@@ -406,8 +409,7 @@ public class ViewCustomerController {
                     Dialog.showError("ERROR", "Error changing state list");
                 }
             }
-        });
-        
+        });  
     }
     
     //search for customer and assign attributes to global customer object
@@ -542,7 +544,7 @@ public class ViewCustomerController {
                             tableClass.setItems(EnrollmentData);
                             tableNote.setItems(NoteData);
                             //apply error class to all text fields on load
-                            for (Node n : root.getChildren()) {
+                            for (Node n : form.getChildren()) {
                                 if (n instanceof TextField) {
                                     n.getStyleClass().removeAll("valid","error");
                                 }
@@ -677,7 +679,7 @@ public class ViewCustomerController {
         });
         boolean valid = true;
         //verify there are not textfields with errors
-        for (Node n : root.getChildren()) {
+        for (Node n : form.getChildren()) {
             if (n instanceof TextField && n.getStyleClass().contains("error")) {
                 valid = false;
             }
@@ -842,7 +844,7 @@ public class ViewCustomerController {
         
         if(editable){
             //apply error class to all text fields on load
-            for (Node n : root.getChildren()) {
+            for (Node n : form.getChildren()) {
                 if (n instanceof TextField) {
                     n.getStyleClass().add("valid");
                 }

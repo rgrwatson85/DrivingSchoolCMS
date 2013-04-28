@@ -13,13 +13,10 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" maxHeight="733.0" maxWidth="1251.0" minHeight="733.0" minWidth="1251.0" prefHeight="733.0" prefWidth="1251.0" styleClass="root" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.main.controller.MainController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1251.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.main.controller.MainController">
   <children>
-    <TilePane fx:id="contentPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefColumns="1" prefHeight="661.0" prefRows="1" prefWidth="1233.0" styleClass="contentPane, background3" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
-      <effect>
-        <InnerShadow height="115.13986013986013" radius="57.06993006993007" width="115.13986013986013" />
-      </effect>
-    </TilePane>
+    <AnchorPane fx:id="contentPane" layoutX="16.0" layoutY="64.0" prefHeight="622.0" prefWidth="1220.0" styleClass="background3" />
+    <TilePane id="contentPane" alignment="CENTER" disable="true" layoutX="14.0" layoutY="64.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefColumns="1" prefHeight="615.0" prefRows="1" prefWidth="1175.0" styleClass="contentPane, background3" visible="false" />
     <HBox alignment="CENTER_LEFT" layoutX="546.0" layoutY="9.0" minWidth="397.0" prefHeight="48.0" prefWidth="397.0" spacing="22.0">
       <children>
         <Button id="addCustomer" fx:id="btnAddCustomer" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAddCustomer_sc" />
@@ -29,9 +26,9 @@
         <Button fx:id="btnBalanceDue" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnBalanceDue_sc" />
       </children>
     </HBox>
-    <Label fx:id="lblUserName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutY="18.0" prefHeight="37.0" prefWidth="291.0" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
+    <Label fx:id="lblUserName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutY="25.0" prefHeight="25.0" prefWidth="291.0" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
     <Label fx:id="lblToolTip" alignment="CENTER" layoutX="14.0" layoutY="50.0" prefWidth="627.0" visible="false" />
-    <HBox fx:id="toggleButtonContainer" alignment="CENTER" layoutX="8.0" layoutY="9.0" prefHeight="48.0" prefWidth="506.0" spacing="15.0" styleClass="undecorator-background, toggleButtonContainer">
+    <HBox fx:id="toggleButtonContainer" alignment="CENTER" layoutX="15.0" layoutY="9.0" prefHeight="48.0" prefWidth="506.0" spacing="15.0" styleClass="undecorator-background, toggleButtonContainer">
       <children>
         <ToggleButton fx:id="btnCustomer" maxWidth="130.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" text="Customer">
           <effect>
@@ -64,7 +61,6 @@
     </AnchorPane>
   </children>
   <stylesheets>
-    <URL value="@Main.css" />
     <URL value="@../../../../resources/css/base.css" />
     <URL value="@../../../../resources/css/undecorator.css" />
   </stylesheets>

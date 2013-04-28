@@ -11,75 +11,64 @@
 <?import javafx.scene.text.*?>
 <?import jfxtras.labs.scene.control.*?>
 
-<AnchorPane id="AnchorPane" minHeight="611.0" prefHeight="611.0" prefWidth="1041.0" styleClass="root" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.ViewCustomerController">
+<AnchorPane id="AnchorPane" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="1220.0" styleClass="root, background3" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.ViewCustomerController">
   <children>
-    <AnchorPane id="AnchorPane" fx:id="root" layoutX="207.0" layoutY="4.0" prefHeight="607.0" prefWidth="834.0">
+    <TableView fx:id="tableNote" layoutX="30.0" layoutY="208.0" prefHeight="86.0" prefWidth="205.0">
+      <columns>
+        <TableColumn editable="false" prefWidth="82.0" resizable="false" text="Date" visible="false" fx:id="colNoteDate" />
+        <TableColumn editable="false" prefWidth="203.0" resizable="false" sortable="false" text="Description" fx:id="colNoteDescription" />
+      </columns>
+    </TableView>
+    <AnchorPane id="AnchorPane" fx:id="form" layoutX="289.0" layoutY="17.0" prefHeight="607.0" prefWidth="924.0">
       <children>
-        <TextField fx:id="txtCustomerID" editable="false" focusTraversable="false" layoutX="-1.0" layoutY="23.0" prefWidth="95.0" />
+        <TextField fx:id="txtCustomerID" editable="false" focusTraversable="false" layoutX="-3.0" layoutY="15.0" prefWidth="95.0" />
         <TextField fx:id="txtSalutation" editable="false" focusTraversable="false" layoutX="-1.0" layoutY="82.0" prefWidth="56.0" />
         <ComboBox fx:id="cmbSalutation" layoutX="-1.0" layoutY="82.0" prefHeight="23.0" prefWidth="68.0" />
-        <TextField fx:id="txtFirstName" editable="false" layoutX="-1.0" layoutY="140.0" prefWidth="288.0" />
-        <TextField fx:id="txtLastName" editable="false" layoutX="-1.0" layoutY="196.0" prefWidth="288.0" />
-        <TextField id="txtLastName" fx:id="txtSuffix" editable="false" focusTraversable="false" layoutX="294.0" layoutY="196.0" prefWidth="95.00009999999747" />
-        <ComboBox fx:id="cmbSuffix" layoutX="294.0" layoutY="195.0" prefHeight="23.0" prefWidth="98.0" />
-        <TextField fx:id="txtAddress" editable="false" layoutX="-2.0" layoutY="254.0" prefWidth="392.0" />
-        <TextField fx:id="txtAddress2" editable="false" layoutX="-1.0" layoutY="318.0" prefWidth="391.0" />
-        <TextField fx:id="txtCity" editable="false" layoutX="-2.0" layoutY="381.0" prefWidth="125.0" />
-        <TextField fx:id="txtState" editable="false" layoutX="135.0" layoutY="380.0" prefWidth="107.0" />
-        <ComboBox id="comboBox1" fx:id="cmbState" layoutX="134.0" layoutY="380.0" prefHeight="22.0" prefWidth="112.0" promptText="State" />
-        <TextField fx:id="txtZip" editable="false" layoutX="-1.0" layoutY="450.0" prefWidth="82.0" />
+        <TextField fx:id="txtFirstName" editable="false" layoutX="96.0" layoutY="82.0" prefWidth="122.0" />
+        <TextField fx:id="txtLastName" editable="false" layoutY="139.0" prefWidth="149.0" />
+        <TextField id="txtLastName" fx:id="txtSuffix" editable="false" focusTraversable="false" layoutX="161.0" layoutY="139.0" prefWidth="56.0" />
+        <ComboBox fx:id="cmbSuffix" layoutX="161.0" layoutY="138.0" prefHeight="23.0" prefWidth="56.0" />
+        <TextField fx:id="txtAddress" editable="false" layoutY="197.0" prefWidth="392.0" />
+        <TextField fx:id="txtAddress2" editable="false" layoutX="-1.0" layoutY="254.0" prefWidth="180.0" />
+        <TextField fx:id="txtCity" editable="false" layoutX="-1.0" layoutY="308.0" prefWidth="125.0" />
+        <TextField fx:id="txtState" editable="false" layoutX="136.0" layoutY="307.0" prefWidth="107.0" />
         <CalendarTextField fx:id="txtDOB" layoutX="469.0" layoutY="197.0" prefWidth="140.0" />
-        <TextField fx:id="txtDOB_mask" editable="false" layoutX="469.0" layoutY="197.0" prefWidth="122.0" />
-        <TextField id="textField1" fx:id="txtCountry" focusTraversable="false" layoutX="135.0" layoutY="450.0" prefWidth="180.0" text="USA" />
-        <ComboBox id="comboBox1" fx:id="cmbCountry" layoutX="135.0" layoutY="449.0" prefHeight="24.0" prefWidth="180.0" promptText="Country" />
-        <TextField fx:id="txtHomePhone1" editable="false" layoutX="470.0" layoutY="24.0" prefWidth="41.0" />
-        <TextField fx:id="txtHomePhone2" editable="false" layoutX="520.0" layoutY="24.0" prefWidth="41.0" />
-        <TextField fx:id="txtHomePhone3" editable="false" layoutX="571.0" layoutY="24.0" prefWidth="48.0" />
-        <TextField fx:id="txtCellPhone1" editable="false" layoutX="470.0" layoutY="82.0" prefWidth="41.0" />
-        <TextField fx:id="txtCellPhone2" editable="false" layoutX="520.0" layoutY="82.0" prefWidth="41.0" />
-        <TextField fx:id="txtCellPhone3" editable="false" layoutX="571.0" layoutY="82.0" prefWidth="48.0" />
-        <TextField fx:id="txtEmail" editable="false" layoutX="469.0" layoutY="139.0" prefWidth="242.0" />
-        <TextField fx:id="txtBalanceDue" alignment="CENTER_RIGHT" editable="false" layoutX="469.0" layoutY="255.0" prefWidth="107.0" />
-        <Button id="button1" fx:id="btnTransactions" layoutX="651.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnHelp" />
-        <Button id="button2" fx:id="btnFee" layoutX="619.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnFee" />
-        <Label id="label2" layoutX="470.0" layoutY="8.0" text="Home Phone" />
-        <Label id="label2" layoutX="470.0" layoutY="66.0" text="Cell Phone" />
-        <Label id="label2" layoutX="469.0" layoutY="122.0" text="Email" />
-        <Label id="label2" layoutX="470.0" layoutY="178.0" text="Date Of Birth" />
-        <Label id="label2" layoutX="-1.0" layoutY="124.0" text="First Name" />
-        <Label id="label2" layoutX="-1.0" layoutY="179.0" text="Last Name" />
-        <Label id="label2" layoutX="-1.0" layoutY="239.0" text="Address" />
-        <Label id="label2" layoutX="-1.0" layoutY="302.0" text="Address 2" />
-        <Label id="label2" layoutX="-2.0" layoutY="365.0" text="City" />
-        <Label id="label2" layoutX="-1.0" layoutY="434.0" text="Zip" />
-        <Label id="label3" layoutY="5.0" prefWidth="125.0" text="ID" />
-        <Label id="label2" layoutX="470.0" layoutY="238.0" text="Balance Due" />
-        <Label id="label2" layoutX="468.0" layoutY="299.0" text="Notes" />
-        <Label id="label2" layoutX="135.0" layoutY="432.0" text="Country" />
-        <Label id="label2" layoutX="135.0" layoutY="365.0" text="State" />
+        <ComboBox id="comboBox1" fx:id="cmbState" layoutX="135.0" layoutY="307.0" prefHeight="22.0" prefWidth="112.0" promptText="State" />
+        <TextField fx:id="txtZip" editable="false" layoutX="261.0" layoutY="307.0" prefWidth="82.0" />
+        <TextField fx:id="txtDOB_mask" editable="false" layoutX="-1.0" layoutY="552.0" prefWidth="122.0" />
+        <TextField id="textField1" fx:id="txtCountry" focusTraversable="false" layoutX="204.0" layoutY="254.0" prefWidth="180.0" text="USA" />
+        <ComboBox id="comboBox1" fx:id="cmbCountry" layoutX="204.0" layoutY="253.0" prefHeight="24.0" prefWidth="180.0" promptText="Country" />
+        <TextField fx:id="txtHomePhone1" editable="false" layoutX="-1.0" layoutY="367.0" prefWidth="41.0" />
+        <TextField fx:id="txtHomePhone2" editable="false" layoutX="50.0" layoutY="367.0" prefWidth="41.0" />
+        <TextField fx:id="txtHomePhone3" editable="false" layoutX="100.0" layoutY="367.0" prefWidth="48.0" />
+        <TextField fx:id="txtCellPhone1" editable="false" layoutY="425.0" prefWidth="41.0" />
+        <TextField fx:id="txtCellPhone2" editable="false" layoutX="50.0" layoutY="425.0" prefWidth="41.0" />
+        <TextField fx:id="txtCellPhone3" editable="false" layoutX="101.0" layoutY="425.0" prefWidth="48.0" />
+        <TextField fx:id="txtEmail" editable="false" layoutX="1.0" layoutY="486.0" prefWidth="392.0" />
+        <TextField fx:id="txtBalanceDue" alignment="CENTER_RIGHT" editable="false" layoutX="188.0" layoutY="551.0" prefWidth="107.0" />
+        <Button id="button1" fx:id="btnTransactions" layoutX="370.0" layoutY="552.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnHelp" />
+        <Button id="button2" fx:id="btnFee" layoutX="338.0" layoutY="552.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnFee" />
+        <Label id="label2" layoutX="-1.0" layoutY="351.0" text="Home Phone" />
+        <Label id="label2" layoutY="409.0" text="Cell Phone" />
+        <Label id="label2" layoutX="1.0" layoutY="469.0" text="Email" />
+        <Label id="label2" layoutY="533.0" text="Date Of Birth" />
+        <Label id="label2" layoutX="96.0" layoutY="66.0" text="First Name" />
+        <Label id="label2" layoutY="122.0" text="Last Name" />
+        <Label id="label2" layoutX="1.0" layoutY="182.0" text="Address" />
+        <Label id="label2" layoutX="-1.0" layoutY="238.0" text="Address 2" />
+        <Label id="label2" layoutX="-1.0" layoutY="292.0" text="City" />
+        <Label id="label2" layoutX="261.0" layoutY="291.0" text="Zip" />
+        <Label id="label2" layoutX="189.0" layoutY="534.0" text="Balance Due" />
+        <Label id="label2" layoutX="204.0" layoutY="236.0" text="Country" />
+        <Label id="label2" layoutX="136.0" layoutY="292.0" text="State" />
         <Label id="label2" layoutX="-1.0" layoutY="66.0" text="Salutation" />
-        <Label id="label2" layoutX="295.0" layoutY="178.0" text="Suffix" />
-        <TableView fx:id="tableNote" layoutX="468.0" layoutY="316.0" prefHeight="153.0" prefWidth="329.0">
-          <columns>
-            <TableColumn editable="false" prefWidth="82.0" resizable="false" text="Date" fx:id="colNoteDate" />
-            <TableColumn editable="false" prefWidth="244.0" resizable="false" sortable="false" text="Description" fx:id="colNoteDescription" />
-          </columns>
-        </TableView>
-        <Button id="button2" fx:id="btnMakePayment" layoutX="586.0" layoutY="256.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnMakePayment" />
-        <Button id="button2" fx:id="btnAddNote" layoutX="804.0" layoutY="319.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnMakePayment" />
-        <TableView id="tableView11" fx:id="tableClass" layoutX="-1.0" layoutY="482.0" prefHeight="111.0" prefWidth="799.0">
-          <columns>
-            <TableColumn editable="false" id="tableColumn1" prefWidth="165.0" text="Enrolled Course" fx:id="colCourses" />
-            <TableColumn editable="false" id="tableColumn1" prefWidth="100.0" text="Start Date" fx:id="colStartDate" />
-            <TableColumn editable="false" id="tableColumn1" prefWidth="100.0" text="End Date" fx:id="colEndDate" />
-            <TableColumn editable="false" id="tableColumn1" prefWidth="125.0" text="Meeting Days" fx:id="colDays" />
-            <TableColumn editable="false" id="tableColumn1" prefWidth="172.0" text="Time" fx:id="colTime" />
-            <TableColumn editable="false" id="tableColumn1" prefWidth="135.0" text="Instructor" fx:id="colInstructor" />
-          </columns>
-        </TableView>
+        <Label id="label2" layoutX="162.0" layoutY="121.0" text="Suffix" />
+        <Button id="button2" fx:id="btnMakePayment" layoutX="305.0" layoutY="552.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnMakePayment" />
+        <Label id="label3" layoutX="-2.0" layoutY="-3.0" prefWidth="22.0" text="ID" />
+        <Region layoutX="407.0" layoutY="3.0" prefHeight="578.0" prefWidth="503.0" style="-fx-background-color: rgba(0,0,0,.26);" />
       </children>
     </AnchorPane>
-    <AnchorPane id="AnchorPane" fx:id="searchWrapper" layoutX="14.0" layoutY="5.0" minHeight="46.0001220703125" minWidth="147.0" prefHeight="172.0" prefWidth="149.0">
+    <AnchorPane id="AnchorPane" fx:id="searchWrapper" layoutX="29.0" layoutY="19.0" minHeight="46.0001220703125" minWidth="147.0" prefHeight="172.0" prefWidth="149.0">
       <children>
         <Label id="label3" layoutX="2.0" layoutY="5.0" prefWidth="54.0" text="Search" />
         <TextField fx:id="txtSearchField" focusTraversable="false" layoutX="2.0" layoutY="22.0" prefHeight="23.0" prefWidth="147.0" />
@@ -106,6 +95,18 @@
         <Label fx:id="lblToolTip" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="1.0" layoutY="138.0" prefHeight="23.0" prefWidth="147.0" styleClass="labelToolTip" textAlignment="CENTER" textFill="#5d5d5d" wrapText="true" />
       </children>
     </AnchorPane>
+    <Button id="button2" fx:id="btnAddNote" layoutX="29.0" layoutY="302.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="107.0" text="Add New Note" />
+    <Label id="label2" layoutX="31.0" layoutY="191.0" text="Notes" />
+    <TableView id="tableView11" fx:id="tableClass" layoutX="28.0" layoutY="348.0" prefHeight="95.0" prefWidth="205.0">
+      <columns>
+        <TableColumn editable="false" id="tableColumn1" prefWidth="203.0" text="Enrolled Course" fx:id="colCourses" />
+        <TableColumn editable="false" id="tableColumn1" prefWidth="100.0" text="Start Date" visible="false" fx:id="colStartDate" />
+        <TableColumn editable="false" id="tableColumn1" prefWidth="100.0" text="End Date" visible="false" fx:id="colEndDate" />
+        <TableColumn editable="false" id="tableColumn1" prefWidth="125.0" text="Meeting Days" visible="false" fx:id="colDays" />
+        <TableColumn editable="false" id="tableColumn1" prefWidth="172.0" text="Time" visible="false" fx:id="colTime" />
+        <TableColumn editable="false" id="tableColumn1" prefWidth="135.0" text="Instructor" visible="false" fx:id="colInstructor" />
+      </columns>
+    </TableView>
   </children>
   <stylesheets>
     <URL value="@../../../../resources/css/base.css" />
