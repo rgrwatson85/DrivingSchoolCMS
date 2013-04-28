@@ -14,6 +14,7 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.util.Duration;
 
 public class Fade {
+    final public static Fade f = new Fade();
     public static GaussianBlur gb = new GaussianBlur(0.0);
     public void FadeOut(){
         MainController.effectsPane.setMouseTransparent(false);

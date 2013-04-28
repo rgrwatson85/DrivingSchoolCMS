@@ -38,7 +38,7 @@
     <TextField id="textField1" fx:id="txtCellPhone1" layoutX="407.0" layoutY="176.0" prefWidth="41.0" />
     <TextField id="textField1" fx:id="txtCellPhone2" layoutX="457.0" layoutY="176.0" prefWidth="41.0" />
     <TextField id="textField1" fx:id="txtCellPhone3" layoutX="508.0" layoutY="176.0" prefWidth="54.0" />
-    <TextField id="textField1" fx:id="txtEmail" layoutX="405.0" layoutY="234.0" prefWidth="259.0" />
+    <TextField fx:id="txtEmail" layoutX="405.0" layoutY="234.0" prefWidth="259.0" />
     <Button fx:id="btnSubmit" layoutX="404.0" layoutY="409.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="103.0" styleClass="submit-button" text="SUBMIT" />
     <CalendarTextField id="textField2" fx:id="calendar" layoutX="406.0" layoutY="292.0" maxWidth="101.0" prefWidth="101.0" style="&#10;" />
     <ComboBox id="comboBox1" fx:id="cmbCountry" layoutX="81.0" layoutY="350.0" prefHeight="23.0" prefWidth="112.0" promptText="Country" />
@@ -63,7 +63,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <TextField fx:id="calendar_mask" editable="true" focusTraversable="false" layoutX="404.0" layoutY="292.0" prefWidth="103.0" />
+    <TextField fx:id="calendar_mask" focusTraversable="false" layoutX="404.0" layoutY="292.0" prefWidth="103.0" />
   </children>
   <stylesheets>
     <URL value="@../../../../resources/css/base.css" />

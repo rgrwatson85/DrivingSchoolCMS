@@ -8,34 +8,29 @@ import com.mjwtech.main.controller.MainController;
 import com.mjwtech.customer.model.Customer;
 import data.database_connection.SettingsController;
 import data.validation.validation;
-import data.database_connection.dbconnection;
 import data.dropdown.dropdowndata;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import jfxtras.labs.scene.control.*;
 import name.antonsmirnov.javafx.dialog.Dialog;
+import resources.eyecandy.Fade;
 
 /**
  * FXML Controller class
@@ -201,13 +196,7 @@ public class AddNewCustomerController implements Initializable {
      */
     private void createChangeListeners() {
         final validation fv = new validation();
-        
-        //apply error class to all text fields on load
-        for (Node n : root.getChildren()) {
-            if (n instanceof TextField) {
-                n.getStyleClass().add("error");
-            }
-        }
+      
         txtFirstName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> ov, String t, String t1) {
@@ -424,8 +413,13 @@ public class AddNewCustomerController implements Initializable {
                     txtEmail.getStyleClass().remove("error");
                     txtEmail.getStyleClass().add("valid");
                 } else {
-                    txtEmail.getStyleClass().remove("valid");
-                    txtEmail.getStyleClass().add("error");
+                    if("".equals(t1)){
+                            txtEmail.getStyleClass().remove("error");
+                            txtEmail.getStyleClass().add("valid");
+                        }else{
+                            txtEmail.getStyleClass().remove("valid");
+                            txtEmail.getStyleClass().add("error");
+                        }
                 }
             }
         });
@@ -442,87 +436,156 @@ public class AddNewCustomerController implements Initializable {
                 }
             }
         });
+        
+        //apply error class to all text fields on load
+        for (Node n : root.getChildren()) {
+            if (n instanceof TextField) {
+                n.getStyleClass().add("error");
+                if("txtEmail".equals(n.getId())){n.getStyleClass().add("valid");}
+            }
+        }
     }
 
     //if validation is passed then the form is submitted to the database
     private void submitForm() {
+        Task addCustomer = new Task() {
+            @Override
+            protected Object call() throws Exception {
+                Thread.sleep(1000);
+                //add form details to customer object
+                Customer.oCust.setFirstName(txtFirstName.getText());
+                Customer.oCust.setLastName(txtLastName.getText());
+                Customer.oCust.setSalutationName(cmbSalutation.getValue().toString());
+                Customer.oCust.setSuffix(cmbSuffix.getValue().toString());
+                Customer.oCust.setAddress(txtAddress1.getText());
+                Customer.oCust.setAddress2(txtAddress2.getText());
+                Customer.oCust.setCity(txtCity.getText());
+                Customer.oCust.setState(cmbState.getSelectionModel().getSelectedItem().toString());
+                Customer.oCust.setZip(txtZip.getText());
+                Customer.oCust.setHomePhone(txtHomePhone1.getText(), txtHomePhone2.getText(), txtHomePhone3.getText());
+                Customer.oCust.setCellPhone(txtCellPhone2.getText(), txtCellPhone2.getText(), txtCellPhone3.getText());
+                Customer.oCust.setEmail(txtEmail.getText());
+                Customer.oCust.setDOB(calendar_mask.getText());
+                //create variables for query
+                String fn = Customer.oCust.getFirstName();
+                fn = fn.substring(0, 1).toUpperCase() + fn.substring(1).toLowerCase();
+                String ln = Customer.oCust.getLastName();
+                ln = ln.substring(0, 1).toUpperCase() + ln.substring(1).toLowerCase();
+                String sf = Customer.oCust.getSuffix();
+                String sa = Customer.oCust.getSalutationName();
+                String add1 = Customer.oCust.getAddress();
+                String add2 = Customer.oCust.getAddress2();
+                String city = Customer.oCust.getCity();
+                city = city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase();
+                String state = Customer.oCust.getState();
+                String zip = Customer.oCust.getZip();
+                String hp = Customer.oCust.getHomePhone();
+                String cp = Customer.oCust.getCellPhone();
+                String email = Customer.oCust.getEmail();
+                String dob = Customer.oCust.getDOB();
+                //create database connection and try to insert the new customer into database
+                try {
+                    SettingsController.openConnection();
+                    ResultSet rs;
+                    String sql = "EXEC createNewCustomer '" + fn + "','" + ln + "','" + sf + "','" + hp + "','" + cp + "','" + add1 + "','" + add2 + "',"
+                            + "'" + city + "','" + state + "','" + zip + "','" + email + "','" + dob + "','" + sa + "'";
 
-        //add form details to customer object
-        Customer.oCust.setFirstName(txtFirstName.getText());
-        Customer.oCust.setLastName(txtLastName.getText());
-        Customer.oCust.setSalutationName(cmbSalutation.getValue().toString());
-        Customer.oCust.setSuffix(cmbSuffix.getValue().toString());
-        Customer.oCust.setAddress(txtAddress1.getText());
-        Customer.oCust.setAddress2(txtAddress2.getText());
-        Customer.oCust.setCity(txtCity.getText());
-        Customer.oCust.setState(cmbState.getSelectionModel().getSelectedItem().toString());
-        Customer.oCust.setZip(txtZip.getText());
-        Customer.oCust.setHomePhone(txtHomePhone1.getText(), txtHomePhone2.getText(), txtHomePhone3.getText());
-        Customer.oCust.setCellPhone(txtCellPhone2.getText(), txtCellPhone2.getText(), txtCellPhone3.getText());
-        Customer.oCust.setEmail(txtEmail.getText());
-        Customer.oCust.setDOB(calendar_mask.getText());
-
-        //create variables for query
-        String fn = Customer.oCust.getFirstName();
-        fn = fn.substring(0, 1).toUpperCase() + fn.substring(1).toLowerCase();
-        String ln = Customer.oCust.getLastName();
-        ln = ln.substring(0, 1).toUpperCase() + ln.substring(1).toLowerCase();
-        String sf = Customer.oCust.getSuffix();
-        String sa = Customer.oCust.getSalutationName();
-        String add1 = Customer.oCust.getAddress();
-        String add2 = Customer.oCust.getAddress2();
-        String city = Customer.oCust.getCity();
-        city = city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase();
-        String state = Customer.oCust.getState();
-        String zip = Customer.oCust.getZip();
-        String hp = Customer.oCust.getHomePhone();
-        String cp = Customer.oCust.getCellPhone();
-        String email = Customer.oCust.getEmail();
-        String dob = Customer.oCust.getDOB();
-
-        //create database connection and try to insert the new customer into database
-        try {
-            //connect to the database
-            SettingsController.openConnection();
-            ResultSet rs;
-            String sql = "EXEC createNewCustomer '" + fn + "','" + ln + "','" + sf + "','" + hp + "','" + cp + "','" + add1 + "','" + add2 + "',"
-                    + "'" + city + "','" + state + "','" + zip + "','" + email + "','" + dob + "','" + sa + "'";
-
-            Statement stmt = SettingsController.conn.createStatement();
-            rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                //set the customer object's id value
-                Customer.oCust.setID(rs.getInt("CustomerID"));
+                    Statement stmt = SettingsController.conn.createStatement();
+                    rs = stmt.executeQuery(sql);
+                    while (rs.next()) {
+                        Customer.oCust.setID(rs.getInt("CustomerID"));
+                    }
+                    SettingsController.closeConnection();
+                } catch (ClassNotFoundException | SQLException ex) {
+                    System.err.println(ex.getMessage());
+                    throw new Exception();
+                }
+                return null;
             }
-            //create confirmation dialog
-            Dialog.buildConfirmation(null, null)
-                    .create()
-                    .setTitle("Emergency Contact")
-                    .setMessage("Would you like to add an emergency contact\nfor this customer?")
-                    //opens add new emergency page in content pane
-                    .addYesButton(new EventHandler() {
+        };
+        addCustomer.setOnScheduled(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                MainController.lblProgressStatus.setText("PROCESSING");
+                Fade.f.FadeOut();
+            }
+        });
+        addCustomer.setOnFailed(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                MainController.lblProgressStatus.setText("ERROR");
+                Task wait = new Task() {
+                        @Override
+                        protected Object call() throws Exception {
+                            Thread.sleep(2000);
+                            this.setOnSucceeded(new EventHandler() {
+                                @Override
+                                public void handle(Event t) {
+                                    Fade.f.FadeIn();
+                                }
+                            });
+                            this.setOnFailed(new EventHandler() {
                             @Override
                             public void handle(Event t) {
-                                //open the add new emergency contact in the content pane
-                                MainController.transitionContent(Customer.customerFXMLString+"AddNewEmergencyContact.fxml");
+                                Fade.f.FadeIn();
                             }
-                        })
-                    //go to view customer record page        
-                    .addNoButton(new EventHandler() {
-                        @Override
-                        public void handle(Event t) {
-                            //open the customer record in the content pane
-                            MainController.transitionContent(Customer.customerFXMLString+"ViewCustomer.fxml");
+                        });
+                            return null;
                         }
-                    })
-                    .build()
-                    .show();
-            
-            SettingsController.closeConnection();
-        } catch (ClassNotFoundException | SQLException ex) {
-            Dialog.showError("Error", "Error adding customer to database.\n\n" + ex.getMessage());
-            System.out.println(ex.getMessage());
-        }
+                    };
+                new Thread(wait).start();
+            }
+        });
+        addCustomer.setOnSucceeded(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                MainController.lblProgressStatus.setText("SUCCESS");
+                Task wait = new Task() {
+                        @Override
+                        protected Object call() throws Exception {
+                            Thread.sleep(2000);
+                            this.setOnSucceeded(new EventHandler() {
+                                @Override
+                                public void handle(Event t) {
+                                    Fade.f.FadeIn();
+                                     //create confirmation dialog
+                                    Dialog.buildConfirmation(null, null)
+                                        .create()
+                                        .setTitle("Emergency Contact")
+                                        .setMessage("Would you like to add an emergency contact\nfor this customer?")
+                                        //opens add new emergency page in content pane
+                                        .addYesButton(new EventHandler() {
+                                                @Override
+                                                public void handle(Event t) {
+                                                    //open the add new emergency contact in the content pane
+                                                    MainController.transitionContent(Customer.customerFXMLString+"AddNewEmergencyContact.fxml");
+                                                }
+                                            })
+                                        //go to view customer record page        
+                                        .addNoButton(new EventHandler() {
+                                            @Override
+                                            public void handle(Event t) {
+                                                //open the customer record in the content pane
+                                                MainController.transitionContent(Customer.customerFXMLString+"ViewCustomer.fxml");
+                                            }
+                                        })
+                                        .build()
+                                        .show();
+                                }
+                            });
+                            this.setOnFailed(new EventHandler() {
+                            @Override
+                            public void handle(Event t) {
+                                Fade.f.FadeIn();
+                            }
+                        });
+                            return null;
+                        }
+                    };
+                new Thread(wait).start();
+            }
+        });
+        new Thread(addCustomer).start();
     }
     
 }
