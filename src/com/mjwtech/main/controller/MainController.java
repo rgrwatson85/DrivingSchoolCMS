@@ -48,7 +48,7 @@ public class MainController implements Initializable {
     @FXML
     public static Label lblProgressStatus;
     @FXML
-    public static Group ProgressGroup;
+    public static AnchorPane effectsPane;
     @FXML
     public static ProgressIndicator progress;
     //area the encompasses the everything below the company logo and user name label

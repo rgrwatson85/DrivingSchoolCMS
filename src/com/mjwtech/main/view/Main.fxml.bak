@@ -13,9 +13,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="root" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.main.controller.MainController">
+<AnchorPane fx:id="root" maxHeight="733.0" maxWidth="1251.0" minHeight="733.0" minWidth="1251.0" prefHeight="733.0" prefWidth="1251.0" styleClass="root" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.main.controller.MainController">
   <children>
-    <TilePane fx:id="contentPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefColumns="1" prefHeight="651.0" prefRows="1" prefWidth="1244.0" styleClass="contentPane, background3" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="64.0">
+    <TilePane fx:id="contentPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefColumns="1" prefHeight="661.0" prefRows="1" prefWidth="1233.0" styleClass="contentPane, background3" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0">
       <effect>
         <InnerShadow height="115.13986013986013" radius="57.06993006993007" width="115.13986013986013" />
       </effect>
@@ -52,16 +52,16 @@
       </effect>
     </Button>
     <Button fx:id="btnLogOut" layoutX="899.0" layoutY="8.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnLogOut_sc" />
-    <Group id="Group" fx:id="ProgressGroup" layoutX="518.0" layoutY="232.0">
+    <AnchorPane id="effectspane" fx:id="effectsPane" mouseTransparent="true" opacity="0.0" prefHeight="651.0" prefWidth="1237.0" style="-fx-background-color:black;" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="64.0">
       <children>
-        <ProgressIndicator id="ProgressIndicator" prefHeight="131.0" prefWidth="163.0" style="-fx-progress-color:lightblue">
+        <ProgressIndicator id="ProgressIndicator" layoutX="541.0" layoutY="253.0" prefHeight="131.0" prefWidth="163.0" style="-fx-progress-color:lightblue">
           <effect>
             <GaussianBlur radius="20.641891891891895" />
           </effect>
         </ProgressIndicator>
-        <Label fx:id="lblProgressStatus" alignment="CENTER" layoutX="-10.0" layoutY="137.0" prefHeight="35.0" prefWidth="187.0" style="-fx-text-fill:white;&#10;-fx-font-size:24;&#10;-fx-font-family:Verdana&#10;" text="PROCESSING" textAlignment="CENTER" />
+        <Label fx:id="lblProgressStatus" alignment="CENTER" layoutX="529.0" layoutY="383.0" prefHeight="48.0" prefWidth="196.0" style="-fx-text-fill:white;&#10;-fx-font-size:24;&#10;-fx-font-family:Perpetua&#10;" text="PROCESSING" textAlignment="CENTER" />
       </children>
-    </Group>
+    </AnchorPane>
   </children>
   <stylesheets>
     <URL value="@Main.css" />

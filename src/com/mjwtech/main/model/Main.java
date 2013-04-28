@@ -41,8 +41,8 @@ public class Main extends Application {
         stage.setWidth(1251);
         stage.setMinWidth(1251);
         stage.setMinHeight(733);
-        stage.setMaxWidth(1600);
-        stage.setMaxHeight(1200);
+        stage.setMaxWidth(1251);
+        stage.setMaxHeight(733);
         stage.setOnShown(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent t) {

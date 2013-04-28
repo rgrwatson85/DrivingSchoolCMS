@@ -16,19 +16,21 @@ import javafx.util.Duration;
 public class Fade {
     public static GaussianBlur gb = new GaussianBlur(0.0);
     public void FadeOut(){
+        MainController.effectsPane.setMouseTransparent(false);
         Timeline tl = new Timeline();
         final KeyValue kv = new KeyValue(gb.radiusProperty(), 15.0);
         final KeyFrame kf = new KeyFrame(Duration.seconds(.5), kv);
-        final KeyValue kv2 = new KeyValue(MainController.ProgressGroup.opacityProperty(), 1);
+        final KeyValue kv2 = new KeyValue(MainController.effectsPane.opacityProperty(), .46);
         final KeyFrame kf2 = new KeyFrame(Duration.seconds(.5), kv2);
         tl.getKeyFrames().addAll(kf,kf2);
         tl.play();
     }
     public void FadeIn(){
+        MainController.effectsPane.setMouseTransparent(true);
         Timeline tl = new Timeline();
         final KeyValue kv = new KeyValue(gb.radiusProperty(), 0.0);
         final KeyFrame kf = new KeyFrame(Duration.seconds(.5), kv);
-        final KeyValue kv2 = new KeyValue(MainController.ProgressGroup.opacityProperty(), 0);
+        final KeyValue kv2 = new KeyValue(MainController.effectsPane.opacityProperty(), 0);
         final KeyFrame kf2 = new KeyFrame(Duration.seconds(.5), kv2);
         tl.getKeyFrames().addAll(kf,kf2);
         tl.play();

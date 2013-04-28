@@ -314,7 +314,7 @@ public class ViewCustomerController {
         colDays.setCellValueFactory(new PropertyValueFactory<Enrollment,String>("RecurrenceString"));
         colTime.setCellValueFactory(new PropertyValueFactory<Enrollment,String>("Time"));
         colInstructor.setCellValueFactory(new PropertyValueFactory<Enrollment,String>("InstructorName"));
-        MainController.ProgressGroup.setOpacity(0);
+        MainController.effectsPane.setOpacity(0);
         MainController.lblProgressStatus.setText("PROCESSING");
         Fade.gb.setRadius(0);
     }
