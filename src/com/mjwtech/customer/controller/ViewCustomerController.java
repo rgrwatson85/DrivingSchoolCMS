@@ -633,14 +633,13 @@ public class ViewCustomerController {
             @Override
             protected Object call() throws Exception {
                 try {
+                    Thread.sleep(2000);
                     SettingsController.openConnection();
                     Statement stmt = SettingsController.conn.createStatement();
-                    String sql = "DELETE FROM Customer WHERE CustomerID="+Customer.oCust.getID();
-                    stmt.executeUpdate(sql);
-                    sql = "SELECT TOP 1 CustomerID FROM Customer WHERE CustomerID < "+Customer.oCust.getID()+"ORDER BY CustomerID DESC";
+                    String sql = "EXEC deleteCustomer "+Customer.oCust.getID();
                     ResultSet rs = stmt.executeQuery(sql);
                     rs.next();
-                    txtSearchField.setText(rs.getInt("CustomerID")+"");
+                    Customer.oCust.setID(rs.getInt("CustomerID"));
                     SettingsController.closeConnection();
                 } catch (ClassNotFoundException | SQLException e) {
                     System.err.println(e.getMessage());
@@ -698,6 +697,7 @@ public class ViewCustomerController {
                                 @Override
                                 public void handle(Event t) {
                                     f.FadeIn();
+                                    txtSearchField.setText(Customer.oCust.getID()+"");
                                     txtSearchField.getOnAction().handle(null);
                                 }
                             });
@@ -730,6 +730,7 @@ public class ViewCustomerController {
                 @Override
                 public void handle(Event t) {
                      new Thread(deleteCustomer).start();
+                     setEditMode(false);
                 }
             })
             .build()
