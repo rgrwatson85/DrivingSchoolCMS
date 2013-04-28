@@ -11,7 +11,7 @@
 <?import javafx.scene.text.*?>
 <?import jfxtras.labs.scene.control.*?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="748.0" styleClass="root, background3" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.AddNewCustomerController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="748.0" styleClass="root" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.AddNewCustomerController">
   <children>
     <TextField id="textField1" fx:id="txtFirstName" layoutX="187.0" layoutY="118.0" prefWidth="154.0" />
     <TextField id="textField1" fx:id="txtLastName" layoutX="82.0" layoutY="176.0" prefWidth="154.0" />

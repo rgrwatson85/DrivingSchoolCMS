@@ -92,9 +92,6 @@ public class MainController implements Initializable {
     //encompasses the main page buttons
     @FXML
     public VBox buttonVBox;
-    //the main display area. set as static so that it can be referenced throughout the entire application
-//    @FXML
-//    public static TilePane contentPane;
     //label that shows the value of the shortcut buttons
     @FXML
     public Label lblToolTip;
@@ -114,6 +111,7 @@ public class MainController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         //set toggle buttons to load the correct pages into the content area
         try {
             applyButtonEventHandlers();

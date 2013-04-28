@@ -65,7 +65,7 @@
         <Label id="label2" layoutX="162.0" layoutY="121.0" text="Suffix" />
         <Button id="button2" fx:id="btnMakePayment" layoutX="305.0" layoutY="552.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnMakePayment" />
         <Label id="label3" layoutX="-2.0" layoutY="-3.0" prefWidth="22.0" text="ID" />
-        <Region layoutX="407.0" layoutY="3.0" prefHeight="578.0" prefWidth="503.0" style="-fx-background-color: rgba(0,0,0,.26);" />
+        <AnchorPane fx:id="advancedView" layoutX="407.0" layoutY="3.0" prefHeight="578.0" prefWidth="503.0" style="-fx-background-color: rgba(0,0,0,.26);" />
       </children>
     </AnchorPane>
     <AnchorPane id="AnchorPane" fx:id="searchWrapper" layoutX="29.0" layoutY="19.0" minHeight="46.0001220703125" minWidth="147.0" prefHeight="172.0" prefWidth="149.0">

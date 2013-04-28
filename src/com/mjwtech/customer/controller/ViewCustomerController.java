@@ -4,6 +4,7 @@ import com.mjwtech.main.controller.MainController;
 import com.mjwtech.customer.model.Customer;
 import com.mjwtech.customer.model.CustomerNote;
 import com.mjwtech.customer.model.Enrollment;
+import com.mjwtech.main.model.Main;
 import data.database_connection.SettingsController;
 import data.dropdown.dropdowndata;
 import data.validation.validation;
@@ -25,7 +26,9 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -36,6 +39,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import jfxtras.labs.scene.control.CalendarTextField;
 import name.antonsmirnov.javafx.dialog.Dialog;
 import resources.eyecandy.Fade;
@@ -48,6 +52,9 @@ public class ViewCustomerController {
 
     @FXML
     private URL location;
+    
+    @FXML
+    private AnchorPane advancedView;
 
     @FXML
     private Button btnAddNote;
@@ -409,7 +416,21 @@ public class ViewCustomerController {
                     Dialog.showError("ERROR", "Error changing state list");
                 }
             }
-        });  
+        });
+        //load note details in the advanced view
+        tableNote.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CustomerNote>() {
+            @Override
+            public void changed(ObservableValue<? extends CustomerNote> ov, CustomerNote t, CustomerNote t1) {
+                try{
+                Node p = FXMLLoader.load(Main.class.getResource("/com/mjwtech/customer/view/AddNote.fxml"));
+                System.out.println(p.getUserData().toString());
+                advancedView.getChildren().clear();
+                advancedView.getChildren().add(p);
+                }catch(Exception e){
+                    System.err.println(e.getMessage());
+                }
+            }
+        });
     }
     
     //search for customer and assign attributes to global customer object
