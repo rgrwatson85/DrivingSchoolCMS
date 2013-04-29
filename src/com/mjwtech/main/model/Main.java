@@ -25,8 +25,7 @@ import javafx.stage.WindowEvent;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Parent p = FXMLLoader.load(getClass().getResource("/com/mjwtech/main/view/Main.fxml"));   
-
+        Parent p = FXMLLoader.load(getClass().getResource("/com/mjwtech/main/view/Main.fxml"));
         Undecorator undecorator = new Undecorator(stage, (Region) p);
         Node node = p.lookup("#root");
         undecorator.setAsStageDraggable(stage, node);

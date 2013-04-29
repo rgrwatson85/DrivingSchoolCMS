@@ -13,9 +13,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1251.0" styleClass="undecorator-background" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.main.controller.MainController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1251.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.main.controller.MainController">
   <children>
-    <AnchorPane fx:id="contentPane" layoutX="16.0" layoutY="64.0" prefHeight="622.0" prefWidth="1220.0" styleClass="background3" />
+    <AnchorPane fx:id="contentPane" layoutX="16.0" layoutY="64.0" prefHeight="622.0" prefWidth="1220.0" styleClass="background3" visible="false" />
     <TilePane id="contentPane" alignment="CENTER" disable="true" layoutX="14.0" layoutY="64.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefColumns="1" prefHeight="615.0" prefRows="1" prefWidth="1175.0" styleClass="contentPane, background3" visible="false" />
     <HBox alignment="CENTER_LEFT" layoutX="546.0" layoutY="9.0" minWidth="397.0" prefHeight="48.0" prefWidth="397.0" spacing="22.0">
       <children>
@@ -61,7 +61,7 @@
     </AnchorPane>
   </children>
   <stylesheets>
-    <URL value="@Main.css" />
     <URL value="@../../../../resources/css/base.css" />
+    <URL value="@../../../../resources/css/undecorator.css" />
   </stylesheets>
 </AnchorPane>

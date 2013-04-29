@@ -4,15 +4,16 @@ import com.mjwtech.main.controller.MainController;
 import com.mjwtech.customer.model.Customer;
 import com.mjwtech.customer.model.CustomerNote;
 import com.mjwtech.customer.model.Enrollment;
-import com.mjwtech.main.model.Main;
 import data.database_connection.SettingsController;
 import data.dropdown.dropdowndata;
 import data.validation.validation;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ResourceBundle;
@@ -28,7 +29,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -39,7 +39,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import jfxtras.labs.scene.control.CalendarTextField;
 import name.antonsmirnov.javafx.dialog.Dialog;
 import resources.eyecandy.Fade;
@@ -54,7 +53,7 @@ public class ViewCustomerController {
     private URL location;
     
     @FXML
-    private AnchorPane advancedView;
+    public static AnchorPane advancedView;
 
     @FXML
     private Button btnAddNote;
@@ -422,12 +421,30 @@ public class ViewCustomerController {
             @Override
             public void changed(ObservableValue<? extends CustomerNote> ov, CustomerNote t, CustomerNote t1) {
                 try{
-                Node p = FXMLLoader.load(Main.class.getResource("/com/mjwtech/customer/view/AddNote.fxml"));
-                System.out.println(p.getUserData().toString());
-                advancedView.getChildren().clear();
-                advancedView.getChildren().add(p);
-                }catch(Exception e){
+                    Node p = FXMLLoader.load(getClass().getResource("/com/mjwtech/customer/view/AddNote.fxml"));
+                    advancedView.getChildren().clear();
+                    advancedView.getChildren().add(p);
+                    AddNoteController.instance.viewNote(t1.getNote(), t1.getDate());
+                }catch(IOException | ParseException e){
                     System.err.println(e.getMessage());
+                }
+            }
+        });
+        tableNote.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+                if(t1){
+                    try{
+                        CustomerNote n = tableNote.getSelectionModel().getSelectedItem();
+                        if(tableNote.getSelectionModel().getSelectedIndex()>=0){
+                            Node p = FXMLLoader.load(getClass().getResource("/com/mjwtech/customer/view/AddNote.fxml"));
+                            advancedView.getChildren().clear();
+                            advancedView.getChildren().add(p);
+                            AddNoteController.instance.viewNote(n.getNote(), n.getDate());
+                        }
+                    }catch(ParseException | IOException e){
+                        System.err.println("No note has been selected");
+                    }
                 }
             }
         });
@@ -437,6 +454,7 @@ public class ViewCustomerController {
     private void searchCustomer(String parameter, Object value){
         setEditMode(false);
         buttonWrapper.setVisible(true);
+        advancedView.getChildren().clear();
         String valueType = value.getClass().getSimpleName();
         if("String".equals(valueType)){
             value = "['"+value+"']";
@@ -562,9 +580,13 @@ public class ViewCustomerController {
                             txtBalanceDue.setText(formatter.format(Customer.oCust.getBalanceDue()));
                             txtCustomerID.setText(""+Customer.oCust.getID());
                             txtSearchField.setText(""+Customer.oCust.getID());
+                           
+                            tableClass.setItems(null);
                             tableClass.setItems(EnrollmentData);
+                            tableNote.setItems(null);
                             tableNote.setItems(NoteData);
-                            //apply error class to all text fields on load
+                           
+                            //remove style class on all text fields on load
                             for (Node n : form.getChildren()) {
                                 if (n instanceof TextField) {
                                     n.getStyleClass().removeAll("valid","error");

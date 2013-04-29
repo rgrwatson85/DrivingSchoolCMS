@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="root" prefHeight="578.0" prefWidth="503.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.AddNoteController">
+  <children>
+    <Button id="btnSubmit" fx:id="btnCancel" layoutX="313.0" layoutY="187.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Cancel" />
+    <TextArea fx:id="txtNote" layoutX="8.0" layoutY="40.0" prefHeight="131.0" prefWidth="481.0" wrapText="true" />
+    <Button fx:id="btnSubmit" layoutX="409.0" layoutY="187.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Submit" />
+    <Text fill="WHITE" layoutX="8.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+    <Label fx:id="lblDate" layoutX="49.0" layoutY="14.0" text="MM/DD/YYYY">
+      <stylesheets>
+        <URL value="@../../../../resources/css/base.css" />
+      </stylesheets>
+    </Label>
+  </children>
+  <stylesheets>
+    <URL value="@../../../../resources/css/base.css" />
+  </stylesheets>
+</AnchorPane>
