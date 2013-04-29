@@ -771,7 +771,7 @@ public class ViewCustomerController {
                                 @Override
                                 public void handle(Event t) {
                                     Fade.f.FadeIn();
-                                    txtSearchField.getOnAction().handle(null);
+                                    initialize();
                                 }
                             });
                             this.setOnFailed(new EventHandler() {
