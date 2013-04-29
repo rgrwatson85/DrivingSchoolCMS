@@ -225,13 +225,28 @@ public class AddNoteController implements Initializable {
             }
         });
                 updateNote.setOnSucceeded(new EventHandler() {
-            @Override
-            public void handle(Event t) {
-                MainController.lblProgressStatus.setText("SUCCESS");
-                new Thread(wait).start();
-            }
-        });
-                new Thread(updateNote).start();
+                    @Override
+                    public void handle(Event t) {
+                        MainController.lblProgressStatus.setText("SUCCESS");
+                        new Thread(wait).start();
+                    }
+                });
+                String x = txtNote.getText().replaceAll(" ", "");
+                String y;
+                if(oldNote.contains(" – Edited By: ")){
+                    y = oldNote.substring(0, oldNote.indexOf("–")-1).replaceAll(" ", "");
+                }else{
+                    y = oldNote.replaceAll(" ", "");
+                }
+                if(x.equals(y)){
+                    Dialog.showWarning("WARNING", "You cannot save until a change has been made");
+                }else{
+                    if("".equals(x)){
+                        Dialog.showWarning("WARNING", "You can not create a note with no text");
+                        txtNote.setText(oldNote);
+                    }else
+                        new Thread(updateNote).start();
+                }
             }
         });
     }
