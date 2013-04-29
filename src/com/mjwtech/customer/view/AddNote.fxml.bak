@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" prefHeight="286.0" prefWidth="503.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.AddNoteController">
+<AnchorPane fx:id="root" prefHeight="318.0" prefWidth="503.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.AddNoteController">
   <children>
     <Button id="btnSubmit" fx:id="btnCancel" layoutX="313.0" layoutY="187.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Cancel" />
     <TextArea fx:id="txtNote" layoutX="8.0" layoutY="40.0" prefHeight="131.0" prefWidth="481.0" wrapText="true" />
@@ -20,6 +20,8 @@
         <URL value="@../../../../resources/css/base.css" />
       </stylesheets>
     </Label>
+    <Button id="btnSubmit" fx:id="btnEdit" layoutX="313.0" layoutY="187.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Edit" />
+    <Button id="btnSubmit" fx:id="btnSave" layoutX="409.0" layoutY="187.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Save" visible="false" />
   </children>
   <stylesheets>
     <URL value="@../../../../resources/css/base.css" />

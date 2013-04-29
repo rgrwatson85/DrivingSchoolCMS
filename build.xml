@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- You may freely edit this file. See commented blocks below for --><!-- some examples of how to customize the build. --><!-- (If you delete it and reopen the project it will be recreated.) --><!-- By default, only the Clean and Build commands use this build script. --><project name="DrivingSchoolCMS" default="default" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
     <description>Builds, tests, and runs the project DrivingSchoolCMS.</description>
     <import file="nbproject/build-impl.xml"/>
+	<target name="-pre-jar">
+        <echo>Copying resources files to build directory...</echo>
+            <mkdir dir="dist/src/resources"/>
+            <copy todir="dist/src/resources">
+                <fileset dir="src/resources" includes="**"/>
+            </copy>
+			<mkdir dir="dist/src/data/database_connection"/>
+            <copy todir="dist/src/data/database_connection">
+                <fileset dir="src/data/database_connection" includes="**"/>
+            </copy>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 

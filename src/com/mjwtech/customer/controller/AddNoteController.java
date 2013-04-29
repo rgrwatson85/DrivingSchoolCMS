@@ -13,8 +13,10 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,6 +28,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;
 import name.antonsmirnov.javafx.dialog.Dialog;
+import org.omg.CosNaming.NamingContextPackage.NotEmpty;
 import resources.eyecandy.Fade;
 
 /**
@@ -40,11 +43,14 @@ public class AddNoteController implements Initializable {
     @FXML
     private Label lblDate;
     @FXML
-    private Label lblName;
-    @FXML
     private Button btnSubmit;
     @FXML
     private Button btnCancel;
+    @FXML
+    private Button btnEdit;
+    @FXML
+    private Button btnSave; 
+            
     /**
      * Initializes the controller class.
      */
@@ -109,8 +115,6 @@ public class AddNoteController implements Initializable {
                     SettingsController.closeConnection();
                     }
                 catch (ClassNotFoundException | SQLException e) {
-                    Scene scene = btnSubmit.getScene();
-                    Window window = scene.getWindow();
                     Dialog.showInfo("Notice", e.getMessage());
                     ViewCustomerController.ap.hideAdvanced();
                 }
@@ -141,13 +145,95 @@ public class AddNoteController implements Initializable {
         new Thread(submitNote).start();
     }
   
-    public void viewNote(String note, String date) throws ParseException{
+    public void viewNote(final String note, final String date, final int ID) throws ParseException{
         txtNote.setText(note);
         btnSubmit.setVisible(false);
+        btnEdit.setVisible(true);
         btnCancel.setText("Close");
         btnCancel.layoutXProperty().setValue(btnSubmit.layoutXProperty().get());
         txtNote.setEditable(false);
-        lblDate.setText(date);
+        lblDate.setText(date);     
+        btnEdit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                editNote(note, ID);
+            }
+        });
+    }
+    
+    private void editNote(String note,  final int ID){
+        final String oldNote=note;
+        btnSave.setVisible(true);
+        btnCancel.setText("Cancel");
+        btnCancel.layoutXProperty().setValue(btnEdit.layoutXProperty().get());
+        btnEdit.setVisible(false);
+        txtNote.setEditable(true);
+        if(oldNote.contains(" – Edited By: ")){
+            txtNote.setText(oldNote.substring(0, oldNote.indexOf("–")-1));
+        } 
+        btnSave.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                final Task wait = new Task() {
+                    @Override
+                    protected Object call() throws Exception {
+                        this.setOnSucceeded(new EventHandler<Event>() {
+                            @Override
+                            public void handle(Event t) {
+                                ViewCustomerController.ap.hideAdvanced();
+                                ViewCustomerController.txtSearchField.getOnAction().handle(null);
+                                Fade.f.FadeIn();
+                            }
+                        });
+                        Thread.sleep(1500);
+                        return null;
+                    }
+                };
+                Task updateNote = new Task() {
+                    @Override
+                    protected Object call() throws Exception {
+                        Thread.sleep(2000);
+                        txtNote.setEditable(false);
+                        String update = "'"+txtNote.getText()+" – Edited By: "+SettingsController.Username+" On "+sdf.format(cal.getTime());
+                        update += "\n\n"+oldNote+"'";
+                        try{
+                            SettingsController.openConnection();
+                            Statement stmt = SettingsController.conn.createStatement();
+                            String sql = "EXEC updateCustomerNote " +ID+","+update;
+                            System.out.println(sql);
+                            stmt.executeUpdate(sql);
+                            SettingsController.closeConnection();
+                        }catch(ClassNotFoundException | SQLException e){
+                            System.err.println(e.getMessage());
+                            throw new Exception();
+                        }
+                        return null;
+                    }
+                };
+                updateNote.setOnScheduled(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                MainController.lblProgressStatus.setText("PROCESSING");
+                Fade.f.FadeOut();         
+            }
+        });
+                updateNote.setOnFailed(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                MainController.lblProgressStatus.setText("ERROR");
+                new Thread(wait).start();
+            }
+        });
+                updateNote.setOnSucceeded(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                MainController.lblProgressStatus.setText("SUCCESS");
+                new Thread(wait).start();
+            }
+        });
+                new Thread(updateNote).start();
+            }
+        });
     }
     
 }

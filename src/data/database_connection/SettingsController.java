@@ -12,12 +12,8 @@ import java.net.Socket;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -71,7 +67,7 @@ public class SettingsController implements Initializable {
     private static String IP;
     private static String port;
     private static String database;
-    private static String Username;
+    public static String Username;
     private static String Password;
     private static boolean loginstatus;
 

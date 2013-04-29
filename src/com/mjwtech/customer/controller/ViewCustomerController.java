@@ -284,7 +284,6 @@ public class ViewCustomerController {
         assert txtSuffix != null : "fx:id=\"txtSuffix\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
         assert txtZip != null : "fx:id=\"txtZip\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
         // </editor-fold>
-
         final Task task = new Task() {
             @Override
             protected Object call() throws Exception {
@@ -343,7 +342,9 @@ public class ViewCustomerController {
         cmbSuffix.setItems(dropdowndata.suffixList);
         cmbState.setItems(dropdowndata.stateList);
         cmbCountry.setItems(dropdowndata.countryList);
+        
         setEditMode(false);
+        
         colNoteDate.setCellValueFactory(new PropertyValueFactory<CustomerNote,String>("Date"));
         colNoteDescription.setCellValueFactory(new PropertyValueFactory<CustomerNote,String>("ShortNote")); 
         colCourses.setCellValueFactory(new PropertyValueFactory<Enrollment,String>("CourseName"));
@@ -356,6 +357,8 @@ public class ViewCustomerController {
         MainController.effectsPane.setOpacity(0);
         MainController.lblProgressStatus.setText("PROCESSING");
         Fade.gb.setRadius(0);
+        
+        advancedView.setMouseTransparent(true);
     }
     
     // Creates all of the event handlers for the class
@@ -401,7 +404,7 @@ public class ViewCustomerController {
             public void handle(ActionEvent t) {
                 setEditMode(false);
                 Dialog.showInfo("NOTICE", "Changes have been cancelled");
-                searchCustomer("CustomerID", Customer.oCust.getID());
+                initialize();
             }
         });
         //save changes to the database
@@ -443,7 +446,7 @@ public class ViewCustomerController {
                             Node p = FXMLLoader.load(getClass().getResource("/com/mjwtech/customer/view/AddNote.fxml"));
                             advancedView.getChildren().clear();
                             advancedView.getChildren().add(p);
-                            AddNoteController.instance.viewNote(n.getNote(), n.getDate());
+                            AddNoteController.instance.viewNote(n.getNote(), n.getDate(), n.getID());
                         }
                     }
                 }catch(ParseException | IOException e){
@@ -580,7 +583,11 @@ public class ViewCustomerController {
                                 txtSuffix.setText("");
                             }
                             txtAddress.setText(Customer.oCust.getAddress());
-                            txtAddress2.setText(Customer.oCust.getAddress2());
+                            try{
+                                txtAddress2.setText(Customer.oCust.getAddress2());
+                            }catch(Exception e){
+                                txtAddress2.setText("");
+                            }
                             txtCity.setText(Customer.oCust.getCity());
                             txtState.setText(Customer.oCust.getState());
                             txtZip.setText(Customer.oCust.getZip());
@@ -1180,6 +1187,7 @@ public class ViewCustomerController {
     
     public static class AdvancedPane {
     public void showAdvanced(){
+        advancedView.setMouseTransparent(false);
         Timeline tl = new Timeline();
         final KeyValue kv1 = new KeyValue(gb.radiusProperty(), 15);
         final KeyFrame kf1 = new KeyFrame(Duration.seconds(.5), kv1);
@@ -1189,6 +1197,7 @@ public class ViewCustomerController {
         tl.play();
     }
     public void hideAdvanced(){
+        advancedView.setMouseTransparent(true);
         Timeline tl = new Timeline();
         final KeyValue kv1 = new KeyValue(gb.radiusProperty(), 0);
         final KeyFrame kf1 = new KeyFrame(Duration.seconds(.5), kv1);
