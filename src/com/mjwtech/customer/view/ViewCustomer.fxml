@@ -67,7 +67,7 @@
         </AnchorPane>
       </children>
     </AnchorPane>
-    <TilePane fx:id="advancedView" alignment="CENTER" maxHeight="-Infinity" maxWidth="1220.0" minHeight="-Infinity" minWidth="0.0" mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="645.0" prefWidth="1205.0" style="-fx-background-color: rgba(0,0,0,.46);" />
+    <TilePane fx:id="advancedView" alignment="CENTER" maxHeight="-Infinity" maxWidth="1220.0" minHeight="-Infinity" minWidth="0.0" mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="645.0" prefWidth="1205.0" style="-fx-background-color: rgba(0,0,0,.66);" />
     <AnchorPane id="AnchorPane" layoutX="28.0" layoutY="81.0" prefHeight="451.0">
       <children>
         <AnchorPane id="AnchorPane" fx:id="searchWrapper" layoutX="1.0" minHeight="46.0001220703125" minWidth="147.0" prefHeight="172.0" prefWidth="149.0">

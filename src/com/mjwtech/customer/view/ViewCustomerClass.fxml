@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="645.0" prefWidth="1205.0" style="-fx-background-color: rgba(0,0,0,0&#10;);" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.customer.controller.ViewCustomerClassController">
+  <children>
+    <AnchorPane id="AnchorPane" prefHeight="224.0" prefWidth="1205.0">
+      <children>
+        <Label id="label1" alignment="CENTER_RIGHT" layoutX="323.0" layoutY="22.0" text="Course Name:">
+          <font>
+            <Font name="Verdana" size="18.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label id="label2" alignment="CENTER_RIGHT" font="$x1" layoutX="351.0" layoutY="81.0" text="Start Date:" textFill="WHITE" />
+        <Label id="label2" alignment="CENTER_RIGHT" font="$x1" layoutX="362.0" layoutY="136.0" text="End Date:" textFill="WHITE" />
+        <Label id="label2" alignment="CENTER_RIGHT" font="$x1" layoutX="726.0" layoutY="194.0" text="Available Seats:" textFill="WHITE" />
+        <Label id="label2" alignment="CENTER_RIGHT" font="$x1" layoutX="766.0" layoutY="21.0" text="Class Days:" textFill="WHITE" />
+        <Label id="label2" alignment="CENTER_RIGHT" font="$x1" layoutX="400.0" layoutY="195.0" text="Time:" textFill="WHITE" />
+        <Label id="label2" alignment="CENTER_RIGHT" font="$x1" layoutX="743.0" layoutY="80.0" prefHeight="22.0" prefWidth="130.0" text="Instructor:" textFill="WHITE" />
+        <Label id="label2" alignment="CENTER_RIGHT" font="$x1" layoutX="772.0" layoutY="135.0" prefHeight="17.0" prefWidth="101.0" text="Location:" textFill="WHITE" />
+        <Label id="label1" fx:id="lblCourseName" font="$x1" layoutX="469.0" layoutY="22.0" prefWidth="293.0" text="Teen Driving Phase 1" />
+        <Label id="label2" fx:id="lblStartDate" font="$x1" layoutX="469.0" layoutY="81.0" prefWidth="192.0" text="04/21/2013" textFill="WHITE" />
+        <Label id="label2" fx:id="lblEndDate" font="$x1" layoutX="469.0" layoutY="136.0" prefWidth="178.0" text="05/21/2013" textFill="WHITE" />
+        <Label id="label2" fx:id="lblTime" font="$x1" layoutX="469.0" layoutY="195.0" prefWidth="206.0" text="11:00 AM – 12:00 PM" textFill="WHITE" />
+        <Label id="label2" fx:id="lblClassDays" font="$x1" layoutX="889.0" layoutY="23.0" prefWidth="214.0" text="M-T-W-Th-F-S-Su" textFill="WHITE" />
+        <Label id="label2" fx:id="lblInstructor" font="$x1" layoutX="889.0" layoutY="80.0" prefHeight="22.0" prefWidth="306.0" text="FirstName LastName" textFill="WHITE" />
+        <Label id="label2" fx:id="lblLocation" font="$x1" layoutX="889.0" layoutY="135.0" prefHeight="22.0" prefWidth="306.0" text="123456 New Address Lane" textFill="WHITE" />
+        <Label id="label2" fx:id="lblAvailableSeats" font="$x1" layoutX="889.0" layoutY="194.0" prefHeight="22.0" prefWidth="192.0" text="25 Seats Available" textFill="WHITE" />
+      </children>
+    </AnchorPane>
+    <TabPane layoutX="323.0" layoutY="248.0" prefHeight="376.0" prefWidth="498.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab text="Course Progress">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="847.0">
+              <children>
+                <TableView layoutX="2.0" prefHeight="340.0" prefWidth="498.0">
+                  <columns>
+                    <TableColumn prefWidth="400.0" text="Unit Of Instruction" />
+                    <TableColumn prefWidth="95.0" text="Status" />
+                  </columns>
+                </TableView>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Attendance">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView prefHeight="340.0" prefWidth="498.0">
+                  <columns>
+                    <TableColumn prefWidth="200.0" text="Class Date" />
+                    <TableColumn prefWidth="300.0" text="Attendance Status" />
+                  </columns>
+                </TableView>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+    <Button fx:id="btnRemoveFromCourse" layoutX="889.0" layoutY="284.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="172.0" text="Remove From Course" />
+    <Button fx:id="btnTransferClass" layoutX="889.0" layoutY="332.0" mnemonicParsing="false" prefHeight="22.0" text="Transfer To Different Class" />
+  </children>
+  <stylesheets>
+    <URL value="@../../../../resources/css/base.css" />
+    <URL value="@ViewCustomerClass.css" />
+  </stylesheets>
+</AnchorPane>

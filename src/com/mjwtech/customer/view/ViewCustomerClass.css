@@ -1,0 +1,12 @@
+/* 
+    Document   : ViewCustomerClass
+    Created on : Apr 29, 2013, 6:01:37 PM
+    Author     : mrgnwatson
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+

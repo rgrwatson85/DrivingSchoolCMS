@@ -468,6 +468,35 @@ public class ViewCustomerController {
                 }
             }
         });
+        //view course information
+        tableClass.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                try{
+                    if(tableClass.getSelectionModel().getSelectedIndex()>=0){
+                        if(t.getClickCount()==2){
+                            setAdvancedMode(true);
+                            Enrollment e = tableClass.getSelectionModel().getSelectedItem();
+                            Node p = FXMLLoader.load(getClass().getResource("/com/mjwtech/customer/view/ViewCustomerClass.fxml"));
+                            advancedView.getChildren().clear();
+                            advancedView.getChildren().add(p);
+                            ViewCustomerClassController.setLabels(
+                                e.getCourseName(),
+                                e.getStartDate(),
+                                e.getEndDate(),
+                                e.getTime(),
+                                e.getRecurrenceString(),
+                                e.getInstructorName(),
+                                "1234 Address Lane",
+                                25
+                            );
+                        }
+                    }
+                }catch(Exception e){
+                    System.err.println("No class has been selected");
+                }
+            }
+        });
         //close advanced pane when it loses the focus
         root.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -1189,10 +1218,10 @@ public class ViewCustomerController {
     public void showAdvanced(){
         advancedView.setMouseTransparent(false);
         Timeline tl = new Timeline();
-        final KeyValue kv1 = new KeyValue(gb.radiusProperty(), 15);
-        final KeyFrame kf1 = new KeyFrame(Duration.seconds(.5), kv1);
+        final KeyValue kv1 = new KeyValue(gb.radiusProperty(), 25);
+        final KeyFrame kf1 = new KeyFrame(Duration.seconds(.7), kv1);
         final KeyValue kv2 = new KeyValue(advancedView.opacityProperty(), 1);
-        final KeyFrame kf2 = new KeyFrame(Duration.seconds(.5), kv2);
+        final KeyFrame kf2 = new KeyFrame(Duration.seconds(.7), kv2);
         tl.getKeyFrames().addAll(kf1,kf2);
         tl.play();
     }
