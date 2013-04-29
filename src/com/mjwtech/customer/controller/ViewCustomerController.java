@@ -17,6 +17,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -37,8 +40,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.TilePane;
+import javafx.util.Duration;
 import jfxtras.labs.scene.control.CalendarTextField;
 import name.antonsmirnov.javafx.dialog.Dialog;
 import resources.eyecandy.Fade;
@@ -53,7 +59,7 @@ public class ViewCustomerController {
     private URL location;
     
     @FXML
-    public static AnchorPane advancedView;
+    public static TilePane advancedView;
 
     @FXML
     private Button btnAddNote;
@@ -131,7 +137,7 @@ public class ViewCustomerController {
     private Label lblToolTip;
 
     @FXML
-    private AnchorPane form;
+    public static AnchorPane form;
     
     @FXML AnchorPane root;
 
@@ -202,7 +208,7 @@ public class ViewCustomerController {
     private TextField txtSalutation;
 
     @FXML
-    private TextField txtSearchField;
+    public static TextField txtSearchField;
 
     @FXML
     private TextField txtState;
@@ -220,6 +226,8 @@ public class ViewCustomerController {
     DecimalFormat formatter = new DecimalFormat("$#,##0.00");
     ObservableList<Enrollment> EnrollmentData;
     ObservableList<CustomerNote> NoteData;
+    
+    public static AdvancedPane ap = new AdvancedPane();
 
     @FXML
     void initialize() {
@@ -277,7 +285,7 @@ public class ViewCustomerController {
         assert txtZip != null : "fx:id=\"txtZip\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
         // </editor-fold>
 
-        Task task = new Task() {
+        final Task task = new Task() {
             @Override
             protected Object call() throws Exception {
                 buttonWrapper.setVisible(false);
@@ -292,6 +300,7 @@ public class ViewCustomerController {
                     @Override
                     public void run() {
                         Dialog.showError("ERROR", "FATAL ERROR:\n\nCould not properly load the page. Exit form and reload.");
+                        System.err.println(task.getException().getMessage());
                     }
                 });
             }
@@ -420,6 +429,7 @@ public class ViewCustomerController {
         tableNote.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CustomerNote>() {
             @Override
             public void changed(ObservableValue<? extends CustomerNote> ov, CustomerNote t, CustomerNote t1) {
+                setAdvancedMode(true);
                 try{
                     Node p = FXMLLoader.load(getClass().getResource("/com/mjwtech/customer/view/AddNote.fxml"));
                     advancedView.getChildren().clear();
@@ -434,6 +444,7 @@ public class ViewCustomerController {
             @Override
             public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
                 if(t1){
+                    setAdvancedMode(true);
                     try{
                         CustomerNote n = tableNote.getSelectionModel().getSelectedItem();
                         if(tableNote.getSelectionModel().getSelectedIndex()>=0){
@@ -445,6 +456,30 @@ public class ViewCustomerController {
                     }catch(ParseException | IOException e){
                         System.err.println("No note has been selected");
                     }
+                }
+            }
+        });
+        //create new customer note
+        btnAddNote.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                setAdvancedMode(true);
+                try{
+                    Node p = FXMLLoader.load(getClass().getResource("/com/mjwtech/customer/view/AddNote.fxml"));
+                    advancedView.getChildren().clear();
+                    advancedView.getChildren().add(p);
+                }catch(Exception e){
+                    System.err.println(e.getMessage());
+                }
+            }
+        });
+        //close advanced pane when it loses the focus
+        root.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                if(t.getClickCount()==2){
+                    setAdvancedMode(false);
+                    searchCustomer("CustomerID", Customer.oCust.getID());
                 }
             }
         });
@@ -521,11 +556,16 @@ public class ViewCustomerController {
                             ResultSet rs = stmt.executeQuery(sql);
                             NoteData = FXCollections.observableArrayList();
                             while(rs.next()){
+                                //System.out.println("Notes added: "+rs.getRow());
                                 CustomerNote cn = new CustomerNote();
                                 cn.setDate(sdf.format(rs.getDate("Date")));
                                 cn.setID(rs.getInt("CustomerNoteID"));
                                 cn.setNote(rs.getString("Note"));
-                                cn.setShortNote(rs.getString("Note").substring(0, 15)+"...(view more)");
+                                if(rs.getString("Note").length()>=15){
+                                    cn.setShortNote(rs.getString("Note").substring(0, 15)+"...(view more)");
+                                }else{
+                                    cn.setShortNote(rs.getString("Note"));
+                                }
                                 NoteData.add(cn);
                             }
                             SettingsController.closeConnection();
@@ -843,6 +883,16 @@ public class ViewCustomerController {
             .show();
     }
     
+    //setAdvancedMode
+    private static void setAdvancedMode(boolean isAdvanced){
+        if(isAdvanced){
+            ap.showAdvanced();
+        }else{
+            advancedView.getChildren().clear();
+            ap.hideAdvanced();
+        }
+    }
+    
     //set edit mode for form
     private void setEditMode(Boolean editable){
         txtSalutation.editableProperty().set(editable);
@@ -1135,4 +1185,42 @@ public class ViewCustomerController {
             });
         }
     }
+    
+    public static class AdvancedPane {
+    GaussianBlur gb = new GaussianBlur();
+    public void showAdvanced(){
+        gb.setRadius(15);
+        Timeline tl = new Timeline();
+        final KeyValue kv2 = new KeyValue(ViewCustomerController.advancedView.opacityProperty(), 1);
+        final KeyFrame kf2 = new KeyFrame(Duration.seconds(.5), kv2);
+        tl.getKeyFrames().addAll(kf2);
+        tl.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                for(Node n : ViewCustomerController.form.getChildren()){
+                    if(!"title".equals(n.getId()))
+                        n.setEffect(gb);
+                }
+            }
+        });
+        tl.play();
+    }
+    public void hideAdvanced(){
+        gb.setRadius(0);
+        Timeline tl = new Timeline();
+        final KeyValue kv2 = new KeyValue(ViewCustomerController.advancedView.opacityProperty(), 0);
+        final KeyFrame kf2 = new KeyFrame(Duration.seconds(.5), kv2);
+        tl.getKeyFrames().addAll(kf2);
+        tl.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                for(Node n : ViewCustomerController.form.getChildren()){
+                    if(!"title".equals(n.getId()))
+                        n.setEffect(gb);
+                }
+            }
+        });
+        tl.play();
+    }
+}
 }

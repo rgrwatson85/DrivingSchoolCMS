@@ -38,6 +38,10 @@ public class Main extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.setMaxWidth(1280);
+        stage.setMinWidth(1280);
+        stage.setMaxHeight(775);
+        stage.setMinHeight(775);
         stage.setOnShown(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent t) {

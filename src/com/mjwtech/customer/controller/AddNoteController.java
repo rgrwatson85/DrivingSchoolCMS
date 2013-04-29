@@ -59,6 +59,7 @@ public class AddNoteController implements Initializable {
             @Override
             public void handle(MouseEvent t) {
                 ViewCustomerController.advancedView.getChildren().clear();
+                ViewCustomerController.ap.hideAdvanced();
             }
         });   
         btnSubmit.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -76,16 +77,16 @@ public class AddNoteController implements Initializable {
         String transDate = sdf.format(cal.getTime());
         String note = txtNote.getText();
         note = note.replace("'", "''");
-        
-        
+               
         try {
             SettingsController.openConnection();
             Statement stmt = SettingsController.conn.createStatement();
-            String sql = "EXEC addNote "+ Customer.oCust.getID()+", '"+note+"', '"+transDate+"'";
+            String sql = "EXEC addCustomerNote "+ Customer.oCust.getID()+", '"+note+"', '"+transDate+"'";
             System.out.println(sql);
             stmt.executeUpdate(sql);
             Dialog.showInfo("Success", "Note was successfully added to customer");
-            btnSubmit.getScene().getWindow().hide();
+            ViewCustomerController.ap.hideAdvanced();
+            ViewCustomerController.txtSearchField.getOnAction().handle(null);
             SettingsController.closeConnection();
             }
         catch (ClassNotFoundException | SQLException e) {
