@@ -228,10 +228,10 @@ public class ViewCustomerController {
     ObservableList<CustomerNote> NoteData;
     
     public static AdvancedPane ap = new AdvancedPane();
+    public static GaussianBlur gb;
 
     @FXML
     void initialize() {
-        
         // <editor-fold defaultstate="collapsed" desc="FXML assert">
         assert btnAddNote != null : "fx:id=\"btnAddNote\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
         assert btnCancelChanges != null : "fx:id=\"btnCancelChanges\" was not injected: check your FXML file 'ViewCustomer.fxml'.";
@@ -290,6 +290,11 @@ public class ViewCustomerController {
             protected Object call() throws Exception {
                 buttonWrapper.setVisible(false);
                 createEventHandlers();
+                gb = new GaussianBlur(0);
+                for(Node n : ViewCustomerController.form.getChildren()){
+                    if(!"title".equals(n.getId()))
+                        n.setEffect(gb);
+                }
                 return null;
             }
         };
@@ -347,6 +352,7 @@ public class ViewCustomerController {
         colDays.setCellValueFactory(new PropertyValueFactory<Enrollment,String>("RecurrenceString"));
         colTime.setCellValueFactory(new PropertyValueFactory<Enrollment,String>("Time"));
         colInstructor.setCellValueFactory(new PropertyValueFactory<Enrollment,String>("InstructorName"));
+        
         MainController.effectsPane.setOpacity(0);
         MainController.lblProgressStatus.setText("PROCESSING");
         Fade.gb.setRadius(0);
@@ -425,37 +431,23 @@ public class ViewCustomerController {
                 }
             }
         });
-        //load note details in the advanced view
-        tableNote.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CustomerNote>() {
+        //load notes into the advanced view if table is double clicked
+        tableNote.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void changed(ObservableValue<? extends CustomerNote> ov, CustomerNote t, CustomerNote t1) {
-                setAdvancedMode(true);
+            public void handle(MouseEvent t) {
                 try{
-                    Node p = FXMLLoader.load(getClass().getResource("/com/mjwtech/customer/view/AddNote.fxml"));
-                    advancedView.getChildren().clear();
-                    advancedView.getChildren().add(p);
-                    AddNoteController.instance.viewNote(t1.getNote(), t1.getDate());
-                }catch(IOException | ParseException e){
-                    System.err.println(e.getMessage());
-                }
-            }
-        });
-        tableNote.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
-                if(t1){
-                    setAdvancedMode(true);
-                    try{
-                        CustomerNote n = tableNote.getSelectionModel().getSelectedItem();
-                        if(tableNote.getSelectionModel().getSelectedIndex()>=0){
+                    if(tableNote.getSelectionModel().getSelectedIndex()>=0){
+                        if(t.getClickCount()==2){
+                            setAdvancedMode(true);
+                            CustomerNote n = tableNote.getSelectionModel().getSelectedItem();
                             Node p = FXMLLoader.load(getClass().getResource("/com/mjwtech/customer/view/AddNote.fxml"));
                             advancedView.getChildren().clear();
                             advancedView.getChildren().add(p);
                             AddNoteController.instance.viewNote(n.getNote(), n.getDate());
                         }
-                    }catch(ParseException | IOException e){
-                        System.err.println("No note has been selected");
                     }
+                }catch(ParseException | IOException e){
+                    System.err.println("No note has been selected");
                 }
             }
         });
@@ -1187,39 +1179,22 @@ public class ViewCustomerController {
     }
     
     public static class AdvancedPane {
-    GaussianBlur gb = new GaussianBlur();
     public void showAdvanced(){
-        gb.setRadius(15);
         Timeline tl = new Timeline();
-        final KeyValue kv2 = new KeyValue(ViewCustomerController.advancedView.opacityProperty(), 1);
+        final KeyValue kv1 = new KeyValue(gb.radiusProperty(), 15);
+        final KeyFrame kf1 = new KeyFrame(Duration.seconds(.5), kv1);
+        final KeyValue kv2 = new KeyValue(advancedView.opacityProperty(), 1);
         final KeyFrame kf2 = new KeyFrame(Duration.seconds(.5), kv2);
-        tl.getKeyFrames().addAll(kf2);
-        tl.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                for(Node n : ViewCustomerController.form.getChildren()){
-                    if(!"title".equals(n.getId()))
-                        n.setEffect(gb);
-                }
-            }
-        });
+        tl.getKeyFrames().addAll(kf1,kf2);
         tl.play();
     }
     public void hideAdvanced(){
-        gb.setRadius(0);
         Timeline tl = new Timeline();
-        final KeyValue kv2 = new KeyValue(ViewCustomerController.advancedView.opacityProperty(), 0);
+        final KeyValue kv1 = new KeyValue(gb.radiusProperty(), 0);
+        final KeyFrame kf1 = new KeyFrame(Duration.seconds(.5), kv1);
+        final KeyValue kv2 = new KeyValue(advancedView.opacityProperty(), 0);
         final KeyFrame kf2 = new KeyFrame(Duration.seconds(.5), kv2);
-        tl.getKeyFrames().addAll(kf2);
-        tl.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                for(Node n : ViewCustomerController.form.getChildren()){
-                    if(!"title".equals(n.getId()))
-                        n.setEffect(gb);
-                }
-            }
-        });
+        tl.getKeyFrames().addAll(kf1,kf2);
         tl.play();
     }
 }

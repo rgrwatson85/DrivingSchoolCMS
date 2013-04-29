@@ -5,6 +5,7 @@
 package com.mjwtech.customer.controller;
 
 import com.mjwtech.customer.model.Customer;
+import com.mjwtech.main.controller.MainController;
 import data.database_connection.SettingsController;
 import java.net.URL;
 import java.sql.SQLException;
@@ -13,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import javafx.concurrent.Task;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +26,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;
 import name.antonsmirnov.javafx.dialog.Dialog;
+import resources.eyecandy.Fade;
 
 /**
  * FXML Controller class
@@ -72,30 +76,69 @@ public class AddNoteController implements Initializable {
     }
     
     private void submitNote(){
-        //get the date from system
-        sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String transDate = sdf.format(cal.getTime());
-        String note = txtNote.getText();
-        note = note.replace("'", "''");
-               
-        try {
-            SettingsController.openConnection();
-            Statement stmt = SettingsController.conn.createStatement();
-            String sql = "EXEC addCustomerNote "+ Customer.oCust.getID()+", '"+note+"', '"+transDate+"'";
-            System.out.println(sql);
-            stmt.executeUpdate(sql);
-            Dialog.showInfo("Success", "Note was successfully added to customer");
-            ViewCustomerController.ap.hideAdvanced();
-            ViewCustomerController.txtSearchField.getOnAction().handle(null);
-            SettingsController.closeConnection();
+        final Task wait = new Task() {
+                    @Override
+                    protected Object call() throws Exception {
+                        this.setOnSucceeded(new EventHandler<Event>() {
+                            @Override
+                            public void handle(Event t) {
+                                ViewCustomerController.ap.hideAdvanced();
+                                ViewCustomerController.txtSearchField.getOnAction().handle(null);
+                                Fade.f.FadeIn();
+                            }
+                        });
+                        Thread.sleep(1500);
+                        return null;
+                    }
+                };
+        Task submitNote = new Task() {
+            @Override
+            protected Object call() throws Exception {
+                Thread.sleep(2000);
+                //get the date from system
+                sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String transDate = sdf.format(cal.getTime());
+                String note = txtNote.getText();
+                note = note.replace("'", "''");              
+                try {
+                    SettingsController.openConnection();
+                    Statement stmt = SettingsController.conn.createStatement();
+                    String sql = "EXEC addCustomerNote "+ Customer.oCust.getID()+", '"+note+"', '"+transDate+"'";
+                    System.out.println(sql);
+                    stmt.executeUpdate(sql);
+                    SettingsController.closeConnection();
+                    }
+                catch (ClassNotFoundException | SQLException e) {
+                    Scene scene = btnSubmit.getScene();
+                    Window window = scene.getWindow();
+                    Dialog.showInfo("Notice", e.getMessage());
+                    ViewCustomerController.ap.hideAdvanced();
+                }
+                return null;
             }
-        catch (ClassNotFoundException | SQLException e) {
-            Scene scene = btnSubmit.getScene();
-            Window window = scene.getWindow();
-            Dialog.showInfo("Notice", e.getMessage());
-            window.hide();
-        }
-        
+        };
+        submitNote.setOnScheduled(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                MainController.lblProgressStatus.setText("PROCESSING");
+                Fade.f.FadeOut();         
+            }
+        });
+        submitNote.setOnFailed(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                MainController.lblProgressStatus.setText("ERROR");
+                new Thread(wait).start();
+            }
+        });
+        submitNote.setOnSucceeded(new EventHandler() {
+            @Override
+            public void handle(Event t) {
+                MainController.lblProgressStatus.setText("SUCCESS");
+                new Thread(wait).start();
+            }
+        });
+        new Thread(submitNote).start();
     }
   
     public void viewNote(String note, String date) throws ParseException{

@@ -60,10 +60,14 @@
         <Label id="label2" layoutX="171.0" layoutY="216.0" text="Suffix" />
         <Button id="button2" fx:id="btnMakePayment" layoutX="617.0" layoutY="404.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" styleClass="btnMakePayment" />
         <Label id="label3" layoutX="7.0" layoutY="92.0" prefWidth="22.0" text="ID" />
-        <Label id="title" layoutX="5.0" layoutY="10.0" minHeight="30.0" mouseTransparent="true" prefHeight="38.0" styleClass="title" text="CUSTOMER RECORD" textAlignment="CENTER" />
+        <AnchorPane id="AnchorPane" layoutX="5.0" layoutY="10.0" prefWidth="363.0">
+          <children>
+            <Label id="title" minHeight="30.0" mouseTransparent="true" prefHeight="38.0" styleClass="title" text="CUSTOMER RECORD" textAlignment="CENTER" />
+          </children>
+        </AnchorPane>
       </children>
     </AnchorPane>
-    <TilePane fx:id="advancedView" alignment="CENTER" maxHeight="-Infinity" maxWidth="1220.0" minHeight="-Infinity" minWidth="0.0" opacity="0.0" orientation="VERTICAL" prefHeight="645.0" prefWidth="1220.0" style="-fx-background-color: rgba(0,0,0,.46);" />
+    <TilePane fx:id="advancedView" alignment="CENTER" maxHeight="-Infinity" maxWidth="1220.0" minHeight="-Infinity" minWidth="0.0" mouseTransparent="true" opacity="0.0" orientation="VERTICAL" prefHeight="645.0" prefWidth="1220.0" style="-fx-background-color: rgba(0,0,0,.46);" />
     <AnchorPane id="AnchorPane" layoutX="28.0" layoutY="19.0">
       <children>
         <AnchorPane id="AnchorPane" fx:id="searchWrapper" layoutX="1.0" minHeight="46.0001220703125" minWidth="147.0" prefHeight="172.0" prefWidth="149.0">
@@ -97,7 +101,7 @@
         <TableView fx:id="tableNote" layoutX="2.0" layoutY="189.0" prefHeight="86.0" prefWidth="205.0">
           <columns>
             <TableColumn editable="false" prefWidth="82.0" resizable="false" text="Date" visible="false" fx:id="colNoteDate" />
-            <TableColumn editable="false" prefWidth="203.0" resizable="false" sortable="false" text="Description" fx:id="colNoteDescription" />
+            <TableColumn editable="false" prefWidth="203.0" resizable="false" sortable="false" text="Summary" fx:id="colNoteDescription" />
           </columns>
         </TableView>
         <Button id="button2" fx:id="btnAddNote" layoutX="1.0" layoutY="283.0" minHeight="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="107.0" text="Add New Note" />
