@@ -17,6 +17,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -95,21 +98,36 @@ public class DashboardController implements Initializable {
                     TableCell<Enrollment,String> c = new TableCell<Enrollment, String>(){
                         @Override
                         public void updateItem(String item, boolean empty) {
-                            if(item==null){
+                               
                                 b1 = new Button();
                                 b1.getStyleClass().add("btnAttendanceRecords");
                                 b1.setPrefSize(30, 30);
                                 b1.setTooltip(new Tooltip("Take Attendance"));
-
+                                b1.setOnAction(new EventHandler<ActionEvent>() {
+                                    @Override
+                                    public void handle(ActionEvent t) {
+                                        tableClass.getSelectionModel().select(getTableRow().getIndex());
+                                        int ClassID = tableClass.getSelectionModel().getSelectedItem().getClassID();
+                                        Dialog.showInfo("NOTICE", "THIS HAS NOT YET BEEN IMPLEMENTED.\nWILL OPEN TAKE ATTENDANCE FOR CLASS ID: "+ClassID);
+                                    }
+                                });
+                                
                                 b2 = new Button();
                                 b2.getStyleClass().add("btnCourseEnrollment");
                                 b2.setPrefSize(30, 30);
                                 b2.setTooltip(new Tooltip("View Enrollment"));
-
+                                b2.setOnAction(new EventHandler<ActionEvent>() {
+                                    @Override
+                                    public void handle(ActionEvent t) {
+                                        tableClass.getSelectionModel().select(getTableRow().getIndex());
+                                        int ClassID = tableClass.getSelectionModel().getSelectedItem().getClassID();
+                                        Dialog.showInfo("NOTICE", "THIS HAS NOT YET BEEN IMPLEMENTED.\nWILL OPEN VIEW ENROLLMENT FOR CLASS ID: "+ClassID);
+                                    }
+                                });
+                                
                                 h = new HBox(5);
                                 h.getChildren().addAll(b1,b2);
                                 setGraphic(h);
-                            }
                         }
                     };
                     
