@@ -104,7 +104,6 @@
 .btnDeleteCustomer{-fx-background-image: url("../images/fullsize/delete_user.png");-fx-background-size: stretch;}
 .btnAddToCourse{-fx-background-image: url("../images/fullsize/add_to_cart.png");-fx-background-size: stretch;}
 .btnAddNewCourse{-fx-background-image: url("../images/fullsize/add_to_database.png");-fx-background-size: stretch;}
-.btnDeleteCourse{-fx-background-image: url("../images/fullsize/search_database.png");-fx-background-size: stretch;}
 .btnCourseEnrollment{-fx-background-image: url("../images/fullsize/tutorial.png");-fx-background-size: stretch;}
 .btnAttendanceRecords{-fx-background-image: url("../images/fullsize/user_accept.png");-fx-background-size: stretch;}
 .btnHelp{-fx-background-image: url("../images/fullsize/help.png");-fx-background-size: stretch;}

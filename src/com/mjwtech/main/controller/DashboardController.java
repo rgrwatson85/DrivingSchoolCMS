@@ -19,14 +19,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import name.antonsmirnov.javafx.dialog.Dialog;
-import sun.plugin.cache.OldCacheEntry;
 
 /**
  * FXML Controller class
@@ -34,7 +36,7 @@ import sun.plugin.cache.OldCacheEntry;
  * @author mrgnwatson
  */
 public class DashboardController implements Initializable {
-    
+
     @FXML
     private TableView<Enrollment> tableClass;
     @FXML
@@ -45,39 +47,39 @@ public class DashboardController implements Initializable {
     private TableColumn<Enrollment, String> colInstructor;
     @FXML
     private TableColumn<Enrollment, String> colAction;
-    
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     SimpleDateFormat parseDate = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat displayTime = new SimpleDateFormat("h:mm a");
     SimpleDateFormat parseTime = new SimpleDateFormat("HH:mm:ss");
     ObservableList<Enrollment> classData;
-    
-    ObservableList<String> ol = FXCollections.observableArrayList("Action","Take Attendance","View Enrollment","Edit","Delete");
-    ComboBox combo = new ComboBox(ol);
+    ObservableList<String> ol = FXCollections.observableArrayList("Action", "Take Attendance", "View Enrollment", "Edit", "Delete");
+    ComboBox combo;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.gc();
         try {
             loadClasses();
         } catch (ParseException ex) {
             Dialog.showError("ERROR", "Error loading today's classes");
         }
-    }    
-    
-    private void loadClasses() throws ParseException{
+    }
+
+    private void loadClasses() throws ParseException {
         try {
             SettingsController.openConnection();
             Statement stmt = SettingsController.conn.createStatement();
             String sql = "EXEC viewTodaysClasses";
             ResultSet rs = stmt.executeQuery(sql);
             classData = FXCollections.observableArrayList();
-            while(rs.next()){
+            while (rs.next()) {
                 Enrollment e = new Enrollment();
                 e.setClassID(rs.getInt("ClassID"));
                 e.setCourseName(rs.getString("CourseName"));
-                e.setTime(displayTime.format(parseTime.parse(rs.getString("StartTime")))+" – "+displayTime.format(parseTime.parse(rs.getString("EndTime"))));
+                e.setTime(displayTime.format(parseTime.parse(rs.getString("StartTime"))) + " – " + displayTime.format(parseTime.parse(rs.getString("EndTime"))));
                 e.setInstructorName(rs.getString("Instructor"));
                 classData.add(e);
             }
@@ -86,27 +88,33 @@ public class DashboardController implements Initializable {
             colTime.setCellValueFactory(new PropertyValueFactory("Time"));
             colInstructor.setCellValueFactory(new PropertyValueFactory("InstructorName"));
             colAction.setCellFactory(new Callback<TableColumn<Enrollment, String>, TableCell<Enrollment, String>>() {
-               @Override
+                Button b1, b2;
+                HBox h;
+                @Override
                 public TableCell<Enrollment, String> call(TableColumn<Enrollment, String> p) {
-                   TableCell<Enrollment,String> cell = new TableCell<Enrollment,String>(){
+                    TableCell<Enrollment,String> c = new TableCell<Enrollment, String>(){
                         @Override
-                        public void updateItem(final String item, boolean empty) {
-                            if(item!=null){
-                               super.updateItem(item, empty);
-                               combo = new ComboBox(classData);                                                      
-                               combo.getSelectionModel().select(classData.indexOf(item));
-                               setGraphic(combo);
-                            } 
-                            combo.valueProperty().addListener(new ChangeListener() {
-                                @Override
-                                public void changed(ObservableValue ov, Object t, Object t1) {
-                                    
-                                }
-                            });
+                        public void updateItem(String item, boolean empty) {
+                            if(item==null){
+                                b1 = new Button();
+                                b1.getStyleClass().add("btnAttendanceRecords");
+                                b1.setPrefSize(30, 30);
+                                b1.setTooltip(new Tooltip("Take Attendance"));
+
+                                b2 = new Button();
+                                b2.getStyleClass().add("btnCourseEnrollment");
+                                b2.setPrefSize(30, 30);
+                                b2.setTooltip(new Tooltip("View Enrollment"));
+
+                                h = new HBox(5);
+                                h.getChildren().addAll(b1,b2);
+                                setGraphic(h);
+                            }
                         }
-                   };
-                   return cell;
-               }
+                    };
+                    
+                    return c;
+                }
             });
             SettingsController.closeConnection();
         } catch (ClassNotFoundException | SQLException e) {
