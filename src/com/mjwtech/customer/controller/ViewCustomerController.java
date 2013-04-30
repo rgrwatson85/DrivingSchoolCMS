@@ -1219,9 +1219,9 @@ public class ViewCustomerController {
         advancedView.setMouseTransparent(false);
         Timeline tl = new Timeline();
         final KeyValue kv1 = new KeyValue(gb.radiusProperty(), 25);
-        final KeyFrame kf1 = new KeyFrame(Duration.seconds(.7), kv1);
+        final KeyFrame kf1 = new KeyFrame(Duration.seconds(.3), kv1);
         final KeyValue kv2 = new KeyValue(advancedView.opacityProperty(), 1);
-        final KeyFrame kf2 = new KeyFrame(Duration.seconds(.7), kv2);
+        final KeyFrame kf2 = new KeyFrame(Duration.seconds(.3), kv2);
         tl.getKeyFrames().addAll(kf1,kf2);
         tl.play();
     }

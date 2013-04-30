@@ -5,6 +5,7 @@
 package data.database_connection;
 
 import com.mjwtech.main.controller.MainController;
+import static com.mjwtech.main.controller.MainController.transitionContent;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -125,6 +126,8 @@ public class SettingsController implements Initializable {
             saveLogin();
             dbconnection.instance.stage.getScene().getWindow().hide();
             MainController.root.setEffect(null);
+            //load dashboard 
+            transitionContent("/com/mjwtech/main/view/Dashboard.fxml");
         } else {
             lblStatus.setText("Unsuccessful Database Credentials");
         }

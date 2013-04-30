@@ -70,6 +70,7 @@
 
 /*NAV ICONS*/
 .btnWaitlist{-fx-background-image: url("../images/fullsize/Chat.png");-fx-background-size: stretch;-fx-background-color: transparent;}
+.btnDashBoard{-fx-background-image: url("../images/shortcuts/home.png");-fx-background-size: stretch;-fx-background-color: transparent;}
 .btnCustomer{-fx-background-image: url("../images/fullsize/users.png");-fx-background-size: stretch;-fx-background-color: transparent;}
 .btnCourse{-fx-background-image: url("../images/fullsize/course.png");-fx-background-size: stretch;-fx-background-color: transparent;}
 .btnEmployee{-fx-background-image: url("../images/fullsize/employee.png");-fx-background-size: stretch;-fx-background-color: transparent;}

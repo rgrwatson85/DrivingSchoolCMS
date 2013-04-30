@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="645.0" prefWidth="1205.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.main.controller.DashboardController">
+  <children>
+    <Label id="title" layoutX="30.0" layoutY="30.0" prefHeight="46.0" prefWidth="381.0" styleClass="title" text="TODAYS CLASSES" textAlignment="CENTER" />
+    <TableView id="tableClasses" fx:id="tableClass" layoutX="23.0" layoutY="76.0" prefHeight="200.0" prefWidth="594.0">
+      <columns>
+        <TableColumn prefWidth="150.0" text="Course" fx:id="colCourseName" />
+        <TableColumn prefWidth="150.0" text="Time" fx:id="colTime" />
+        <TableColumn prefWidth="200.0" text="Instructor" fx:id="colInstructor" />
+        <TableColumn prefWidth="77.0" text="Action" fx:id="colAction" />
+      </columns>
+    </TableView>
+  </children>
+  <stylesheets>
+    <URL value="@../../../../resources/css/base.css" />
+  </stylesheets>
+</AnchorPane>

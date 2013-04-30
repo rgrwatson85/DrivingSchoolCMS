@@ -47,9 +47,9 @@ public class MainController implements Initializable {
     //area the encompasses the everything below the company logo and user name label
     @FXML
     public static AnchorPane contentPane;
-    //encomapsses the company logo and the user name label
+    //open dashboard shortcut
     @FXML
-    AnchorPane titleArea;
+    Button btnDashboard;
     //add Customer shortcut button
     @FXML
     Button btnAddCustomer;
@@ -125,7 +125,6 @@ public class MainController implements Initializable {
                 SettingsController.logout();
             }
         });
-        
         //sets the blur for content pane - created in Fade.java
         contentPane.setEffect(Fade.gb);
     }
@@ -155,5 +154,13 @@ public class MainController implements Initializable {
                 });
             }
         }
+        
+        btnDashboard.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                transitionContent("/com/mjwtech/main/view/Dashboard.fxml");
+            }
+        });
+        
     }
 }

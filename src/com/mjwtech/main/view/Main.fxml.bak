@@ -15,10 +15,11 @@
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1251.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mjwtech.main.controller.MainController">
   <children>
-    <AnchorPane fx:id="contentPane" layoutX="16.0" layoutY="64.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="1205.0" styleClass="background3" />
+    <AnchorPane fx:id="contentPane" layoutX="16.0" layoutY="64.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="1205.0" styleClass="background3" />
     <TilePane id="contentPane" alignment="CENTER" disable="true" layoutX="14.0" layoutY="64.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefColumns="1" prefHeight="615.0" prefRows="1" prefWidth="1175.0" styleClass="contentPane, background3" visible="false" />
-    <HBox alignment="CENTER_LEFT" layoutX="546.0" layoutY="9.0" minWidth="397.0" prefHeight="48.0" prefWidth="397.0" spacing="22.0">
+    <HBox alignment="CENTER_LEFT" layoutX="546.0" layoutY="9.0" minWidth="397.0" prefHeight="48.0" prefWidth="471.0" spacing="22.0">
       <children>
+        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnDashBoard" />
         <Button id="addCustomer" fx:id="btnAddCustomer" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnAddCustomer_sc" />
         <Button id="btnSearchStudent" fx:id="btnContactCustomer" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnContactCustomer_sc" />
         <Button id="Schedule" fx:id="btnSchedule" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnSchedule_sc" />
@@ -26,7 +27,7 @@
         <Button fx:id="btnBalanceDue" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnBalanceDue_sc" />
       </children>
     </HBox>
-    <Label fx:id="lblUserName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutY="25.0" prefHeight="25.0" prefWidth="291.0" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
+    <Label fx:id="lblUserName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutY="25.0" prefHeight="25.0" prefWidth="272.0" style="-fx-text-fill:red" text="Logged In As: ADMIN" textFill="WHITE" AnchorPane.rightAnchor="29.0" />
     <Label fx:id="lblToolTip" alignment="CENTER" layoutX="14.0" layoutY="50.0" prefWidth="627.0" visible="false" />
     <HBox fx:id="toggleButtonContainer" alignment="CENTER" layoutX="15.0" layoutY="9.0" prefHeight="48.0" prefWidth="506.0" spacing="15.0" styleClass="undecorator-background, toggleButtonContainer">
       <children>
@@ -48,7 +49,7 @@
         <ColorAdjust brightness="-0.4126984126984127" contrast="0.41269841269841256" hue="0.04761904761904767" saturation="-0.2222222222222222" />
       </effect>
     </Button>
-    <Button fx:id="btnLogOut" layoutX="899.0" layoutY="8.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnLogOut_sc" />
+    <Button fx:id="btnLogOut" layoutX="963.0" layoutY="9.0" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="btnLogOut_sc" />
     <AnchorPane id="effectspane" fx:id="effectsPane" mouseTransparent="true" opacity="0.0" prefHeight="651.0" prefWidth="1237.0" style="-fx-background-color:black;" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="64.0">
       <children>
         <ProgressIndicator id="ProgressIndicator" layoutX="541.0" layoutY="253.0" prefHeight="131.0" prefWidth="163.0" style="-fx-progress-color:lightblue">
